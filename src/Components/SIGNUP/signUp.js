@@ -49,7 +49,8 @@ export const SignUp = () => {
   //   }
   //   gapi.load("client:auth2", start);
   // });
-  console.log(userData);
+  // console.log(userData);
+  // console.log('URL.users:', URL.users)
   const getUserData = async () => {
     const result = await axios.get(`${URL.users}`);
     setUserData(result.data);
