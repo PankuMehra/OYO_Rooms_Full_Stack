@@ -9,8 +9,8 @@ app.use(express.urlencoded({extended:true}))
 app.use("/" , Routes)
 
 connection();
-const PORT = 8000;
+const PORT = process.env.PORT || 5050;
 app.listen(PORT, ()=>{
-    console.log("backend Server listing at http://localhost:8000")
+    console.log(`backend Server listing at http://localhost:${PORT}`)
 })
 
