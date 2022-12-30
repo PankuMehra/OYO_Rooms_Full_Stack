@@ -1,24 +1,39 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import Button from "@mui/material/Button";
-import Box from "@mui/material/Box";
-import Slider from "@mui/material/Slider";
-import FormGroup from "@mui/material/FormGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
+import {
+  Box,
+  Button,
+  Slider,
+  FormGroup,
+  FormControlLabel,
+  Checkbox,
+  TextField,
+  Skeleton,
+  Stack,
+  Card,
+} from "@mui/material";
+import { IoLocationSharp } from "react-icons/io5";
+// import Button from "@mui/material/Button";
+// import Box from "@mui/material/Box";
+// import Slider from "@mui/material/Slider";
+// import FormGroup from "@mui/material/FormGroup";
+// import FormControlLabel from "@mui/material/FormControlLabel";
+// import Checkbox from "@mui/material/Checkbox";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
-import TextField from "@mui/material/TextField";
+// import TextField from "@mui/material/TextField";
 import styles from "./style.css";
-import Skeleton from "@mui/material/Skeleton";
+// import Skeleton from "@mui/material/Skeleton";
 import { Link } from "react-router-dom";
 import WifiIcon from "@mui/icons-material/Wifi";
 import CameraswitchIcon from "@mui/icons-material/Cameraswitch";
 import ElevatorIcon from "@mui/icons-material/Elevator";
-import Stack from "@mui/material/Stack";
+// import Stack from "@mui/material/Stack";
+import Carousel from "react-material-ui-carousel";
 import Footer from "../HomePage/Footer/Footer";
 
 import { getHotelRooms } from "./api";
 import Navbar1 from "../HomePage/Navbar1";
+import { margin } from "@mui/system";
 // console.log(getHotelRooms);
 function HotelItem({
   hotelName,
@@ -29,234 +44,321 @@ function HotelItem({
   image3,
   image4,
   city,
+  distance,
+  info,
   rating,
+  ratingStatus,
   price,
   discount,
   strikedPrice,
   id,
 }) {
+  const items = [mainImage, image1, image2, image3, image4];
   return (
     <>
-      <div style={{ display: "flex", justifyContent: "left" }}>
-        <div style={{ display: "flex" }}>
-          <div style={{ marginBottom: "5%  " }}>
-            <img
-              src={mainImage}
-              alt="img"
-              height="400px"
-              width="96%"
-              style={{ objectFit: "cover" }}
-            />
-          </div>
-          <div style={{ width: "10%", marginLeft: "-1%" }}>
-            <img
-              src={image1}
-              alt="img"
-              height="100px"
-              width="100px"
-              style={{ objectFit: "cover" }}
-            />
-            <img
-              src={image2}
-              alt="img"
-              height="100px"
-              width="100px"
-              style={{ objectFit: "cover" }}
-            />
-            <img
-              src={image3}
-              alt="img"
-              height="100px"
-              width="100px"
-              style={{ objectFit: "cover" }}
-            />
-            <img
-              src={image4}
-              alt="img"
-              height="100px"
-              width="100px"
-              style={{ objectFit: "cover" }}
-            />
-          </div>
-
-          <div style={{ marginLeft: "30px", textAlign: "left" }}>
-            <div>
-              <span
-                style={{
-                  fontSize: "24px",
-                  fontWeight: "700",
-                  paddingBottom: "20px",
-                }}
-              >
-                {hotelName}
-              </span>
-            </div>
-            <p>{address}</p>
+      <Box display="flex" borderBottom="1px solid #e1e2e3" paddingBottom="45px">
+        <Box width="40%">
+          <Carousel>
+            {items.map((item, i) => (
+              <img key={i} src={item} className="main-image" />
+            ))}
+          </Carousel>
+        </Box>
+        <Box
+          width="8.2%"
+          display="flex"
+          flexDirection="column"
+          justifyContent="space-between"
+          alignItems="center"
+        >
+          <img src={mainImage} alt="img" className="short-image" />
+          <img src={image1} alt="img" className="short-image" />
+          <img src={image2} alt="img" className="short-image" />
+          <img src={image3} alt="img" className="short-image" />
+          <img src={image4} alt="img" className="short-image" />
+        </Box>
+        <Box width="52%" paddingLeft="12px" display="flex" flexDirection="column">
+          <Box display="flex">
+            <Box width="75%" display="grid">
+              <h3 className="hotelName">{hotelName}</h3>
+              <Box display="flex">
+                <Box width="80%">
+                  <p className="all-p-tags">{address}</p>
+                </Box>
+                <Box
+                  width="20%"
+                  display="flex"
+                  justifyContent="space-evenly"
+                  alignItems="center"
+                  color="#222"
+                >
+                  <IoLocationSharp color="#ef4023" />
+                  <p className="all-p-tags">{distance}</p>
+                </Box>
+              </Box>
+            </Box>
+            <Box
+              width="25%"
+              color="#ef4023"
+              fontSize="14px"
+              fontWeight="600"
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
+            >
+              <p style={{ width: "85%" }}>{info}</p>
+            </Box>
+          </Box>
+          <Box>
             <div style={{ display: "flex" }}>
-              <div style={{ marginBottom: "10px", marginTop: "10px" }}>
+              <div style={{ marginBottom: "10px", marginTop: "10px", display: "flex" }}>
                 <button
                   style={{
                     background: "rgb(82,181,32)",
                     color: "white",
                     border: "none",
-                    borderRadius: "5px",
-                    padding: "0px 10px",
+                    borderRadius: "3px",
+                    padding: "2px 8px",
                     marginRight: "20px",
+                    display: "flex",
+                    justifyContent:"center",
+                    alignItems: "center"
                   }}
                 >
                   &nbsp; {rating}★
                 </button>
-                ({rating * 10} Ratings) .{rating > 4 ? "Very Good" : "Good"}
-              </div>
-            </div>
-            <div
-              style={{
-                display: "flex",
-                gap: "2rem",
-                marginBottom: "10px",
-                marginTop: "10px",
-              }}
-            >
-              <div>
-                <p>🛏 AC &nbsp;</p>
-              </div>
-              <div>
-                <p>🚘 Parking Facility &nbsp;</p>{" "}
-              </div>
-              <div>
-                {" "}
-                <p>🙏 Reception &nbsp;</p>{" "}
-              </div>
-            </div>
-            <div
-              style={{
-                display: "flex",
-                gap: "2rem",
-                marginBottom: "10px",
-                marginTop: "10px",
-              }}
-            >
-              <div>
-                <p>
-                  <WifiIcon /> Free Wifi &nbsp;
-                </p>
-              </div>
-              <div>
-                <p>📺 TV &nbsp;</p>
-              </div>
-              <div>
-                <p>
-                  <CameraswitchIcon /> CCTV Camera &nbsp;
-                </p>
-              </div>
-              <div>
-                <p>
-                  <ElevatorIcon /> Elevator &nbsp;
+                <p style={{ color: "#898989" }}>
+                  ({rating * 10} Ratings) .{ratingStatus}
                 </p>
               </div>
             </div>
-            <div style={{ marginBottom: "20px", marginTop: "10px" }}>
-              <br />
-            </div>
-            <div style={{ display: "flex", gap: "2rem" }}>
-              <div>
-                <div>
-                  <p style={{ lineHeight: "5px" }}>
-                    <span
-                      style={{
-                        fontSize: "20px",
-                        fontWeight: "700",
-                        lineHeight: "24px",
-                        color: "rgb(238,42,35)",
-                      }}
-                    >
-                      ₹{price} &nbsp;
-                    </span>
-                    <span
-                      style={{
-                        textDecoration: "line-through",
-                        fontSize: "12px",
-                        lineHeight: "25px",
-                        color: "rgb(180,186,188)",
-                      }}
-                    >
-                      ₹{strikedPrice} &nbsp;
-                    </span>
-                    <span
-                      style={{
-                        color: "rgb(244,165,34)",
-                        paddingBottom: "10px",
-                        fontSize: "12px",
-                      }}
-                    >
-                      &nbsp;
-                      {discount}% off
-                    </span>
-                  </p>
-                </div>
-                <div>
-                  <p
-                    style={{
-                      color: "rgb(163,169,172)",
-                      fontSize: "12px",
-                      paddingBottom: "10px",
-                      paddingTop: "10px",
-                    }}
-                  >
-                    per room per night
-                  </p>
-                </div>
-              </div>
-              <div style={{ marginLeft: "20px" }}>
-                <Stack direction="row" spacing={2}>
-                  <Button
-                    variant="out"
-                    style={{
-                      color: "black",
-                      border: "2px solid black",
-                      width: "120px",
-                      height: "60px",
-                    }}
-                  >
-                    <Link
-                      to={`/hotels/${id}`}
-                      style={{ textDecoration: "none", color: "black" }}
-                    >
-                      View Details
-                    </Link>
-                  </Button>
-                  <Button
-                    variant="out"
-                    style={{
-                      border: "2px solid black",
-                      color: "white",
-                      backgroundColor: "green",
-                      width: "120px",
-                      height: "60px",
-                    }}
-                  >
-                    <Link
-                      to={`/hotels/${id}`}
-                      style={{
-                        textDecoration: "none",
-                        color: "white",
-                        fontWeight: "600",
-                      }}
-                    >
-                      Book Now
-                    </Link>
-                  </Button>
-                </Stack>
-              </div>
-            </div>
-          </div>
-        </div>
-        <hr
-          style={{ border: ".5px solid rgb(224,224,224)", marginTop: "15px" }}
-        />
-      </div>
+          </Box>
+        </Box>
+      </Box>
     </>
   );
+  // return (
+  //   <>
+  //     <div style={{ display: "flex", justifyContent: "left" }}>
+  //       <div style={{ display: "flex" }}>
+  //         <div style={{ marginBottom: "5%  " }}>
+  //           <img
+  //             src={mainImage}
+  //             alt="img"
+  //             height="300px"
+  //             width="100%"
+  //             // style={{ objectFit: "cover" }}
+  //           />
+  //         </div>
+  //         <div style={{ width: "10%", marginLeft: "-1%" }}>
+  //           <img
+  //             src={image1}
+  //             alt="img"
+  //             height="100px"
+  //             width="100px"
+  //             style={{ objectFit: "cover" }}
+  //           />
+  //           <img
+  //             src={image2}
+  //             alt="img"
+  //             height="100px"
+  //             width="100px"
+  //             style={{ objectFit: "cover" }}
+  //           />
+  //           <img
+  //             src={image3}
+  //             alt="img"
+  //             height="100px"
+  //             width="100px"
+  //             style={{ objectFit: "cover" }}
+  //           />
+  //           <img
+  //             src={image4}
+  //             alt="img"
+  //             height="100px"
+  //             width="100px"
+  //             style={{ objectFit: "cover" }}
+  //           />
+  //         </div>
+
+  //         <div style={{ marginLeft: "30px", textAlign: "left" }}>
+  //           <div>
+  //             <span
+  //               style={{
+  //                 fontSize: "24px",
+  //                 fontWeight: "700",
+  //                 paddingBottom: "20px",
+  //               }}
+  //             >
+  //               {hotelName}
+  //             </span>
+  //           </div>
+  //           <p>{address}</p>
+  //           <div style={{ display: "flex" }}>
+  //             <div style={{ marginBottom: "10px", marginTop: "10px" }}>
+  //               <button
+  //                 style={{
+  //                   background: "rgb(82,181,32)",
+  //                   color: "white",
+  //                   border: "none",
+  //                   borderRadius: "5px",
+  //                   padding: "0px 10px",
+  //                   marginRight: "20px",
+  //                 }}
+  //               >
+  //                 &nbsp; {rating}★
+  //               </button>
+  //               ({rating * 10} Ratings) .{rating > 4 ? "Very Good" : "Good"}
+  //             </div>
+  //           </div>
+  //           <div
+  //             style={{
+  //               display: "flex",
+  //               gap: "2rem",
+  //               marginBottom: "10px",
+  //               marginTop: "10px",
+  //             }}
+  //           >
+  //             <div>
+  //               <p>🛏 AC &nbsp;</p>
+  //             </div>
+  //             <div>
+  //               <p>🚘 Parking Facility &nbsp;</p>{" "}
+  //             </div>
+  //             <div>
+  //               {" "}
+  //               <p>🙏 Reception &nbsp;</p>{" "}
+  //             </div>
+  //           </div>
+  //           <div
+  //             style={{
+  //               display: "flex",
+  //               gap: "2rem",
+  //               marginBottom: "10px",
+  //               marginTop: "10px",
+  //             }}
+  //           >
+  //             <div>
+  //               <p>
+  //                 <WifiIcon /> Free Wifi &nbsp;
+  //               </p>
+  //             </div>
+  //             <div>
+  //               <p>📺 TV &nbsp;</p>
+  //             </div>
+  //             <div>
+  //               <p>
+  //                 <CameraswitchIcon /> CCTV Camera &nbsp;
+  //               </p>
+  //             </div>
+  //             <div>
+  //               <p>
+  //                 <ElevatorIcon /> Elevator &nbsp;
+  //               </p>
+  //             </div>
+  //           </div>
+  //           <div style={{ marginBottom: "20px", marginTop: "10px" }}>
+  //             <br />
+  //           </div>
+  //           <div style={{ display: "flex", gap: "2rem" }}>
+  //             <div>
+  //               <div>
+  //                 <p style={{ lineHeight: "5px" }}>
+  //                   <span
+  //                     style={{
+  //                       fontSize: "20px",
+  //                       fontWeight: "700",
+  //                       lineHeight: "24px",
+  //                       color: "rgb(238,42,35)",
+  //                     }}
+  //                   >
+  //                     ₹{price} &nbsp;
+  //                   </span>
+  //                   <span
+  //                     style={{
+  //                       textDecoration: "line-through",
+  //                       fontSize: "12px",
+  //                       lineHeight: "25px",
+  //                       color: "rgb(180,186,188)",
+  //                     }}
+  //                   >
+  //                     ₹{strikedPrice} &nbsp;
+  //                   </span>
+  //                   <span
+  //                     style={{
+  //                       color: "rgb(244,165,34)",
+  //                       paddingBottom: "10px",
+  //                       fontSize: "12px",
+  //                     }}
+  //                   >
+  //                     &nbsp;
+  //                     {discount}% off
+  //                   </span>
+  //                 </p>
+  //               </div>
+  //               <div>
+  //                 <p
+  //                   style={{
+  //                     color: "rgb(163,169,172)",
+  //                     fontSize: "12px",
+  //                     paddingBottom: "10px",
+  //                     paddingTop: "10px",
+  //                   }}
+  //                 >
+  //                   per room per night
+  //                 </p>
+  //               </div>
+  //             </div>
+  //             <div style={{ marginLeft: "20px" }}>
+  //               <Stack direction="row" spacing={2}>
+  //                 <Button
+  //                   variant="out"
+  //                   style={{
+  //                     color: "black",
+  //                     border: "2px solid black",
+  //                     width: "120px",
+  //                     height: "60px",
+  //                   }}
+  //                 >
+  //                   <Link
+  //                     to={`/hotels/${id}`}
+  //                     style={{ textDecoration: "none", color: "black" }}
+  //                   >
+  //                     View Details
+  //                   </Link>
+  //                 </Button>
+  //                 <Button
+  //                   variant="out"
+  //                   style={{
+  //                     border: "2px solid black",
+  //                     color: "white",
+  //                     backgroundColor: "green",
+  //                     width: "120px",
+  //                     height: "60px",
+  //                   }}
+  //                 >
+  //                   <Link
+  //                     to={`/hotels/${id}`}
+  //                     style={{
+  //                       textDecoration: "none",
+  //                       color: "white",
+  //                       fontWeight: "600",
+  //                     }}
+  //                   >
+  //                     Book Now
+  //                   </Link>
+  //                 </Button>
+  //               </Stack>
+  //             </div>
+  //           </div>
+  //         </div>
+  //       </div>
+  //       <hr
+  //         style={{ border: ".5px solid rgb(224,224,224)", marginTop: "15px" }}
+  //       />
+  //     </div>
+  //   </>
+  // );
 }
 
 function valuetext(value) {
@@ -933,7 +1035,7 @@ function DisplayHotel() {
             style={{ border: ".2px solid rgb(224,224,224)", marginTop: "15px" }}
           />
 
-          <div style={{ height: "1960px" }}>
+          <div style={{ width: "100%", display: "grid", gap: "45px" }}>
             {/* {isLoading && <Skeleton
               animation="wave"
               height="500px"
@@ -983,9 +1085,7 @@ function DisplayHotel() {
           </div>
           {/* <hr style={{ border: ".2px solid rgb(224,224,224)" }} /> */}
 
-          <div
-            style={{ display: "flex", marginTop: "-180px", marginLeft: "40%" }}
-          >
+          <div style={{ display: "flex", width: "215px", margin: "auto" }}>
             <div style={{ margin: "20px" }}>
               <Button
                 variant="outlined"
