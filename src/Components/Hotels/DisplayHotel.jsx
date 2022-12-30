@@ -37,226 +37,237 @@ function HotelItem({
 }) {
   return (
     <>
-      <div style={{ display: "flex", justifyContent: "left" }}>
-        <div style={{ display: "flex" }}>
-          <div style={{ marginBottom: "5%  " }}>
-            <img
-              src={mainImage}
-              alt="img"
-              height="400px"
-              width="96%"
-              style={{ objectFit: "cover" }}
-            />
-          </div>
-          <div style={{ width: "10%", marginLeft: "-1%" }}>
-            <img
-              src={image1}
-              alt="img"
-              height="100px"
-              width="100px"
-              style={{ objectFit: "cover" }}
-            />
-            <img
-              src={image2}
-              alt="img"
-              height="100px"
-              width="100px"
-              style={{ objectFit: "cover" }}
-            />
-            <img
-              src={image3}
-              alt="img"
-              height="100px"
-              width="100px"
-              style={{ objectFit: "cover" }}
-            />
-            <img
-              src={image4}
-              alt="img"
-              height="100px"
-              width="100px"
-              style={{ objectFit: "cover" }}
-            />
-          </div>
-
-          <div style={{ marginLeft: "30px", textAlign: "left" }}>
-            <div>
-              <span
-                style={{
-                  fontSize: "24px",
-                  fontWeight: "700",
-                  paddingBottom: "20px",
-                }}
-              >
-                {hotelName}
-              </span>
-            </div>
-            <p>{address}</p>
-            <div style={{ display: "flex" }}>
-              <div style={{ marginBottom: "10px", marginTop: "10px" }}>
-                <button
-                  style={{
-                    background: "rgb(82,181,32)",
-                    color: "white",
-                    border: "none",
-                    borderRadius: "5px",
-                    padding: "0px 10px",
-                    marginRight: "20px",
-                  }}
-                >
-                  &nbsp; {rating}★
-                </button>
-                ({rating * 10} Ratings) .{rating > 4 ? "Very Good" : "Good"}
-              </div>
-            </div>
-            <div
-              style={{
-                display: "flex",
-                gap: "2rem",
-                marginBottom: "10px",
-                marginTop: "10px",
-              }}
-            >
-              <div>
-                <p>🛏 AC &nbsp;</p>
-              </div>
-              <div>
-                <p>🚘 Parking Facility &nbsp;</p>{" "}
-              </div>
-              <div>
-                {" "}
-                <p>🙏 Reception &nbsp;</p>{" "}
-              </div>
-            </div>
-            <div
-              style={{
-                display: "flex",
-                gap: "2rem",
-                marginBottom: "10px",
-                marginTop: "10px",
-              }}
-            >
-              <div>
-                <p>
-                  <WifiIcon /> Free Wifi &nbsp;
-                </p>
-              </div>
-              <div>
-                <p>📺 TV &nbsp;</p>
-              </div>
-              <div>
-                <p>
-                  <CameraswitchIcon /> CCTV Camera &nbsp;
-                </p>
-              </div>
-              <div>
-                <p>
-                  <ElevatorIcon /> Elevator &nbsp;
-                </p>
-              </div>
-            </div>
-            <div style={{ marginBottom: "20px", marginTop: "10px" }}>
-              <br />
-            </div>
-            <div style={{ display: "flex", gap: "2rem" }}>
-              <div>
-                <div>
-                  <p style={{ lineHeight: "5px" }}>
-                    <span
-                      style={{
-                        fontSize: "20px",
-                        fontWeight: "700",
-                        lineHeight: "24px",
-                        color: "rgb(238,42,35)",
-                      }}
-                    >
-                      ₹{price} &nbsp;
-                    </span>
-                    <span
-                      style={{
-                        textDecoration: "line-through",
-                        fontSize: "12px",
-                        lineHeight: "25px",
-                        color: "rgb(180,186,188)",
-                      }}
-                    >
-                      ₹{strikedPrice} &nbsp;
-                    </span>
-                    <span
-                      style={{
-                        color: "rgb(244,165,34)",
-                        paddingBottom: "10px",
-                        fontSize: "12px",
-                      }}
-                    >
-                      &nbsp;
-                      {discount}% off
-                    </span>
-                  </p>
-                </div>
-                <div>
-                  <p
-                    style={{
-                      color: "rgb(163,169,172)",
-                      fontSize: "12px",
-                      paddingBottom: "10px",
-                      paddingTop: "10px",
-                    }}
-                  >
-                    per room per night
-                  </p>
-                </div>
-              </div>
-              <div style={{ marginLeft: "20px" }}>
-                <Stack direction="row" spacing={2}>
-                  <Button
-                    variant="out"
-                    style={{
-                      color: "black",
-                      border: "2px solid black",
-                      width: "120px",
-                      height: "60px",
-                    }}
-                  >
-                    <Link
-                      to={`/hotels/${id}`}
-                      style={{ textDecoration: "none", color: "black" }}
-                    >
-                      View Details
-                    </Link>
-                  </Button>
-                  <Button
-                    variant="out"
-                    style={{
-                      border: "2px solid black",
-                      color: "white",
-                      backgroundColor: "green",
-                      width: "120px",
-                      height: "60px",
-                    }}
-                  >
-                    <Link
-                      to={`/hotels/${id}`}
-                      style={{
-                        textDecoration: "none",
-                        color: "white",
-                        fontWeight: "600",
-                      }}
-                    >
-                      Book Now
-                    </Link>
-                  </Button>
-                </Stack>
-              </div>
-            </div>
-          </div>
-        </div>
-        <hr
-          style={{ border: ".5px solid rgb(224,224,224)", marginTop: "15px" }}
-        />
-      </div>
+      <Box>
+        <Box>
+          
+        </Box>
+        <Box></Box>
+        <Box></Box>
+      </Box>
     </>
-  );
+  )
+  // return (
+  //   <>
+  //     <div style={{ display: "flex", justifyContent: "left" }}>
+  //       <div style={{ display: "flex" }}>
+  //         <div style={{ marginBottom: "5%  " }}>
+  //           <img
+  //             src={mainImage}
+  //             alt="img"
+  //             height="300px"
+  //             width="100%"
+  //             // style={{ objectFit: "cover" }}
+  //           />
+  //         </div>
+  //         <div style={{ width: "10%", marginLeft: "-1%" }}>
+  //           <img
+  //             src={image1}
+  //             alt="img"
+  //             height="100px"
+  //             width="100px"
+  //             style={{ objectFit: "cover" }}
+  //           />
+  //           <img
+  //             src={image2}
+  //             alt="img"
+  //             height="100px"
+  //             width="100px"
+  //             style={{ objectFit: "cover" }}
+  //           />
+  //           <img
+  //             src={image3}
+  //             alt="img"
+  //             height="100px"
+  //             width="100px"
+  //             style={{ objectFit: "cover" }}
+  //           />
+  //           <img
+  //             src={image4}
+  //             alt="img"
+  //             height="100px"
+  //             width="100px"
+  //             style={{ objectFit: "cover" }}
+  //           />
+  //         </div>
+
+  //         <div style={{ marginLeft: "30px", textAlign: "left" }}>
+  //           <div>
+  //             <span
+  //               style={{
+  //                 fontSize: "24px",
+  //                 fontWeight: "700",
+  //                 paddingBottom: "20px",
+  //               }}
+  //             >
+  //               {hotelName}
+  //             </span>
+  //           </div>
+  //           <p>{address}</p>
+  //           <div style={{ display: "flex" }}>
+  //             <div style={{ marginBottom: "10px", marginTop: "10px" }}>
+  //               <button
+  //                 style={{
+  //                   background: "rgb(82,181,32)",
+  //                   color: "white",
+  //                   border: "none",
+  //                   borderRadius: "5px",
+  //                   padding: "0px 10px",
+  //                   marginRight: "20px",
+  //                 }}
+  //               >
+  //                 &nbsp; {rating}★
+  //               </button>
+  //               ({rating * 10} Ratings) .{rating > 4 ? "Very Good" : "Good"}
+  //             </div>
+  //           </div>
+  //           <div
+  //             style={{
+  //               display: "flex",
+  //               gap: "2rem",
+  //               marginBottom: "10px",
+  //               marginTop: "10px",
+  //             }}
+  //           >
+  //             <div>
+  //               <p>🛏 AC &nbsp;</p>
+  //             </div>
+  //             <div>
+  //               <p>🚘 Parking Facility &nbsp;</p>{" "}
+  //             </div>
+  //             <div>
+  //               {" "}
+  //               <p>🙏 Reception &nbsp;</p>{" "}
+  //             </div>
+  //           </div>
+  //           <div
+  //             style={{
+  //               display: "flex",
+  //               gap: "2rem",
+  //               marginBottom: "10px",
+  //               marginTop: "10px",
+  //             }}
+  //           >
+  //             <div>
+  //               <p>
+  //                 <WifiIcon /> Free Wifi &nbsp;
+  //               </p>
+  //             </div>
+  //             <div>
+  //               <p>📺 TV &nbsp;</p>
+  //             </div>
+  //             <div>
+  //               <p>
+  //                 <CameraswitchIcon /> CCTV Camera &nbsp;
+  //               </p>
+  //             </div>
+  //             <div>
+  //               <p>
+  //                 <ElevatorIcon /> Elevator &nbsp;
+  //               </p>
+  //             </div>
+  //           </div>
+  //           <div style={{ marginBottom: "20px", marginTop: "10px" }}>
+  //             <br />
+  //           </div>
+  //           <div style={{ display: "flex", gap: "2rem" }}>
+  //             <div>
+  //               <div>
+  //                 <p style={{ lineHeight: "5px" }}>
+  //                   <span
+  //                     style={{
+  //                       fontSize: "20px",
+  //                       fontWeight: "700",
+  //                       lineHeight: "24px",
+  //                       color: "rgb(238,42,35)",
+  //                     }}
+  //                   >
+  //                     ₹{price} &nbsp;
+  //                   </span>
+  //                   <span
+  //                     style={{
+  //                       textDecoration: "line-through",
+  //                       fontSize: "12px",
+  //                       lineHeight: "25px",
+  //                       color: "rgb(180,186,188)",
+  //                     }}
+  //                   >
+  //                     ₹{strikedPrice} &nbsp;
+  //                   </span>
+  //                   <span
+  //                     style={{
+  //                       color: "rgb(244,165,34)",
+  //                       paddingBottom: "10px",
+  //                       fontSize: "12px",
+  //                     }}
+  //                   >
+  //                     &nbsp;
+  //                     {discount}% off
+  //                   </span>
+  //                 </p>
+  //               </div>
+  //               <div>
+  //                 <p
+  //                   style={{
+  //                     color: "rgb(163,169,172)",
+  //                     fontSize: "12px",
+  //                     paddingBottom: "10px",
+  //                     paddingTop: "10px",
+  //                   }}
+  //                 >
+  //                   per room per night
+  //                 </p>
+  //               </div>
+  //             </div>
+  //             <div style={{ marginLeft: "20px" }}>
+  //               <Stack direction="row" spacing={2}>
+  //                 <Button
+  //                   variant="out"
+  //                   style={{
+  //                     color: "black",
+  //                     border: "2px solid black",
+  //                     width: "120px",
+  //                     height: "60px",
+  //                   }}
+  //                 >
+  //                   <Link
+  //                     to={`/hotels/${id}`}
+  //                     style={{ textDecoration: "none", color: "black" }}
+  //                   >
+  //                     View Details
+  //                   </Link>
+  //                 </Button>
+  //                 <Button
+  //                   variant="out"
+  //                   style={{
+  //                     border: "2px solid black",
+  //                     color: "white",
+  //                     backgroundColor: "green",
+  //                     width: "120px",
+  //                     height: "60px",
+  //                   }}
+  //                 >
+  //                   <Link
+  //                     to={`/hotels/${id}`}
+  //                     style={{
+  //                       textDecoration: "none",
+  //                       color: "white",
+  //                       fontWeight: "600",
+  //                     }}
+  //                   >
+  //                     Book Now
+  //                   </Link>
+  //                 </Button>
+  //               </Stack>
+  //             </div>
+  //           </div>
+  //         </div>
+  //       </div>
+  //       <hr
+  //         style={{ border: ".5px solid rgb(224,224,224)", marginTop: "15px" }}
+  //       />
+  //     </div>
+  //   </>
+  // );
 }
 
 function valuetext(value) {
