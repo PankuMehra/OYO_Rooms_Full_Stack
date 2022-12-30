@@ -1,24 +1,39 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import Button from "@mui/material/Button";
-import Box from "@mui/material/Box";
-import Slider from "@mui/material/Slider";
-import FormGroup from "@mui/material/FormGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
+import {
+  Box,
+  Button,
+  Slider,
+  FormGroup,
+  FormControlLabel,
+  Checkbox,
+  TextField,
+  Skeleton,
+  Stack,
+  Card,
+} from "@mui/material";
+import { IoLocationSharp } from "react-icons/io5";
+// import Button from "@mui/material/Button";
+// import Box from "@mui/material/Box";
+// import Slider from "@mui/material/Slider";
+// import FormGroup from "@mui/material/FormGroup";
+// import FormControlLabel from "@mui/material/FormControlLabel";
+// import Checkbox from "@mui/material/Checkbox";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
-import TextField from "@mui/material/TextField";
+// import TextField from "@mui/material/TextField";
 import styles from "./style.css";
-import Skeleton from "@mui/material/Skeleton";
+// import Skeleton from "@mui/material/Skeleton";
 import { Link } from "react-router-dom";
 import WifiIcon from "@mui/icons-material/Wifi";
 import CameraswitchIcon from "@mui/icons-material/Cameraswitch";
 import ElevatorIcon from "@mui/icons-material/Elevator";
-import Stack from "@mui/material/Stack";
+// import Stack from "@mui/material/Stack";
+import Carousel from "react-material-ui-carousel";
 import Footer from "../HomePage/Footer/Footer";
 
 import { getHotelRooms } from "./api";
 import Navbar1 from "../HomePage/Navbar1";
+import { margin } from "@mui/system";
 // console.log(getHotelRooms);
 function HotelItem({
   hotelName,
@@ -29,23 +44,99 @@ function HotelItem({
   image3,
   image4,
   city,
+  distance,
+  info,
   rating,
+  ratingStatus,
   price,
   discount,
   strikedPrice,
   id,
 }) {
+  const items = [mainImage, image1, image2, image3, image4];
   return (
     <>
-      <Box>
-        <Box>
-          
+      <Box display="flex" borderBottom="1px solid #e1e2e3" paddingBottom="45px">
+        <Box width="40%">
+          <Carousel>
+            {items.map((item, i) => (
+              <img key={i} src={item} className="main-image" />
+            ))}
+          </Carousel>
         </Box>
-        <Box></Box>
-        <Box></Box>
+        <Box
+          width="8.2%"
+          display="flex"
+          flexDirection="column"
+          justifyContent="space-between"
+          alignItems="center"
+        >
+          <img src={mainImage} alt="img" className="short-image" />
+          <img src={image1} alt="img" className="short-image" />
+          <img src={image2} alt="img" className="short-image" />
+          <img src={image3} alt="img" className="short-image" />
+          <img src={image4} alt="img" className="short-image" />
+        </Box>
+        <Box width="52%" paddingLeft="12px" display="flex" flexDirection="column">
+          <Box display="flex">
+            <Box width="75%" display="grid">
+              <h3 className="hotelName">{hotelName}</h3>
+              <Box display="flex">
+                <Box width="80%">
+                  <p className="all-p-tags">{address}</p>
+                </Box>
+                <Box
+                  width="20%"
+                  display="flex"
+                  justifyContent="space-evenly"
+                  alignItems="center"
+                  color="#222"
+                >
+                  <IoLocationSharp color="#ef4023" />
+                  <p className="all-p-tags">{distance}</p>
+                </Box>
+              </Box>
+            </Box>
+            <Box
+              width="25%"
+              color="#ef4023"
+              fontSize="14px"
+              fontWeight="600"
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
+            >
+              <p style={{ width: "85%" }}>{info}</p>
+            </Box>
+          </Box>
+          <Box>
+            <div style={{ display: "flex" }}>
+              <div style={{ marginBottom: "10px", marginTop: "10px", display: "flex" }}>
+                <button
+                  style={{
+                    background: "rgb(82,181,32)",
+                    color: "white",
+                    border: "none",
+                    borderRadius: "3px",
+                    padding: "2px 8px",
+                    marginRight: "20px",
+                    display: flex,
+                    justifyContent:"center",
+                    alignItems: "center"
+                  }}
+                >
+                  &nbsp; {rating}★
+                </button>
+                <p style={{ color: "#898989" }}>
+                  ({rating * 10} Ratings) .{ratingStatus}
+                </p>
+              </div>
+            </div>
+          </Box>
+        </Box>
       </Box>
     </>
-  )
+  );
   // return (
   //   <>
   //     <div style={{ display: "flex", justifyContent: "left" }}>
@@ -944,7 +1035,7 @@ function DisplayHotel() {
             style={{ border: ".2px solid rgb(224,224,224)", marginTop: "15px" }}
           />
 
-          <div style={{ height: "1960px" }}>
+          <div style={{ width: "100%", display: "grid", gap: "45px" }}>
             {/* {isLoading && <Skeleton
               animation="wave"
               height="500px"
@@ -994,9 +1085,7 @@ function DisplayHotel() {
           </div>
           {/* <hr style={{ border: ".2px solid rgb(224,224,224)" }} /> */}
 
-          <div
-            style={{ display: "flex", marginTop: "-180px", marginLeft: "40%" }}
-          >
+          <div style={{ display: "flex", width: "215px", margin: "auto" }}>
             <div style={{ margin: "20px" }}>
               <Button
                 variant="outlined"
