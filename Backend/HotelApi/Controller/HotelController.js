@@ -50,3 +50,35 @@ export const getHotel=async (req,res)=>{
         res.status(500).json(error)
     }
 }
+
+
+export const getHotelById=async (req,res)=>{
+    try {
+    //    console.log(req.params.id)
+        const HotelById = await Hotels.findById(req.params.id);
+        res.status(200).json(HotelById);
+
+    } catch (error) {
+        res.status(500).json(error)
+    }
+}
+export const getHotelByQuery=async (req,res)=>{
+    try {
+        console.log(req.params.query)    
+        const HotelByCity = await Hotels.find(
+            {
+                "$or" : [
+                    {"city":{$regex:req.params.query}},
+                    {"hotelName":{$regex:req.params.query}},
+                    {"address":{$regex:req.params.query}}
+
+                ]
+            }
+        )
+    
+        res.status(200).json(HotelByCity);
+
+    } catch (error) {
+        res.status(500).json(error)
+    }
+}
