@@ -2,6 +2,11 @@
 import mongoose from "mongoose";
 
 const hotelSchema = new mongoose.Schema({
+
+    id:{
+        type:Number,
+        require: true
+    },
     hotelName:{
         type:String,
         require: true
@@ -11,8 +16,8 @@ const hotelSchema = new mongoose.Schema({
         require: true
     },
     distance:{
-        type:Number,
-        require: true
+        type:String
+       
     },
     city:{
         type:String,
@@ -23,7 +28,7 @@ const hotelSchema = new mongoose.Schema({
         require: true
     },
     rating:{
-        type:Number,
+        type:String,
         require: true
     },
     ratingCount:{
@@ -35,30 +40,58 @@ const hotelSchema = new mongoose.Schema({
     
     },
     price:{
-        type:Number,
+        type:String,
         require:true
     
     },
     strikedPrice:{
-        type:Number,
+        type:String,
         require:true
     
     },
     discount:{
-        type:Number,
+        type:String,
         require:true
     
     },
-    facility:{
-        type:[String]
+    facility1:{
+        type:String
+    
+    },
+    facility2:{
+        type:String
+    
+    },
+    facility3:{
+        type:String
+    
+    },
+    facilityX:{
+        type:String
     
     },
     mainImage:{
         type:String,
         require:true,
     },
-    image:{
-        type:[String],
+    image1:{
+        type:String,
+        
+    },
+    image2:{
+        type:String,
+        
+    },
+    image3:{
+        type:String,
+        
+    },
+    image4:{
+        type:String,
+        
+    },
+    image5:{
+        type:String,
         
     },
    
