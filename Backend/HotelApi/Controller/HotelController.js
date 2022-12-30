@@ -5,6 +5,7 @@ export const addHotel=async (req,res)=>{
         
         const newHotel = await Hotels.create({
   
+            id: req.body.id,
             hotelName: req.body.hotelName,
             address: req.body.address,
             distance: req.body.distance,
@@ -16,9 +17,17 @@ export const addHotel=async (req,res)=>{
             price: req.body.price,
             strikedPrice: req.body.strikedPrice,
             discount: req.body.discount,
-            facility: req.body.facility,
+            facility1: req.body.facility1,
+            facility2: req.body.facility2,
+            facility3: req.body.facility3,
+            facilityX: req.body.facilityX,
             mainImage: req.body.mainImage,
-            image: req.body.image,
+            image1: req.body.image1,
+            image2: req.body.image2,
+            image3: req.body.image3,
+            image4: req.body.image4,
+            image5: req.body.image5,
+            
             
          })
      
