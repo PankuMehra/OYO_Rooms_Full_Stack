@@ -120,7 +120,7 @@ function HotelItem({
                     borderRadius: "3px",
                     padding: "2px 8px",
                     marginRight: "20px",
-                    display: flex,
+                    display: "flex",
                     justifyContent:"center",
                     alignItems: "center"
                   }}
