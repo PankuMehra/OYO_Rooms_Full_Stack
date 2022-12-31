@@ -67,6 +67,7 @@ function HotelItem({
   discount,
   strikedPrice,
   id,
+  _id
 }) {
   const items = [mainImage, image1, image2, image3, image4];
   const facilityIcons = [
@@ -326,7 +327,7 @@ function HotelItem({
                     }}
                   >
                     <Link
-                      to={`/hotels/${id}`}
+                      to={`/hotels/${_id}`}
                       style={{ textDecoration: "none", color: "black" }}
                     >
                       View Details
