@@ -6,6 +6,7 @@
 .pnp.js
 /Backend/node_modules
 /Backend/env
+/Backend/LoginApi/node_modules
 # testing
 /coverage
 
