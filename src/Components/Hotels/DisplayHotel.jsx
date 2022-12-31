@@ -48,6 +48,10 @@ function HotelItem({
   info,
   rating,
   ratingStatus,
+  facility1,
+  facility2,
+  facility3,
+  facilityX,
   price,
   discount,
   strikedPrice,
@@ -77,7 +81,12 @@ function HotelItem({
           <img src={image3} alt="img" className="short-image" />
           <img src={image4} alt="img" className="short-image" />
         </Box>
-        <Box width="52%" paddingLeft="12px" display="flex" flexDirection="column">
+        <Box
+          width="52%"
+          paddingLeft="12px"
+          display="flex"
+          flexDirection="column"
+        >
           <Box display="flex">
             <Box width="75%" display="grid">
               <h3 className="hotelName">{hotelName}</h3>
@@ -111,7 +120,13 @@ function HotelItem({
           </Box>
           <Box>
             <div style={{ display: "flex" }}>
-              <div style={{ marginBottom: "10px", marginTop: "10px", display: "flex" }}>
+              <div
+                style={{
+                  marginBottom: "10px",
+                  marginTop: "10px",
+                  display: "flex",
+                }}
+              >
                 <button
                   style={{
                     background: "rgb(82,181,32)",
@@ -121,8 +136,8 @@ function HotelItem({
                     padding: "2px 8px",
                     marginRight: "20px",
                     display: "flex",
-                    justifyContent:"center",
-                    alignItems: "center"
+                    justifyContent: "center",
+                    alignItems: "center",
                   }}
                 >
                   &nbsp; {rating}★
@@ -132,6 +147,20 @@ function HotelItem({
                 </p>
               </div>
             </div>
+          </Box>
+          <Box>
+            <Box display="flex" gap="2rem" marginBottom="10px" marginTop="10px">
+              <Box>
+                <p>🛏 {facility1} &nbsp;</p>
+              </Box>
+              <Box>
+                <p>🚘 {facility2} &nbsp;</p>{" "}
+              </Box>
+              <Box>
+                {" "}
+                <p>🙏 {facility3} &nbsp;</p>{" "}
+              </Box>
+            </Box>
           </Box>
         </Box>
       </Box>
