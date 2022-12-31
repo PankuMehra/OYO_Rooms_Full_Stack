@@ -1,4 +1,4 @@
-import { Movie } from "@mui/icons-material";
+
 import Hotels from "../database/model/hotel.js";
 
 export const addHotel = async (req, res) => {
@@ -79,6 +79,7 @@ export const getHotel = async (req, res) => {
     //   sortBy[sortbyprice[0]] = sort[1];
     // } else sortBy[sortbyprice[0]] = "asc";
     const city = req.query.city || "";
+    const rating = req.query.rating || "";
     const totalData = await Hotels.countDocuments();
 
     const { limit = 10, page = 1 } = req.query;
@@ -92,7 +93,7 @@ export const getHotel = async (req, res) => {
           },
         },
         { address: { $regex: ".*" + req.query.address + ".*", $options: "i" } },
-        { rating: { $regex: ".*" + req.query.rating + ".*", $options: "i" } },
+        { rating: { $regex: ".*" + rating + ".*", $options: "i" } },
       ],
     })
       .limit(limit * 1)

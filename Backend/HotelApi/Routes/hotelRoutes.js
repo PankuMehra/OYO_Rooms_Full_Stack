@@ -8,8 +8,8 @@ route.get("/" , (req, res)=>{
 })
 route.post("/addhotel" ,addHotel)
 route.get("/gethotels" ,getHotel)
-// route.get("/gethotels/:query" ,getHotelByQuery)
 route.get("/gethotel/:id" ,getHotelById)
+// route.get("/gethotels/:query" ,getHotelByQuery)
 
 
 export default route;
