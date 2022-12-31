@@ -204,7 +204,14 @@ function HotelItem({
           </Box>
           <Box>
             <Box display="flex" gap="2rem" marginBottom="10px" marginTop="10px">
-              <Box display="flex" justifyContent="space-between" gap="5px" height="35px" alignItems="center" color="#222" >
+              <Box
+                display="flex"
+                justifyContent="space-between"
+                gap="5px"
+                height="35px"
+                alignItems="center"
+                color="#222"
+              >
                 {facilityIcons.map((elem) => {
                   if (elem.facility == facility1) {
                     return elem.icon;
@@ -212,7 +219,14 @@ function HotelItem({
                 })}{" "}
                 <p> {facility1} &nbsp;</p>{" "}
               </Box>
-              <Box display="flex" justifyContent="space-between" gap="5px" height="35px" alignItems="center" color="#222" >
+              <Box
+                display="flex"
+                justifyContent="space-between"
+                gap="5px"
+                height="35px"
+                alignItems="center"
+                color="#222"
+              >
                 {facilityIcons.map((elem) => {
                   if (elem.facility == facility2) {
                     return elem.icon;
@@ -220,7 +234,14 @@ function HotelItem({
                 })}{" "}
                 <p> {facility2} &nbsp;</p>{" "}
               </Box>
-              <Box display="flex" justifyContent="space-between" gap="5px" height="35px" alignItems="center" color="#222" >
+              <Box
+                display="flex"
+                justifyContent="space-between"
+                gap="5px"
+                height="35px"
+                alignItems="center"
+                color="#222"
+              >
                 {facilityIcons.map((elem) => {
                   if (elem.facility == facility3) {
                     return elem.icon;
@@ -228,9 +249,109 @@ function HotelItem({
                 })}{" "}
                 <p> {facility3} &nbsp;</p>{" "}
               </Box>
-              <Box display="flex" justifyContent="space-between" gap="5px" height="35px" alignItems="center" color="#222" >
+              <Box
+                display="flex"
+                justifyContent="space-between"
+                gap="5px"
+                height="35px"
+                alignItems="center"
+                color="#222"
+              >
                 {" "}
                 <p> {facilityX} &nbsp;</p>{" "}
+              </Box>
+            </Box>
+          </Box>
+          <Box>
+            <Box style={{ display: "flex", gap: "2rem" }}>
+              <Box>
+                <Box>
+                  <p style={{ lineHeight: "5px" }}>
+                    <span
+                      style={{
+                        fontSize: "20px",
+                        fontWeight: "700",
+                        lineHeight: "24px",
+                        color: "rgb(238,42,35)",
+                      }}
+                    >
+                      ₹{price} &nbsp;
+                    </span>
+                    <span
+                      style={{
+                        textDecoration: "line-through",
+                        fontSize: "12px",
+                        lineHeight: "25px",
+                        color: "rgb(180,186,188)",
+                      }}
+                    >
+                      ₹{strikedPrice} &nbsp;
+                    </span>
+                    <span
+                      style={{
+                        color: "rgb(244,165,34)",
+                        paddingBottom: "10px",
+                        fontSize: "12px",
+                      }}
+                    >
+                      &nbsp;
+                      {discount}% off
+                    </span>
+                  </p>
+                </Box>
+                <Box>
+                  <p
+                    style={{
+                      color: "rgb(163,169,172)",
+                      fontSize: "12px",
+                      paddingBottom: "10px",
+                      paddingTop: "10px",
+                    }}
+                  >
+                    per room per night
+                  </p>
+                </Box>
+              </Box>
+              <Box style={{ marginLeft: "20px" }}>
+                <Stack direction="row" spacing={2}>
+                  <Button
+                    variant="out"
+                    style={{
+                      color: "black",
+                      border: "2px solid black",
+                      width: "120px",
+                      height: "60px",
+                    }}
+                  >
+                    <Link
+                      to={`/hotels/${id}`}
+                      style={{ textDecoration: "none", color: "black" }}
+                    >
+                      View Details
+                    </Link>
+                  </Button>
+                  <Button
+                    variant="out"
+                    style={{
+                      border: "2px solid black",
+                      color: "white",
+                      backgroundColor: "green",
+                      width: "120px",
+                      height: "60px",
+                    }}
+                  >
+                    <Link
+                      to={`/hotels/${id}`}
+                      style={{
+                        textDecoration: "none",
+                        color: "white",
+                        fontWeight: "600",
+                      }}
+                    >
+                      Book Now
+                    </Link>
+                  </Button>
+                </Stack>
               </Box>
             </Box>
           </Box>
