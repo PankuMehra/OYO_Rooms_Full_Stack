@@ -13,6 +13,19 @@ import {
   Card,
 } from "@mui/material";
 import { IoLocationSharp } from "react-icons/io5";
+import { BiWifi } from "react-icons/bi";
+import {
+  GiCarBattery,
+  GiCctvCamera,
+  GiElevator,
+  GiSecurityGate,
+} from "react-icons/gi";
+import { BsCheck2Circle } from "react-icons/bs";
+import { AiFillCar } from "react-icons/ai";
+import { WiSnowflakeCold } from "react-icons/wi";
+import { RiTempColdLine } from "react-icons/ri";
+import { SlScreenDesktop } from "react-icons/sl";
+import { FaRegMoneyBillAlt } from "react-icons/fa";
 // import Button from "@mui/material/Button";
 // import Box from "@mui/material/Box";
 // import Slider from "@mui/material/Slider";
@@ -30,7 +43,6 @@ import ElevatorIcon from "@mui/icons-material/Elevator";
 // import Stack from "@mui/material/Stack";
 import Carousel from "react-material-ui-carousel";
 import Footer from "../HomePage/Footer/Footer";
-
 import { getHotelRooms } from "./api";
 import Navbar1 from "../HomePage/Navbar1";
 import { margin } from "@mui/system";
@@ -58,6 +70,48 @@ function HotelItem({
   id,
 }) {
   const items = [mainImage, image1, image2, image3, image4];
+  const facilityIcons = [
+    {
+      icon: <BiWifi />,
+      facility: "Free Wi-Fi",
+    },
+    {
+      icon: <BsCheck2Circle />,
+      facility: "Reception",
+    },
+    {
+      icon: <AiFillCar />,
+      facility: "Parking facility",
+    },
+    {
+      icon: <GiCctvCamera />,
+      facility: "CCTV cameras",
+    },
+    {
+      icon: <GiCarBattery />,
+      facility: "Power backup",
+    },
+    {
+      icon: <GiElevator />,
+      facility: "Elevator",
+    },
+    {
+      icon: <WiSnowflakeCold />,
+      facility: "AC",
+    },
+    {
+      icon: <RiTempColdLine />,
+      facility: "Geyser",
+    },
+    {
+      icon: <SlScreenDesktop />,
+      facility: "TV",
+    },
+    {
+      icon: <GiSecurityGate />,
+      facility: "Security",
+    },
+  ];
   return (
     <>
       <Box display="flex" borderBottom="1px solid #e1e2e3" paddingBottom="45px">
@@ -150,17 +204,31 @@ function HotelItem({
           </Box>
           <Box>
             <Box display="flex" gap="2rem" marginBottom="10px" marginTop="10px">
-              <Box>
-                <p> {facility1} &nbsp;</p>
+              <Box display="flex" justifyContent="space-between" gap="5px" height="35px" alignItems="center" color="#222" >
+                {facilityIcons.map((elem) => {
+                  if (elem.facility == facility1) {
+                    return elem.icon;
+                  }
+                })}{" "}
+                <p> {facility1} &nbsp;</p>{" "}
               </Box>
-              <Box>
+              <Box display="flex" justifyContent="space-between" gap="5px" height="35px" alignItems="center" color="#222" >
+                {facilityIcons.map((elem) => {
+                  if (elem.facility == facility2) {
+                    return elem.icon;
+                  }
+                })}{" "}
                 <p> {facility2} &nbsp;</p>{" "}
               </Box>
-              <Box>
-                {" "}
+              <Box display="flex" justifyContent="space-between" gap="5px" height="35px" alignItems="center" color="#222" >
+                {facilityIcons.map((elem) => {
+                  if (elem.facility == facility3) {
+                    return elem.icon;
+                  }
+                })}{" "}
                 <p> {facility3} &nbsp;</p>{" "}
               </Box>
-              <Box>
+              <Box display="flex" justifyContent="space-between" gap="5px" height="35px" alignItems="center" color="#222" >
                 {" "}
                 <p> {facilityX} &nbsp;</p>{" "}
               </Box>
