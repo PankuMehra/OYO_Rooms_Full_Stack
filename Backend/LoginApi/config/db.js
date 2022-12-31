@@ -1,8 +1,12 @@
 import mongoose from "mongoose";
+import dotenv from "dotenv";
 
+dotenv.config();
+const USERNAME = process.env.DB_USERNAME
+const PASSWORD = process.env.DB_PASSWORD
 const connection = async () => {
-  const USERNAME = process.env.DB_USERNAME
-  const PASSWORD = process.env.DB_PASSWORD
+  
+  
   try {
     mongoose.connect(
       
