@@ -2,10 +2,12 @@
 
 # dependencies
 /node_modules
+*node_modules
 /.pnp
 .pnp.js
 /Backend/node_modules
 /Backend/env
+/Backend/LoginApi/node_modules
 # testing
 /coverage
 
