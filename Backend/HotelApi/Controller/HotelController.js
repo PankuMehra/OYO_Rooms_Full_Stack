@@ -101,14 +101,14 @@ export const getHotel = async (req, res) => {
     let nextPage;
     let prevPage;
     if (page < totalData / limit - 1) {
-      nextPage = page + 1;
+      nextPage = Number(page) + 1;
     }
-    if (page != 0) {
-      prevPage = page - 1;
+    if (page != 1) {
+      prevPage = Number(page) - 1;
     }
     res.status(200).json({
       totalPage: Math.round(totalData / limit),
-      currentPage: page,
+      currentPage: Number(page),
       nextPage: nextPage,
       prevPage: prevPage,
       hotels,
