@@ -46,7 +46,6 @@ import Footer from "../HomePage/Footer/Footer";
 import { getHotelRooms } from "./api";
 import Navbar1 from "../HomePage/Navbar1";
 import { margin } from "@mui/system";
-// console.log(getHotelRooms);
 function HotelItem({
   hotelName,
   address,
@@ -137,9 +136,10 @@ function HotelItem({
         </Box>
         <Box
           width="52%"
-          paddingLeft="12px"
           display="flex"
           flexDirection="column"
+          justifyContent="space-between"
+          paddingLeft="12px"
         >
           <Box display="flex">
             <Box width="75%" display="grid">
@@ -263,13 +263,13 @@ function HotelItem({
             </Box>
           </Box>
           <Box>
-            <Box style={{ display: "flex", gap: "2rem" }}>
+            <Box display="flex" justifyContent="space-between">
               <Box>
                 <Box>
                   <p style={{ lineHeight: "5px" }}>
                     <span
                       style={{
-                        fontSize: "20px",
+                        fontSize: "22px",
                         fontWeight: "700",
                         lineHeight: "24px",
                         color: "rgb(238,42,35)",
@@ -280,7 +280,7 @@ function HotelItem({
                     <span
                       style={{
                         textDecoration: "line-through",
-                        fontSize: "12px",
+                        fontSize: "16px",
                         lineHeight: "25px",
                         color: "rgb(180,186,188)",
                       }}
@@ -291,11 +291,11 @@ function HotelItem({
                       style={{
                         color: "rgb(244,165,34)",
                         paddingBottom: "10px",
-                        fontSize: "12px",
+                        fontSize: "16px",
                       }}
                     >
                       &nbsp;
-                      {discount}% off
+                      {discount}
                     </span>
                   </p>
                 </Box>
@@ -303,7 +303,7 @@ function HotelItem({
                   <p
                     style={{
                       color: "rgb(163,169,172)",
-                      fontSize: "12px",
+                      fontSize: "13px",
                       paddingBottom: "10px",
                       paddingTop: "10px",
                     }}
@@ -317,10 +317,12 @@ function HotelItem({
                   <Button
                     variant="out"
                     style={{
+                      fontSize:"16px",
+                      fontWeight:"600",
                       color: "black",
                       border: "2px solid black",
-                      width: "120px",
-                      height: "60px",
+                      padding: "5px 15px",
+                      borderRadius: "3px"
                     }}
                   >
                     <Link
@@ -333,11 +335,12 @@ function HotelItem({
                   <Button
                     variant="out"
                     style={{
+                      fontSize:"16px",
                       border: "2px solid black",
                       color: "white",
-                      backgroundColor: "green",
-                      width: "120px",
-                      height: "60px",
+                      backgroundColor: "#1ab64f",
+                      padding: "5px 15px",
+                      borderRadius: "3px"
                     }}
                   >
                     <Link
@@ -598,6 +601,7 @@ function DisplayHotel() {
   const hoteldata = useSelector((state) => {
     return state.Reducer.hotelDataArray;
   });
+
   let currentCity = localStorage.getItem("currentCity") || "Mumbai";
 
   //   const handleMailChange = (event) => {
@@ -625,18 +629,12 @@ function DisplayHotel() {
     // JSON.parse(localStorage.getItem("currentCity"));
     getHotelRooms(currentCity, dispatch);
     console.log("hoteldata:", hoteldata);
-    // console.log('new:', new);
   };
-  // console.log(start);
-  // console.log(end);
-
   //   let { hotelDataArray, isLoading, isError } = useSelector(
   //     (state) => state.app,
   //     shallowEqual
   //   );
   const dispatch = useDispatch();
-
-  console.log(hoteldata);
 
   useEffect(() => {
     //   dispatch();
@@ -669,7 +667,6 @@ function DisplayHotel() {
   }
   const handleFilterClick = (e) => {
     setFilterBy(e.target.textContent);
-    // console.log(filterBy);
   };
 
   return (
