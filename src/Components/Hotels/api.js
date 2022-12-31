@@ -14,6 +14,5 @@ export const getHotelRooms = (city, page,dispatch) => {
         type: "GET_HOTELDATA_SUCCESS",
         payload: res,
       });
-      //   return res
     });
 };
