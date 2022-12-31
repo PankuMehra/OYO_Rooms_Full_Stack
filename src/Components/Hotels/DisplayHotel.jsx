@@ -151,14 +151,18 @@ function HotelItem({
           <Box>
             <Box display="flex" gap="2rem" marginBottom="10px" marginTop="10px">
               <Box>
-                <p>🛏 {facility1} &nbsp;</p>
+                <p> {facility1} &nbsp;</p>
               </Box>
               <Box>
-                <p>🚘 {facility2} &nbsp;</p>{" "}
+                <p> {facility2} &nbsp;</p>{" "}
               </Box>
               <Box>
                 {" "}
-                <p>🙏 {facility3} &nbsp;</p>{" "}
+                <p> {facility3} &nbsp;</p>{" "}
+              </Box>
+              <Box>
+                {" "}
+                <p> {facilityX} &nbsp;</p>{" "}
               </Box>
             </Box>
           </Box>
