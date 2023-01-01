@@ -606,9 +606,6 @@ function DisplayHotel() {
 
   let currentCity = localStorage.getItem("currentCity") || "Mumbai";
 
-  //   const handleMailChange = (event) => {
-  //     setMail(event.target.value);
-  //   };
 
   const prevPage = () => {
     page.current--;
