@@ -283,6 +283,8 @@ function DisplayHotel() {
   const hoteldata = useSelector((state) => {
     return state.Reducer.hotelDataArray;
   });
+  console.log("hoteldata:", hoteldata);
+
   let currentCity = localStorage.getItem("currentCity") || "Mumbai";
 
   //   const handleMailChange = (event) => {
@@ -325,6 +327,7 @@ function DisplayHotel() {
 
   useEffect(() => {
     //   dispatch();
+    console.log("uhgfgyhui");
     getHotelRooms(currentCity, page.current, dispatch);
   }, []);
 
@@ -332,26 +335,27 @@ function DisplayHotel() {
     setSortBy(e.target.value);
   };
 
-  switch (sortBy) {
-    case "rating": {
-      hoteldata.sort((a, b) => a.rating - b.rating);
-      break;
-    }
-    case "lowtohigh": {
-      hoteldata.sort((a, b) => a.price - b.price);
-      break;
-    }
-    case "hightolow": {
-      hoteldata.sort((a, b) => b.price - a.price);
-      break;
-    }
-    case "popularity": {
-      hoteldata.sort((a, b) => a.popularity - b.popularity);
-      break;
-    }
-    default:
-      return hoteldata;
-  }
+  // switch (sortBy) {
+  //   case "rating": {
+  //     hoteldata.sort((a, b) => a.rating - b.rating);
+  //     break;
+  //   }
+  //   case "lowtohigh": {
+  //     hoteldata.sort((a, b) => a.price - b.price);
+  //     break;
+  //   }
+  //   case "hightolow": {
+  //     hoteldata.sort((a, b) => b.price - a.price);
+  //     break;
+  //   }
+  //   case "popularity": {
+  //     hoteldata.sort((a, b) => a.popularity - b.popularity);
+  //     break;
+  //   }
+  //   default:
+  //     return hoteldata;
+  // }
+
   const handleFilterClick = (e) => {
     setFilterBy(e.target.textContent);
     // console.log(filterBy);
