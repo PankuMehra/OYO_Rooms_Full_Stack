@@ -33,18 +33,18 @@ class SearchBanner extends Component {
     }
   };
 
-  handleSearchHotel = () => {
-    const { hotelListingDataRequest, history } = this.props;
-    console.log(this.props);
-    let location = loadData("location");
-    let lat = location.lat.toString();
-    let lon = location.lng.toString();
-    console.log(typeof lat);
-    console.log(typeof lon);
-    console.log("listing calling");
-    hotelListingDataRequest({ location: { lat, lon }, path: "" });
-    history.push("/listing");
-  };
+  // handleSearchHotel = () => {
+  //   const { hotelListingDataRequest, history } = this.props;
+  //   console.log(this.props);
+  //   let location = loadData("location");
+  //   let lat = location.lat.toString();
+  //   let lon = location.lng.toString();
+  //   console.log(typeof lat);
+  //   console.log(typeof lon);
+  //   console.log("listing calling");
+  //   hotelListingDataRequest({ location: { lat, lon }, path: "" });
+  //   history.push("/listing");
+  // };
 
   handleEvent = (event, picker) => {
     this.setState({

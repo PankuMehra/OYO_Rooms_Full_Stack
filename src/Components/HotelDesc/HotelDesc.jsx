@@ -13,8 +13,24 @@ import { Link } from "react-router-dom";
 // import Footer from "../Components/footer/Footer";
 import { BsChevronLeft } from "react-icons/bs";
 import { BsChevronRight } from "react-icons/bs";
-import { Skeleton } from "@mui/material";
+import { Skeleton, Box } from "@mui/material";
 import { URL } from "../../URL";
+import Carousel from "react-material-ui-carousel";
+import { IoLocationSharp } from "react-icons/io5";
+import { BiWifi } from "react-icons/bi";
+import {
+  GiCarBattery,
+  GiCctvCamera,
+  GiElevator,
+  GiSecurityGate,
+} from "react-icons/gi";
+import { BsCheck2Circle } from "react-icons/bs";
+import { AiFillCar } from "react-icons/ai";
+import { WiSnowflakeCold } from "react-icons/wi";
+import { RiTempColdLine } from "react-icons/ri";
+import { SlScreenDesktop } from "react-icons/sl";
+import { FaRegMoneyBillAlt } from "react-icons/fa";
+
 import "./HotelDesc.css";
 import Navbar1 from "../HomePage/Navbar1";
 // import { IoIosArrowDropleft, IoIosArrowDropright } from "react-icons/io";
@@ -105,65 +121,68 @@ function HotelDesc() {
       "all-Items-slidebar-mover"
     ).style.transform = `translateX(${x * 50}%)`;
   };
-
+  console.log("roomDetails", roomDetails);
+  // const items = ["A", "B"];
+  const items = [
+    roomDetails.mainImage,
+    roomDetails.image1,
+    roomDetails.image2,
+    roomDetails.image3,
+    roomDetails.image4,
+  ];
+  const facilityIcons = [
+    {
+      icon: <BiWifi />,
+      facility: "Free Wi-Fi",
+    },
+    {
+      icon: <BsCheck2Circle />,
+      facility: "Reception",
+    },
+    {
+      icon: <AiFillCar />,
+      facility: "Parking facility",
+    },
+    {
+      icon: <GiCctvCamera />,
+      facility: "CCTV cameras",
+    },
+    {
+      icon: <GiCarBattery />,
+      facility: "Power backup",
+    },
+    {
+      icon: <GiElevator />,
+      facility: "Elevator",
+    },
+    {
+      icon: <WiSnowflakeCold />,
+      facility: "AC",
+    },
+    {
+      icon: <RiTempColdLine />,
+      facility: "Geyser",
+    },
+    {
+      icon: <SlScreenDesktop />,
+      facility: "TV",
+    },
+    {
+      icon: <GiSecurityGate />,
+      facility: "Security",
+    },
+  ];
   return (
     <>
       <Navbar1 />
       <div>
-        <div>
-          <div>
-            {/* {slideImages.map((slideImage, index) => (
-              <div key={index}>
-                <div
-                  style={{
-                    backgroundImage: `url(${slideImage.url})`,
-                    height: "600px",
-                    width: "100%",
-                  }}
-                ></div>
-                <img src={`${slideImage.url}`} alt="slideImage"/>
-              </div>
-            ))} */}
-            <div id="leftArrow" onClick={clickLeftButton}>
-              {/* <IoIosArrowDropleft /> */}
-              {/* <i className="fa-solid fa-angle-left"></i> */}
-              <BsChevronLeft />
-            </div>
-            <div
-              id="all-Items-slidebar-mover"
-              style={{
-                display: "flex",
-                width: "100%",
-                position: "relative",
-                overflow: "hidden",
-              }}
-            >
-              <div className="slideImageBox">
-                <img src={`${roomDetails.mainImage}`} alt="slide" />
-              </div>
-              <div className="slideImageBox">
-                <img src={`${roomDetails.image1}`} alt="slide" />
-              </div>
-              <div className="slideImageBox">
-                <img src={`${roomDetails.image2}`} alt="slide" />
-              </div>
-              <div className="slideImageBox">
-                <img src={`${roomDetails.image3}`} alt="slide" />
-              </div>
-              <div className="slideImageBox">
-                <img src={`${roomDetails.image4}`} alt="slide" />
-              </div>
-              <div className="slideImageBox">
-                <img src={`${roomDetails.image5}`} alt="slide" />
-              </div>
-            </div>
-            <div id="rightArrow" onClick={clickRightButton}>
-              {/* <IoIosArrowDropright /> */}
-              {/* <i class="fa-solid fa-angle-right"></i> */}
-              <BsChevronRight />
-            </div>
-          </div>
-        </div>
+        <Box width="90%">
+          <Carousel>
+            {items.map((item, i) => (
+              <img key={i} src={item} className="main-image" />
+            ))}
+          </Carousel>
+        </Box>
       </div>
       <div>
         {/* {roomDetails.map((i) => ( */}
@@ -214,38 +233,71 @@ function HotelDesc() {
               <div>
                 <h2>Amenities</h2>
               </div>
-              <div style={{ display: "flex", gap: "2rem" }}>
-                <div>
-                  <p>🛏 AC</p>
-                </div>
-                <div>
-                  <p>🚘 Parking Facility</p>{" "}
-                </div>
-                <div>
-                  {" "}
-                  <p>🙏 Reception</p>{" "}
-                </div>
-              </div>
-              <div style={{ display: "flex", gap: "2rem" }}>
-                <div>
-                  <p>
-                    <WifiIcon /> Free Wifi
-                  </p>
-                </div>
-                <div>
-                  <p>📺 TV</p>
-                </div>
-                <div>
-                  <p>
-                    <CameraswitchIcon /> CCTV Camera
-                  </p>
-                </div>
-                <div>
-                  <p>
-                    <ElevatorIcon /> Elevator
-                  </p>
-                </div>
-              </div>
+              <Box>
+                <Box
+                  display="flex"
+                  gap="2rem"
+                  marginBottom="10px"
+                  marginTop="10px"
+                >
+                  <Box
+                    display="flex"
+                    justifyContent="space-between"
+                    gap="5px"
+                    height="35px"
+                    alignItems="center"
+                    color="#222"
+                  >
+                    {facilityIcons.map((elem) => {
+                      if (elem.facility == facility1) {
+                        return elem.icon;
+                      }
+                    })}{" "}
+                    <p> {facility1} &nbsp;</p>{" "}
+                  </Box>
+                  <Box
+                    display="flex"
+                    justifyContent="space-between"
+                    gap="5px"
+                    height="35px"
+                    alignItems="center"
+                    color="#222"
+                  >
+                    {facilityIcons.map((elem) => {
+                      if (elem.facility == facility2) {
+                        return elem.icon;
+                      }
+                    })}{" "}
+                    <p> {facility2} &nbsp;</p>{" "}
+                  </Box>
+                  <Box
+                    display="flex"
+                    justifyContent="space-between"
+                    gap="5px"
+                    height="35px"
+                    alignItems="center"
+                    color="#222"
+                  >
+                    {facilityIcons.map((elem) => {
+                      if (elem.facility == facility3) {
+                        return elem.icon;
+                      }
+                    })}{" "}
+                    <p> {facility3} &nbsp;</p>{" "}
+                  </Box>
+                  <Box
+                    display="flex"
+                    justifyContent="space-between"
+                    gap="5px"
+                    height="35px"
+                    alignItems="center"
+                    color="#222"
+                  >
+                    {" "}
+                    <p> {facilityX} &nbsp;</p>{" "}
+                  </Box>
+                </Box>
+              </Box>
               <div style={{ color: "red" }}>
                 <h3>Show More</h3>
               </div>
@@ -477,11 +529,7 @@ function HotelDesc() {
                   }}
                 >
                   <div>OyoRoom Coupon applied</div>
-                  <div>
-                    ₹
-                    {89}
-                    ✅
-                  </div>
+                  <div>₹{89}✅</div>
                 </div>
 
                 <div
@@ -538,8 +586,7 @@ function HotelDesc() {
                   </div>
                   <div>
                     <div style={{ margin: "20px" }}>
-                      ₹
-                      {roomDetails.strikedPrice - roomDetails.price}
+                      ₹{roomDetails.strikedPrice - roomDetails.price}
                     </div>
                     <div style={{ marginLeft: "20px" }}>
                       ₹{roomDetails.price}

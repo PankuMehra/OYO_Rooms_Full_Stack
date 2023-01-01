@@ -67,9 +67,10 @@ function HotelItem({
   discount,
   strikedPrice,
   id,
-  _id
+  _id,
 }) {
   const items = [mainImage, image1, image2, image3, image4];
+
   const facilityIcons = [
     {
       icon: <BiWifi />,
@@ -112,6 +113,7 @@ function HotelItem({
       facility: "Security",
     },
   ];
+
   return (
     <>
       <Box display="flex" borderBottom="1px solid #e1e2e3" paddingBottom="45px">
@@ -318,16 +320,17 @@ function HotelItem({
                   <Button
                     variant="out"
                     style={{
-                      fontSize:"16px",
-                      fontWeight:"600",
+                      fontSize: "16px",
+                      fontWeight: "600",
                       color: "black",
                       border: "2px solid black",
                       padding: "5px 15px",
-                      borderRadius: "3px"
+                      borderRadius: "3px",
                     }}
                   >
                     <Link
-                      to={`/hotels/${_id}`}
+                      // to={`/hotels/${_id}`}
+                      to={`/hotels/${id}`}
                       style={{ textDecoration: "none", color: "black" }}
                     >
                       View Details
@@ -336,12 +339,12 @@ function HotelItem({
                   <Button
                     variant="out"
                     style={{
-                      fontSize:"16px",
+                      fontSize: "16px",
                       border: "2px solid black",
                       color: "white",
                       backgroundColor: "#1ab64f",
                       padding: "5px 15px",
-                      borderRadius: "3px"
+                      borderRadius: "3px",
                     }}
                   >
                     <Link
@@ -602,10 +605,9 @@ function DisplayHotel() {
   const hoteldata = useSelector((state) => {
     return state.Reducer.hotelDataArray;
   });
-  console.log('hoteldata:', hoteldata)
+  console.log("hoteldata:", hoteldata);
 
   let currentCity = localStorage.getItem("currentCity") || "Mumbai";
-
 
   const prevPage = () => {
     page.current--;
@@ -637,7 +639,7 @@ function DisplayHotel() {
 
   useEffect(() => {
     //   dispatch();
-    console.log("uhgfgyhui")
+    console.log("uhgfgyhui");
     getHotelRooms(currentCity, page.current, dispatch);
   }, []);
 
