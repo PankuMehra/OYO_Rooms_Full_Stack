@@ -25,7 +25,7 @@ class SearchBanner extends Component {
 
   loadData = (key) => {
     try {
-      let data = localStorage.getItem(key);
+      let data = localStorage.getItem(key) || "";
       data = JSON.parse(data);
       return data;
     } catch (err) {

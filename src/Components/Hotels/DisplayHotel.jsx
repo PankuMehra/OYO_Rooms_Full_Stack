@@ -1,51 +1,25 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import {
-  Box,
-  Button,
-  Slider,
-  FormGroup,
-  FormControlLabel,
-  Checkbox,
-  TextField,
-  Skeleton,
-  Stack,
-  Card,
-} from "@mui/material";
-import { IoLocationSharp } from "react-icons/io5";
-import { BiWifi } from "react-icons/bi";
-import {
-  GiCarBattery,
-  GiCctvCamera,
-  GiElevator,
-  GiSecurityGate,
-} from "react-icons/gi";
-import { BsCheck2Circle } from "react-icons/bs";
-import { AiFillCar } from "react-icons/ai";
-import { WiSnowflakeCold } from "react-icons/wi";
-import { RiTempColdLine } from "react-icons/ri";
-import { SlScreenDesktop } from "react-icons/sl";
-import { FaRegMoneyBillAlt } from "react-icons/fa";
-// import Button from "@mui/material/Button";
-// import Box from "@mui/material/Box";
-// import Slider from "@mui/material/Slider";
-// import FormGroup from "@mui/material/FormGroup";
-// import FormControlLabel from "@mui/material/FormControlLabel";
-// import Checkbox from "@mui/material/Checkbox";
+import Button from "@mui/material/Button";
+import Box from "@mui/material/Box";
+import Slider from "@mui/material/Slider";
+import FormGroup from "@mui/material/FormGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
-// import TextField from "@mui/material/TextField";
+import TextField from "@mui/material/TextField";
 import styles from "./style.css";
-// import Skeleton from "@mui/material/Skeleton";
+import Skeleton from "@mui/material/Skeleton";
 import { Link } from "react-router-dom";
 import WifiIcon from "@mui/icons-material/Wifi";
 import CameraswitchIcon from "@mui/icons-material/Cameraswitch";
 import ElevatorIcon from "@mui/icons-material/Elevator";
-// import Stack from "@mui/material/Stack";
-import Carousel from "react-material-ui-carousel";
+import Stack from "@mui/material/Stack";
 import Footer from "../HomePage/Footer/Footer";
+
 import { getHotelRooms } from "./api";
 import Navbar1 from "../HomePage/Navbar1";
-import { margin } from "@mui/system";
+// console.log(getHotelRooms);
 function HotelItem({
   hotelName,
   address,
@@ -55,311 +29,18 @@ function HotelItem({
   image3,
   image4,
   city,
-  distance,
-  info,
   rating,
-  ratingStatus,
-  facility1,
-  facility2,
-  facility3,
-  facilityX,
   price,
   discount,
   strikedPrice,
   id,
-  _id
 }) {
-  const items = [mainImage, image1, image2, image3, image4];
-  const facilityIcons = [
-    {
-      icon: <BiWifi />,
-      facility: "Free Wi-Fi",
-    },
-    {
-      icon: <BsCheck2Circle />,
-      facility: "Reception",
-    },
-    {
-      icon: <AiFillCar />,
-      facility: "Parking facility",
-    },
-    {
-      icon: <GiCctvCamera />,
-      facility: "CCTV cameras",
-    },
-    {
-      icon: <GiCarBattery />,
-      facility: "Power backup",
-    },
-    {
-      icon: <GiElevator />,
-      facility: "Elevator",
-    },
-    {
-      icon: <WiSnowflakeCold />,
-      facility: "AC",
-    },
-    {
-      icon: <RiTempColdLine />,
-      facility: "Geyser",
-    },
-    {
-      icon: <SlScreenDesktop />,
-      facility: "TV",
-    },
-    {
-      icon: <GiSecurityGate />,
-      facility: "Security",
-    },
-  ];
   return (
     <>
-      <Box display="flex" borderBottom="1px solid #e1e2e3" paddingBottom="45px">
-        <Box width="40%">
-          <Carousel>
-            {items.map((item, i) => (
-              <img key={i} src={item} className="main-image" />
-            ))}
-          </Carousel>
-        </Box>
-        <Box
-          width="8.2%"
-          display="flex"
-          flexDirection="column"
-          justifyContent="space-between"
-          alignItems="center"
-        >
-          <img src={mainImage} alt="img" className="short-image" />
-          <img src={image1} alt="img" className="short-image" />
-          <img src={image2} alt="img" className="short-image" />
-          <img src={image3} alt="img" className="short-image" />
-          <img src={image4} alt="img" className="short-image" />
-        </Box>
-        <Box
-          width="52%"
-          display="flex"
-          flexDirection="column"
-          justifyContent="space-between"
-          paddingLeft="12px"
-        >
-          <Box display="flex">
-            <Box width="75%" display="grid">
-              <h3 className="hotelName">{hotelName}</h3>
-              <Box display="flex">
-                <Box width="80%">
-                  <p className="all-p-tags">{address}</p>
-                </Box>
-                <Box
-                  width="20%"
-                  display="flex"
-                  justifyContent="space-evenly"
-                  alignItems="center"
-                  color="#222"
-                >
-                  <IoLocationSharp color="#ef4023" />
-                  <p className="all-p-tags">{distance}</p>
-                </Box>
-              </Box>
-            </Box>
-            <Box
-              width="25%"
-              color="#ef4023"
-              fontSize="14px"
-              fontWeight="600"
-              display="flex"
-              justifyContent="center"
-              alignItems="center"
-            >
-              <p style={{ width: "85%" }}>{info}</p>
-            </Box>
-          </Box>
-          <Box>
-            <div style={{ display: "flex" }}>
-              <div
-                style={{
-                  marginBottom: "10px",
-                  marginTop: "10px",
-                  display: "flex",
-                }}
-              >
-                <button
-                  style={{
-                    background: "rgb(82,181,32)",
-                    color: "white",
-                    border: "none",
-                    borderRadius: "3px",
-                    padding: "2px 8px",
-                    marginRight: "20px",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}
-                >
-                  &nbsp; {rating}★
-                </button>
-                <p style={{ color: "#898989" }}>
-                  ({rating * 10} Ratings) .{ratingStatus}
-                </p>
-              </div>
-            </div>
-          </Box>
-          <Box>
-            <Box display="flex" gap="2rem" marginBottom="10px" marginTop="10px">
-              <Box
-                display="flex"
-                justifyContent="space-between"
-                gap="5px"
-                height="35px"
-                alignItems="center"
-                color="#222"
-              >
-                {facilityIcons.map((elem) => {
-                  if (elem.facility == facility1) {
-                    return elem.icon;
-                  }
-                })}{" "}
-                <p> {facility1} &nbsp;</p>{" "}
-              </Box>
-              <Box
-                display="flex"
-                justifyContent="space-between"
-                gap="5px"
-                height="35px"
-                alignItems="center"
-                color="#222"
-              >
-                {facilityIcons.map((elem) => {
-                  if (elem.facility == facility2) {
-                    return elem.icon;
-                  }
-                })}{" "}
-                <p> {facility2} &nbsp;</p>{" "}
-              </Box>
-              <Box
-                display="flex"
-                justifyContent="space-between"
-                gap="5px"
-                height="35px"
-                alignItems="center"
-                color="#222"
-              >
-                {facilityIcons.map((elem) => {
-                  if (elem.facility == facility3) {
-                    return elem.icon;
-                  }
-                })}{" "}
-                <p> {facility3} &nbsp;</p>{" "}
-              </Box>
-              <Box
-                display="flex"
-                justifyContent="space-between"
-                gap="5px"
-                height="35px"
-                alignItems="center"
-                color="#222"
-              >
-                {" "}
-                <p> {facilityX} &nbsp;</p>{" "}
-              </Box>
-            </Box>
-          </Box>
-          <Box>
-            <Box display="flex" justifyContent="space-between">
-              <Box>
-                <Box>
-                  <p style={{ lineHeight: "5px" }}>
-                    <span
-                      style={{
-                        fontSize: "22px",
-                        fontWeight: "700",
-                        lineHeight: "24px",
-                        color: "rgb(238,42,35)",
-                      }}
-                    >
-                      ₹{price} &nbsp;
-                    </span>
-                    <span
-                      style={{
-                        textDecoration: "line-through",
-                        fontSize: "16px",
-                        lineHeight: "25px",
-                        color: "rgb(180,186,188)",
-                      }}
-                    >
-                      ₹{strikedPrice} &nbsp;
-                    </span>
-                    <span
-                      style={{
-                        color: "rgb(244,165,34)",
-                        paddingBottom: "10px",
-                        fontSize: "16px",
-                      }}
-                    >
-                      &nbsp;
-                      {discount}
-                    </span>
-                  </p>
-                </Box>
-                <Box>
-                  <p
-                    style={{
-                      color: "rgb(163,169,172)",
-                      fontSize: "13px",
-                      paddingBottom: "10px",
-                      paddingTop: "10px",
-                    }}
-                  >
-                    per room per night
-                  </p>
-                </Box>
-              </Box>
-              <Box style={{ marginLeft: "20px" }}>
-                <Stack direction="row" spacing={2}>
-                  <Button
-                    variant="out"
-                    style={{
-                      fontSize:"16px",
-                      fontWeight:"600",
-                      color: "black",
-                      border: "2px solid black",
-                      padding: "5px 15px",
-                      borderRadius: "3px"
-                    }}
-                  >
-                    <Link
-                      to={`/hotels/${_id}`}
-                      style={{ textDecoration: "none", color: "black" }}
-                    >
-                      View Details
-                    </Link>
-                  </Button>
-                  <Button
-                    variant="out"
-                    style={{
-                      fontSize:"16px",
-                      border: "2px solid black",
-                      color: "white",
-                      backgroundColor: "#1ab64f",
-                      padding: "5px 15px",
-                      borderRadius: "3px"
-                    }}
-                  >
-                    <Link
-                      to={`/hotels/${id}`}
-                      style={{
-                        textDecoration: "none",
-                        color: "white",
-                        fontWeight: "600",
-                      }}
-                    >
-                      Book Now
-                    </Link>
-                  </Button>
-                </Stack>
-              </Box>
-            </Box>
-          </Box>
-        </Box>
+      <Box>
+        <Box></Box>
+        <Box></Box>
+        <Box></Box>
       </Box>
     </>
   );
@@ -602,7 +283,6 @@ function DisplayHotel() {
   const hoteldata = useSelector((state) => {
     return state.Reducer.hotelDataArray;
   });
-
   let currentCity = localStorage.getItem("currentCity") || "Mumbai";
 
   //   const handleMailChange = (event) => {
@@ -630,12 +310,18 @@ function DisplayHotel() {
     // JSON.parse(localStorage.getItem("currentCity"));
     getHotelRooms(currentCity, dispatch);
     console.log("hoteldata:", hoteldata);
+    // console.log('new:', new);
   };
+  // console.log(start);
+  // console.log(end);
+
   //   let { hotelDataArray, isLoading, isError } = useSelector(
   //     (state) => state.app,
   //     shallowEqual
   //   );
   const dispatch = useDispatch();
+
+  console.log(hoteldata);
 
   useEffect(() => {
     //   dispatch();
@@ -668,11 +354,12 @@ function DisplayHotel() {
   }
   const handleFilterClick = (e) => {
     setFilterBy(e.target.textContent);
+    // console.log(filterBy);
   };
 
   return (
     <div>
-      <Navbar1 />
+      {/* <Navbar1 /> */}
       <div
         style={{
           background: "rgb(222,150,64)",
@@ -1255,7 +942,7 @@ function DisplayHotel() {
             style={{ border: ".2px solid rgb(224,224,224)", marginTop: "15px" }}
           />
 
-          <div style={{ width: "100%", display: "grid", gap: "45px" }}>
+          <div style={{ height: "1960px" }}>
             {/* {isLoading && <Skeleton
               animation="wave"
               height="500px"
@@ -1305,7 +992,9 @@ function DisplayHotel() {
           </div>
           {/* <hr style={{ border: ".2px solid rgb(224,224,224)" }} /> */}
 
-          <div style={{ display: "flex", width: "215px", margin: "auto" }}>
+          <div
+            style={{ display: "flex", marginTop: "-180px", marginLeft: "40%" }}
+          >
             <div style={{ margin: "20px" }}>
               <Button
                 variant="outlined"
