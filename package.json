@@ -25,6 +25,7 @@
     "react-dom": "^18.2.0",
     "react-google-button": "^0.7.2",
     "react-icons": "^4.7.1",
+    "react-material-ui-carousel": "^3.4.2",
     "react-places-autocomplete": "^7.3.0",
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.4.4",
