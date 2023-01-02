@@ -11,6 +11,10 @@ import {
   Skeleton,
   Stack,
   Card,
+  InputLabel,
+  Select,
+  MenuItem,
+  FormControl,
 } from "@mui/material";
 import { IoLocationSharp } from "react-icons/io5";
 import { BiWifi } from "react-icons/bi";
@@ -46,7 +50,6 @@ import Footer from "../HomePage/Footer/Footer";
 import { getHotelRooms } from "./api";
 import Navbar1 from "../HomePage/Navbar1";
 import { margin } from "@mui/system";
-// console.log(getHotelRooms);
 function HotelItem({
   hotelName,
   address,
@@ -59,6 +62,7 @@ function HotelItem({
   distance,
   info,
   rating,
+  ratingCount,
   ratingStatus,
   facility1,
   facility2,
@@ -68,6 +72,7 @@ function HotelItem({
   discount,
   strikedPrice,
   id,
+  _id,
 }) {
   const items = [mainImage, image1, image2, image3, image4];
   const facilityIcons = [
@@ -118,28 +123,60 @@ function HotelItem({
         <Box width="40%">
           <Carousel>
             {items.map((item, i) => (
-              <img key={i} src={item} className="main-image" />
+              <img
+                key={i}
+                style={{ height: "270px" }}
+                src={item}
+                className="main-image"
+              />
             ))}
           </Carousel>
         </Box>
         <Box
           width="8.2%"
+          height="270px"
           display="flex"
           flexDirection="column"
           justifyContent="space-between"
           alignItems="center"
         >
-          <img src={mainImage} alt="img" className="short-image" />
-          <img src={image1} alt="img" className="short-image" />
-          <img src={image2} alt="img" className="short-image" />
-          <img src={image3} alt="img" className="short-image" />
-          <img src={image4} alt="img" className="short-image" />
+          <img
+            style={{ height: "52px" }}
+            src={mainImage}
+            alt="img"
+            className="short-image"
+          />
+          <img
+            style={{ height: "52px" }}
+            src={image1}
+            alt="img"
+            className="short-image"
+          />
+          <img
+            style={{ height: "52px" }}
+            src={image2}
+            alt="img"
+            className="short-image"
+          />
+          <img
+            style={{ height: "52px" }}
+            src={image3}
+            alt="img"
+            className="short-image"
+          />
+          <img
+            style={{ height: "52px" }}
+            src={image4}
+            alt="img"
+            className="short-image"
+          />
         </Box>
         <Box
           width="52%"
-          paddingLeft="12px"
           display="flex"
           flexDirection="column"
+          justifyContent="space-between"
+          paddingLeft="12px"
         >
           <Box display="flex">
             <Box width="75%" display="grid">
@@ -179,6 +216,7 @@ function HotelItem({
                   marginBottom: "10px",
                   marginTop: "10px",
                   display: "flex",
+                  // alignItems:"flex-end",
                 }}
               >
                 <button
@@ -187,17 +225,18 @@ function HotelItem({
                     color: "white",
                     border: "none",
                     borderRadius: "3px",
-                    padding: "2px 8px",
+                    padding: "1px 7px",
                     marginRight: "20px",
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
+                    fontSize: "15px",
                   }}
                 >
                   &nbsp; {rating}★
                 </button>
-                <p style={{ color: "#898989" }}>
-                  ({rating * 10} Ratings) .{ratingStatus}
+                <p style={{ color: "#898989", fontSize: "14px" }}>
+                  {ratingCount} .{ratingStatus}
                 </p>
               </div>
             </div>
@@ -211,6 +250,7 @@ function HotelItem({
                 height="35px"
                 alignItems="center"
                 color="#222"
+                fontSize="15px"
               >
                 {facilityIcons.map((elem) => {
                   if (elem.facility == facility1) {
@@ -226,6 +266,7 @@ function HotelItem({
                 height="35px"
                 alignItems="center"
                 color="#222"
+                fontSize="15px"
               >
                 {facilityIcons.map((elem) => {
                   if (elem.facility == facility2) {
@@ -241,6 +282,7 @@ function HotelItem({
                 height="35px"
                 alignItems="center"
                 color="#222"
+                fontSize="15px"
               >
                 {facilityIcons.map((elem) => {
                   if (elem.facility == facility3) {
@@ -256,6 +298,7 @@ function HotelItem({
                 height="35px"
                 alignItems="center"
                 color="#222"
+                fontSize="15px"
               >
                 {" "}
                 <p> {facilityX} &nbsp;</p>{" "}
@@ -263,13 +306,13 @@ function HotelItem({
             </Box>
           </Box>
           <Box>
-            <Box style={{ display: "flex", gap: "2rem" }}>
+            <Box display="flex" justifyContent="space-between">
               <Box>
                 <Box>
                   <p style={{ lineHeight: "5px" }}>
                     <span
                       style={{
-                        fontSize: "20px",
+                        fontSize: "22px",
                         fontWeight: "700",
                         lineHeight: "24px",
                         color: "rgb(238,42,35)",
@@ -280,7 +323,7 @@ function HotelItem({
                     <span
                       style={{
                         textDecoration: "line-through",
-                        fontSize: "12px",
+                        fontSize: "15px",
                         lineHeight: "25px",
                         color: "rgb(180,186,188)",
                       }}
@@ -291,11 +334,11 @@ function HotelItem({
                       style={{
                         color: "rgb(244,165,34)",
                         paddingBottom: "10px",
-                        fontSize: "12px",
+                        fontSize: "15px",
                       }}
                     >
                       &nbsp;
-                      {discount}% off
+                      {discount}
                     </span>
                   </p>
                 </Box>
@@ -303,7 +346,7 @@ function HotelItem({
                   <p
                     style={{
                       color: "rgb(163,169,172)",
-                      fontSize: "12px",
+                      fontSize: "13px",
                       paddingBottom: "10px",
                       paddingTop: "10px",
                     }}
@@ -317,10 +360,12 @@ function HotelItem({
                   <Button
                     variant="out"
                     style={{
+                      fontSize: "15px",
+                      fontWeight: "600",
                       color: "black",
-                      border: "2px solid black",
-                      width: "120px",
-                      height: "60px",
+                      border: "1px solid black",
+                      padding: "4px 15px",
+                      borderRadius: "3px",
                     }}
                   >
                     <Link
@@ -333,11 +378,12 @@ function HotelItem({
                   <Button
                     variant="out"
                     style={{
-                      border: "2px solid black",
+                      fontSize: "15px",
+                      border: "1px solid black",
                       color: "white",
-                      backgroundColor: "green",
-                      width: "120px",
-                      height: "60px",
+                      backgroundColor: "#1ab64f",
+                      padding: "4px 15px",
+                      borderRadius: "3px",
                     }}
                   >
                     <Link
@@ -588,8 +634,9 @@ function valuetext(value) {
 }
 
 function DisplayHotel() {
-  const [start, setStart] = React.useState([0]);
-  const [end, setEnd] = React.useState([10000]);
+  let [start, setStart] = React.useState([0]);
+  let [end, setEnd] = React.useState([10000]);
+  let [filterArray, setFilterArray] = React.useState([]);
   const [value, setValue] = React.useState([0, 1000]);
   const [sortBy, setSortBy] = React.useState("popularity");
   const [filterBy, setFilterBy] = useState("");
@@ -598,11 +645,9 @@ function DisplayHotel() {
   const hoteldata = useSelector((state) => {
     return state.Reducer.hotelDataArray;
   });
-  let currentCity = localStorage.getItem("currentCity") || "Mumbai";
+  console.log("hoteldata:", hoteldata);
 
-  //   const handleMailChange = (event) => {
-  //     setMail(event.target.value);
-  //   };
+  let currentCity = localStorage.getItem("currentCity") || "Mumbai";
 
   const prevPage = () => {
     page.current--;
@@ -617,30 +662,30 @@ function DisplayHotel() {
   const handleChange = (event, newValue) => {
     setValue(newValue);
     // let x = newValue[0] * 1000;
-    setStart(newValue[0] * 100);
-    setEnd(newValue[1] * 100);
-    hoteldata.filter((elem) => {
-      return elem.price > start;
+    start = newValue[0] * 100;
+    end = newValue[1] * 100;
+    setStart(start);
+    setEnd(end);
+    console.log('start:', start)
+    console.log('end:', end)
+    
+    let filterHotelData = hoteldata.filter((elem) => {
+      if(elem.price >= start && elem.price <= end){
+        return elem;
+      }
     });
-    // JSON.parse(localStorage.getItem("currentCity"));
-    getHotelRooms(currentCity, dispatch);
-    console.log("hoteldata:", hoteldata);
-    // console.log('new:', new);
+    setFilterArray(filterHotelData);
+    console.log('filterHotelData:', filterHotelData)
   };
-  // console.log(start);
-  // console.log(end);
-
   //   let { hotelDataArray, isLoading, isError } = useSelector(
   //     (state) => state.app,
   //     shallowEqual
   //   );
   const dispatch = useDispatch();
 
-  console.log(hoteldata);
-
   useEffect(() => {
-    //   dispatch();
     getHotelRooms(currentCity, page.current, dispatch);
+    setFilterArray(hoteldata);
   }, []);
 
   const handleSortBy = (e) => {
@@ -649,27 +694,27 @@ function DisplayHotel() {
 
   switch (sortBy) {
     case "rating": {
-      hoteldata.sort((a, b) => a.rating - b.rating);
+      filterArray.sort((a, b) => b.rating - a.rating);
       break;
     }
     case "lowtohigh": {
-      hoteldata.sort((a, b) => a.price - b.price);
+      filterArray.sort((a, b) => a.price - b.price);
       break;
     }
     case "hightolow": {
-      hoteldata.sort((a, b) => b.price - a.price);
+      filterArray.sort((a, b) => b.price - a.price);
       break;
     }
     case "popularity": {
-      hoteldata.sort((a, b) => a.popularity - b.popularity);
+      filterArray.sort((a, b) => a.popularity - b.popularity);
       break;
     }
     default:
-      return hoteldata;
+      return filterArray;
   }
+
   const handleFilterClick = (e) => {
     setFilterBy(e.target.textContent);
-    // console.log(filterBy);
   };
 
   return (
@@ -766,7 +811,7 @@ function DisplayHotel() {
           />
 
           <div>
-            <h4>Collections</h4>
+            {/* <h4>Collections</h4>
             <div
               style={{
                 display: "flex",
@@ -876,8 +921,8 @@ function DisplayHotel() {
                   + View More
                 </Button>
               </div>
-            </div>
-            <hr
+            </div> */}
+            {/* <hr
               style={{
                 border: ".2px solid rgb(224,224,224)",
                 marginTop: "10px",
@@ -954,7 +999,6 @@ function DisplayHotel() {
                   </span>
                 </div>
               </div>
-
               <div style={{ display: "flex" }}>
                 <div style={{ marginRight: "5px" }}>
                   <input
@@ -1028,8 +1072,8 @@ function DisplayHotel() {
               >
                 + View More
               </Button>
-            </div>
-            <hr
+            </div> */}
+            {/* <hr
               style={{
                 border: ".2px solid rgb(224,224,224)",
                 marginTop: "10px",
@@ -1090,7 +1134,7 @@ function DisplayHotel() {
                 border: ".2px solid rgb(224,224,224)",
                 marginTop: "10px",
               }}
-            />
+            /> */}
             <h4>Hotel Facilities</h4>
             <div
               style={{ display: "flex", flexDirection: "column", gap: "10px" }}
@@ -1107,7 +1151,7 @@ function DisplayHotel() {
                   name="OYO Rooms"
                   label="Oyo"
                 />{" "}
-                Seating Area
+                Free Wi-Fi
               </div>
               <div>
                 <input
@@ -1121,7 +1165,7 @@ function DisplayHotel() {
                   name="OYO Rooms"
                   label="Oyo"
                 />{" "}
-                Balcony
+                Reception
               </div>
               <div>
                 <input
@@ -1135,7 +1179,7 @@ function DisplayHotel() {
                   name="OYO Rooms"
                   label="Oyo"
                 />
-                Full Sized Bed
+                Parking facility
               </div>
               <div>
                 <input
@@ -1149,7 +1193,7 @@ function DisplayHotel() {
                   name="OYO Rooms"
                   label="Oyo"
                 />
-                King Sized Bed
+                CCTV cameras
               </div>
               <div>
                 {" "}
@@ -1164,10 +1208,85 @@ function DisplayHotel() {
                   name="OYO Rooms"
                   label="Oyo"
                 />
-                Queen Sized Bed
+                Power backup
+              </div>
+              <div>
+                {" "}
+                <input
+                  style={{
+                    marginRight: "10px",
+                    height: "15px",
+                    width: "18px",
+                    cursor: "pointer",
+                  }}
+                  type="checkbox"
+                  name="OYO Rooms"
+                  label="Oyo"
+                />
+                Elevator
+              </div>
+              <div>
+                {" "}
+                <input
+                  style={{
+                    marginRight: "10px",
+                    height: "15px",
+                    width: "18px",
+                    cursor: "pointer",
+                  }}
+                  type="checkbox"
+                  name="OYO Rooms"
+                  label="Oyo"
+                />
+                AC
+              </div>
+              <div>
+                {" "}
+                <input
+                  style={{
+                    marginRight: "10px",
+                    height: "15px",
+                    width: "18px",
+                    cursor: "pointer",
+                  }}
+                  type="checkbox"
+                  name="OYO Rooms"
+                  label="Oyo"
+                />
+                Geyser
+              </div>
+              <div>
+                {" "}
+                <input
+                  style={{
+                    marginRight: "10px",
+                    height: "15px",
+                    width: "18px",
+                    cursor: "pointer",
+                  }}
+                  type="checkbox"
+                  name="OYO Rooms"
+                  label="Oyo"
+                />
+                TV
+              </div>
+              <div>
+                {" "}
+                <input
+                  style={{
+                    marginRight: "10px",
+                    height: "15px",
+                    width: "18px",
+                    cursor: "pointer",
+                  }}
+                  type="checkbox"
+                  name="OYO Rooms"
+                  label="Oyo"
+                />
+                Security
               </div>
             </div>
-            <div>
+            {/* <div>
               <Button
                 variant="outlined"
                 style={{
@@ -1183,7 +1302,7 @@ function DisplayHotel() {
               >
                 + View More
               </Button>
-            </div>
+            </div> */}
             <hr
               style={{
                 border: ".2px solid rgb(224,224,224)",
@@ -1226,7 +1345,12 @@ function DisplayHotel() {
               //   justifyContent: "left"
             }}
           >
-            <div>
+            <Box
+              display="flex"
+              alignItems="flex-end"
+              width="100%"
+              borderBottom="1px solid #e1e2e3"
+            >
               <span style={{ fontSize: "21px", fontWeight: "700" }}>
                 Hotels in {currentCity}
               </span>
@@ -1237,21 +1361,47 @@ function DisplayHotel() {
                   <span className={`${styles.slider} ${styles.round}`}></span>
                 </label>
               </span>
-              <span style={{ marginLeft: "100px" }}>Sort By </span>
-              <span>
-                <select
+              {/* <span style={{ marginLeft: "100px" }}>Sort By </span> */}
+              {/* <span> */}
+              <FormControl
+                variant="standard"
+                sx={{ minWidth: 120, marginLeft: "200px" }}
+              >
+                <InputLabel id="demo-simple-select-standard-label">
+                  Sort By
+                </InputLabel>
+                <Select
+                  labelId="demo-simple-select-standard-label"
+                  id="demo-simple-select-standard"
+                  // value={rating}
+                  name="sort"
+                  onChange={handleSortBy}
+                  label="Sort By"
+                >
+                  <MenuItem value="">
+                    <em>None</em>
+                  </MenuItem>
+                  <MenuItem value="rating">Guest Ratings</MenuItem>
+                  <MenuItem value="lowtohigh">Price Low To High</MenuItem>
+                  <MenuItem value="hightolow">Price High To Low</MenuItem>
+                </Select>
+              </FormControl>
+              {/* <select
                   onChange={handleSortBy}
                   name="sort"
                   id="sort"
-                  style={{ padding: "10px", width: "200px" }}
+                  style={{
+                    padding: "10px",
+                    width: "200px",
+                    border: "1px solid gray",
+                  }}
                 >
-                  <option value="popularity">Popularity</option>
                   <option value="rating">Guest Ratings</option>
                   <option value="lowtohigh">Price Low To High</option>
                   <option value="hightolow">Price High To Low</option>
-                </select>
-              </span>
-            </div>
+                </select> */}
+              {/* </span> */}
+            </Box>
           </div>
           <hr
             style={{ border: ".2px solid rgb(224,224,224)", marginTop: "15px" }}
@@ -1292,18 +1442,18 @@ function DisplayHotel() {
                 }
                return;
               }) */}
-            {hoteldata
+            {/* {hoteldata
               .filter((elem) => {
                 if (elem.price >= start && elem.price <= end) {
-                  return elem.city;
+                  return elem;
                 } else if (filterBy === "") {
                   return elem;
                 }
                 return;
-              })
-              .map((item) => (
-                <HotelItem key={item.id} {...item} />
-              ))}
+              }) */}
+            {filterArray.map((item) => (
+              <HotelItem key={item.id} {...item} />
+            ))}
           </div>
           {/* <hr style={{ border: ".2px solid rgb(224,224,224)" }} /> */}
 
@@ -1312,7 +1462,7 @@ function DisplayHotel() {
               <Button
                 variant="outlined"
                 onClick={prevPage}
-                disabled={page.current == 0 ? true : false}
+                disabled={page.current == 1 ? true : false}
                 style={{
                   background: "red",
                   color: "white",
@@ -1328,7 +1478,7 @@ function DisplayHotel() {
               <Button
                 variant="outlined"
                 onClick={nextPage}
-                disabled={page.current == 4 ? true : false}
+                disabled={page.current == 2 ? true : false}
                 style={{
                   background: "red",
                   color: "white",
