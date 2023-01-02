@@ -369,7 +369,7 @@ function HotelItem({
                     }}
                   >
                     <Link
-                      to={`/hotels/${id}`}
+                      to={`/hotels/${_id}`}
                       style={{ textDecoration: "none", color: "black" }}
                     >
                       View Details
@@ -387,7 +387,7 @@ function HotelItem({
                     }}
                   >
                     <Link
-                      to={`/hotels/${id}`}
+                      to={`/hotels/${_id}`}
                       style={{
                         textDecoration: "none",
                         color: "white",

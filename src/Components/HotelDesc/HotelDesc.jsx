@@ -13,33 +13,43 @@ import { Link } from "react-router-dom";
 // import Footer from "../Components/footer/Footer";
 import { BsChevronLeft } from "react-icons/bs";
 import { BsChevronRight } from "react-icons/bs";
-import { Skeleton } from "@mui/material";
+import { Skeleton, Box } from "@mui/material";
 import { URL } from "../../URL";
 import "./HotelDesc.css";
 import Navbar1 from "../HomePage/Navbar1";
-// import { IoIosArrowDropleft, IoIosArrowDropright } from "react-icons/io";
-// import { position } from "@chakra-ui/react";
-// import Navbar2 from "../Components/Navbar2";
-// var data = [];
-// var slideImages = [];
-// HOOkS
+import Carousel from "react-material-ui-carousel";
+import { IoLocationSharp } from "react-icons/io5";
+import { BiWifi } from "react-icons/bi";
+import {
+  GiCarBattery,
+  GiCctvCamera,
+  GiElevator,
+  GiSecurityGate,
+} from "react-icons/gi";
+import { BsCheck2Circle, BsFillPatchCheckFill } from "react-icons/bs";
+import { AiFillCar } from "react-icons/ai";
+import { WiSnowflakeCold } from "react-icons/wi";
+import { RiTempColdLine } from "react-icons/ri";
+import { SlScreenDesktop } from "react-icons/sl";
+import { FaRegMoneyBillAlt } from "react-icons/fa";
 function HotelDesc() {
   const [data, setData] = useState([]);
   const [roomDetails, setRoomDetails] = useState();
-  const { id } = useParams();
+  const { _id } = useParams();
   let [isLoading, setIsLoading] = useState(true);
   let [isError, setIsError] = useState(false);
   let x = React.useRef(0);
 
   // const {city} = useSelector(state => state.Search);
 
+  console.log("_id:", _id);
   const getDetails = () => {
-    return fetch(`${URL.hotel}/${id}`)
+    return fetch(`${URL.hotel}/${_id}`)
       .then((res) => res.json())
       .then((res) => {
         setRoomDetails(res);
         // setRoomDetails(
-        //   res?.filter((rooms) => rooms.id === parseInt(id))
+        //   res?.filter((rooms) => rooms._id === parseInt(_id))
         // );
         setIsLoading(false);
         console.log(roomDetails);
@@ -106,65 +116,74 @@ function HotelDesc() {
     ).style.transform = `translateX(${x * 50}%)`;
   };
 
+  const items = [
+    roomDetails.mainImage,
+    roomDetails.image1,
+    roomDetails.image2,
+    roomDetails.image3,
+    roomDetails.image4,
+  ];
+  const facilityIcons = [
+    {
+      icon: <BiWifi />,
+      facility: "Free Wi-Fi",
+    },
+    {
+      icon: <BsCheck2Circle />,
+      facility: "Reception",
+    },
+    {
+      icon: <AiFillCar />,
+      facility: "Parking facility",
+    },
+    {
+      icon: <GiCctvCamera />,
+      facility: "CCTV cameras",
+    },
+    {
+      icon: <GiCarBattery />,
+      facility: "Power backup",
+    },
+    {
+      icon: <GiElevator />,
+      facility: "Elevator",
+    },
+    {
+      icon: <WiSnowflakeCold />,
+      facility: "AC",
+    },
+    {
+      icon: <RiTempColdLine />,
+      facility: "Geyser",
+    },
+    {
+      icon: <SlScreenDesktop />,
+      facility: "TV",
+    },
+    {
+      icon: <GiSecurityGate />,
+      facility: "Security",
+    },
+  ];
   return (
     <>
       <Navbar1 />
-      <div>
-        <div>
-          <div>
-            {/* {slideImages.map((slideImage, index) => (
-              <div key={index}>
-                <div
-                  style={{
-                    backgroundImage: `url(${slideImage.url})`,
-                    height: "600px",
-                    width: "100%",
-                  }}
-                ></div>
-                <img src={`${slideImage.url}`} alt="slideImage"/>
-              </div>
-            ))} */}
-            <div id="leftArrow" onClick={clickLeftButton}>
-              {/* <IoIosArrowDropleft /> */}
-              {/* <i className="fa-solid fa-angle-left"></i> */}
-              <BsChevronLeft />
-            </div>
-            <div
-              id="all-Items-slidebar-mover"
-              style={{
-                display: "flex",
-                width: "100%",
-                position: "relative",
-                overflow: "hidden",
-              }}
-            >
-              <div className="slideImageBox">
-                <img src={`${roomDetails.mainImage}`} alt="slide" />
-              </div>
-              <div className="slideImageBox">
-                <img src={`${roomDetails.image1}`} alt="slide" />
-              </div>
-              <div className="slideImageBox">
-                <img src={`${roomDetails.image2}`} alt="slide" />
-              </div>
-              <div className="slideImageBox">
-                <img src={`${roomDetails.image3}`} alt="slide" />
-              </div>
-              <div className="slideImageBox">
-                <img src={`${roomDetails.image4}`} alt="slide" />
-              </div>
-              <div className="slideImageBox">
-                <img src={`${roomDetails.image5}`} alt="slide" />
-              </div>
-            </div>
-            <div id="rightArrow" onClick={clickRightButton}>
-              {/* <IoIosArrowDropright /> */}
-              {/* <i class="fa-solid fa-angle-right"></i> */}
-              <BsChevronRight />
-            </div>
-          </div>
-        </div>
-      </div>
+      <Box display="flex" justifyContent="space-around">
+        <Box width="49%" height="90%">
+          <Carousel>
+            {items.map((item, i) => (
+              <img key={i} src={item} className="main-image" />
+            ))}
+          </Carousel>
+        </Box>
+        <Box width="49%" height="90%">
+          <Carousel>
+            {items.map((item, i) => (
+              <img key={i} src={item} className="main-image" />
+            ))}
+          </Carousel>
+        </Box>
+      </Box>
       <div>
         {/* {roomDetails.map((i) => ( */}
         <div>
@@ -189,10 +208,10 @@ function HotelDesc() {
               <div style={{ display: "flex" }}>
                 <div>
                   <h2>{roomDetails.hotelName}</h2>
-                  <p>{roomDetails.address}</p>
+                  <p style={{ color: "#c4c4c4" }}>{roomDetails.address}</p>
                 </div>
                 <div style={{ marginLeft: "25px", paddingTop: "5px" }}>
-                  <h3
+                  {/* <h3
                     style={{
                       border: "1px solid red",
                       padding: "5px",
@@ -201,20 +220,123 @@ function HotelDesc() {
                   >
                     {roomDetails.rating}
                     <span style={{ color: "rgb(243,146,66)" }}>★</span>
-                  </h3>
+                  </h3> */}
+                  <button
+                    style={{
+                      background: "rgb(82,181,32)",
+                      color: "white",
+                      border: "none",
+                      borderRadius: "3px",
+                      padding: "5px 12px",
+                      // marginRight: "20px",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      fontSize: "18px",
+                      fontWeight: "bolder",
+                    }}
+                  >
+                    &nbsp; {roomDetails.rating} ★
+                  </button>
+                  <p
+                    style={{
+                      backgroundColor: "rgb(239 239 239)",
+                      fontSize: "12px",
+                      textAlign: "center",
+                    }}
+                  >
+                    {roomDetails.ratingCount}
+                  </p>
                 </div>
               </div>
               <div style={{ textAlign: "left" }}>
-                <h2>Description</h2>
-                <p>{roomDetails.info}</p>
-                <div style={{ color: "red" }}>
-                  <h3>Read more</h3>
+                <h5>Description</h5>
+                <p
+                  style={{
+                    color: "rgba(0,0,0,0.7)",
+                    fontWeight: "100",
+                    wordSpacing: "2px",
+                  }}
+                >
+                  {roomDetails.info}
+                </p>
+                <div>
+                  <h6 style={{ color: "#ee2e24" }}>Read more</h6>
                 </div>
               </div>
               <div>
-                <h2>Amenities</h2>
+                <h5>Amenities</h5>
               </div>
-              <div style={{ display: "flex", gap: "2rem" }}>
+              <Box>
+                <Box
+                  display="flex"
+                  gap="2rem"
+                  marginBottom="10px"
+                  marginTop="10px"
+                >
+                  <Box
+                    display="flex"
+                    justifyContent="space-between"
+                    gap="5px"
+                    height="35px"
+                    alignItems="center"
+                    color="#222"
+                    fontSize="15px"
+                  >
+                    {facilityIcons.map((elem) => {
+                      if (elem.facility == roomDetails.facility1) {
+                        return elem.icon;
+                      }
+                    })}{" "}
+                    <p> {roomDetails.facility1} &nbsp;</p>{" "}
+                  </Box>
+                  <Box
+                    display="flex"
+                    justifyContent="space-between"
+                    gap="5px"
+                    height="35px"
+                    alignItems="center"
+                    color="#222"
+                    fontSize="15px"
+                  >
+                    {facilityIcons.map((elem) => {
+                      if (elem.facility == roomDetails.facility2) {
+                        return elem.icon;
+                      }
+                    })}{" "}
+                    <p> {roomDetails.facility2} &nbsp;</p>{" "}
+                  </Box>
+                  <Box
+                    display="flex"
+                    justifyContent="space-between"
+                    gap="5px"
+                    height="35px"
+                    alignItems="center"
+                    color="#222"
+                    fontSize="15px"
+                  >
+                    {facilityIcons.map((elem) => {
+                      if (elem.facility == roomDetails.facility3) {
+                        return elem.icon;
+                      }
+                    })}{" "}
+                    <p> {roomDetails.facility3} &nbsp;</p>{" "}
+                  </Box>
+                  <Box
+                    display="flex"
+                    justifyContent="space-between"
+                    gap="5px"
+                    height="35px"
+                    alignItems="center"
+                    color="#222"
+                    fontSize="15px"
+                  >
+                    {" "}
+                    <p> {roomDetails.facilityX} &nbsp;</p>{" "}
+                  </Box>
+                </Box>
+              </Box>
+              {/* <div style={{ display: "flex", gap: "2rem" }}>
                 <div>
                   <p>🛏 AC</p>
                 </div>
@@ -225,7 +347,7 @@ function HotelDesc() {
                   {" "}
                   <p>🙏 Reception</p>{" "}
                 </div>
-              </div>
+              </div> 
               <div style={{ display: "flex", gap: "2rem" }}>
                 <div>
                   <p>
@@ -245,10 +367,10 @@ function HotelDesc() {
                     <ElevatorIcon /> Elevator
                   </p>
                 </div>
-              </div>
-              <div style={{ color: "red" }}>
+              </div> */}
+              {/* <div style={{ color: "red" }}>
                 <h3>Show More</h3>
-              </div>
+              </div> */}
               <div>
                 <div>
                   <h2>Choose your room</h2>
@@ -262,105 +384,131 @@ function HotelDesc() {
                 >
                   <div
                     style={{
-                      background: "rgb(179,179,195)",
-                      padding: "3px",
+                      background: "#7c809b",
+                      paddingLeft: "10px",
                       borderRadius: "10px",
-                      textAlign: "center",
                     }}
                   >
                     <p>
-                      {" "}
-                      <span style={{ color: "yellow" }}>★</span> SELECTED
-                      CATEGORY
+                      <span style={{ color: "yellow" }}>★</span>{" "}
+                      <span
+                        style={{
+                          color: "white",
+                          fontSize: "12px",
+                          fontWeight: "600",
+                        }}
+                      >
+                        SELECTED CATEGORY
+                      </span>
                     </p>
                   </div>
-                  <div style={{ display: "flex" }}>
-                    <div>
-                      <div>
-                        <h2>Classic (2X) ✅</h2>
-                        <p>Room size: 156 sqft</p>
-                      </div>
-                      <div style={{ display: "flex", gap: "1rem" }}>
-                        <div>
-                          <p>
-                            <WifiIcon /> Free Wifi
-                          </p>
-                        </div>
-                        <div>
-                          <p>📺 TV</p>
-                        </div>
-                        <div>
-                          <p>
-                            <CameraswitchIcon /> CCTV Camera
-                          </p>
-                        </div>
-                        <div>
-                          <p>
-                            <ElevatorIcon /> Elevator
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                    <div style={{ padding: "10px", paddingLeft: "40px" }}>
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      paddingTop: "14px",
+                      borderBottom: "1px solid #74747428",
+                    }}
+                  >
+                    <Box>
+                      <Box>
+                        <h5>
+                          Classic (2X) <BsFillPatchCheckFill color="#2ed56b" />
+                        </h5>
+                        <p style={{ fontSize: "15px" }}>Room size: 156 sqft</p>
+                      </Box>
+                      <Box
+                        display="flex"
+                        gap="2rem"
+                        marginBottom="10px"
+                        marginTop="10px"
+                      >
+                        <Box
+                          display="flex"
+                          justifyContent="space-between"
+                          gap="5px"
+                          height="35px"
+                          alignItems="center"
+                          color="#222"
+                          fontSize="15px"
+                        >
+                          {facilityIcons.map((elem) => {
+                            if (elem.facility == roomDetails.facility2) {
+                              return elem.icon;
+                            }
+                          })}{" "}
+                          <p> {roomDetails.facility2} &nbsp;</p>{" "}
+                        </Box>
+                        <Box
+                          display="flex"
+                          justifyContent="space-between"
+                          alignItems="center"
+                          gap="5px"
+                          height="35px"
+                          color="#222"
+                          fontSize="15px"
+                          width="130px"
+                        >
+                          {facilityIcons.map((elem) => {
+                            if (elem.facility == roomDetails.facility3) {
+                              return elem.icon;
+                            }
+                          })}{" "}
+                          <p> {roomDetails.facility3} &nbsp;</p>{" "}
+                        </Box>
+                      </Box>
+                    </Box>
+                    <div style={{ padding: "5px" }}>
                       <img
                         src={roomDetails.image1}
                         alt="img"
-                        height="160px"
+                        height="120px"
                         style={{ borderRadius: "10px", marginLeft: "50px" }}
                       />
                     </div>
                   </div>
 
-                  <div>
-                    <p style={{ lineHeight: "5px" }}>
-                      <span
-                        style={{
-                          fontSize: "20px",
-                          fontWeight: "700",
-                          lineHeight: "24px",
-                        }}
-                      >
-                        ₹{roomDetails.price}
-                      </span>
-                      <span
+                  <Box
+                    padding="12px"
+                    display="flex"
+                    justifyContent="space-between"
+                    alignItems="center"
+                  >
+                    <Box
+                      display="flex"
+                      justifyContent="space-between"
+                    >
+                      <h5>₹ {roomDetails.price}</h5>
+                      <p
                         style={{
                           textDecoration: "line-through",
-                          fontSize: "16px",
-                          lineHeight: "25px",
-                          color: "rgb(180,186,188)",
+                          color:"gray",
+                          marginLeft: "8px"
                         }}
                       >
-                        ₹
-                        {(
-                          (roomDetails.price * 100) /
-                          (100 - roomDetails.discount)
-                        ).toFixed(2)}
-                      </span>
-                      <span
+                        ₹ {roomDetails.strikedPrice}
+                      </p>
+                    </Box>
+                    <Box>
+                      <button
                         style={{
-                          textAlign: "right",
+                          cursor: "pointer",
+                          border: "1px solid rgb(215,215,215)",
+                          backgroundColor: "white",
+                          fontSize: "12px",
+                          fontWeight: "700",
                           width: "150px",
-                          marginLeft: "40%",
+                          padding: "10px",
+                          borderRadius: "5px",
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
                         }}
                       >
-                        <button
-                          style={{
-                            cursor: "pointer",
-                            border: "1px solid rgb(215,215,215)",
-                            fontSize: "12px",
-                            fontWeight: "700",
-                            padding: "10px",
-                            width: "150px",
-                            borderRadius: "5px",
-                            marginLeft: "100px",
-                          }}
-                        >
-                          {" "}
-                          ✅ SELECTED
-                        </button>
-                      </span>
-                    </p>
-                  </div>
+                        <BsFillPatchCheckFill color="#2ed56b" /> SELECTED
+                      </button>
+                    </Box>
+                  </Box>
                 </div>
               </div>
             </div>
@@ -477,11 +625,7 @@ function HotelDesc() {
                   }}
                 >
                   <div>OyoRoom Coupon applied</div>
-                  <div>
-                    ₹
-                    {89}
-                    ✅
-                  </div>
+                  <div>₹{89}✅</div>
                 </div>
 
                 <div
@@ -538,8 +682,7 @@ function HotelDesc() {
                   </div>
                   <div>
                     <div style={{ margin: "20px" }}>
-                      ₹
-                      {roomDetails.strikedPrice - roomDetails.price}
+                      ₹{roomDetails.strikedPrice - roomDetails.price}
                     </div>
                     <div style={{ marginLeft: "20px" }}>
                       ₹{roomDetails.price}
@@ -555,7 +698,7 @@ function HotelDesc() {
                   }}
                 >
                   <Link
-                    to={`/checkout/${id}`}
+                    to={`/checkout/${_id}`}
                     style={{
                       padding: "20px",
                       background: "green",
