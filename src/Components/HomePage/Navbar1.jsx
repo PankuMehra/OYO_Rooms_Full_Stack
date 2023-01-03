@@ -16,7 +16,7 @@ export default function Navbar1() {
   let loggedInUser = useSelector((store) => {
     return store.UserReducer.LoggedIn;
   });
-  console.log(loggedInUser);
+  // console.log(loggedInUser);
   let currentUser = localStorage.getItem("currentUser");
   let isAuth = localStorage.getItem("isAuth");
 

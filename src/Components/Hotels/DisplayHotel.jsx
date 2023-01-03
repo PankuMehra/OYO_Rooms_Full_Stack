@@ -413,6 +413,9 @@ function valuetext(value) {
 function DisplayHotel() {
   let [start, setStart] = React.useState([0]);
   let [end, setEnd] = React.useState([10000]);
+  let [facility, setFacility] = React.useState("");
+  let [facility1, setFacility1] = React.useState("");
+  let [facility2, setFacility2] = React.useState("");
   let [filterArray, setFilterArray] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
   const [value, setValue] = React.useState([0, 1000]);
@@ -426,10 +429,46 @@ function DisplayHotel() {
 
   const handleFilter = (event) => {
     setAge(event.target.name);
-    let facility = event.target.name;
+    facility = event.target.name
+    setFacility(facility);
+
     console.log("facility:", facility);
-    console.log("gtfdrftyui");
-    filterHotelRooms(currentCity, page.current, facility, dispatch);
+    filterHotelRooms(
+      currentCity,
+      page.current,
+      facility,
+      facility1,
+      facility2,
+      dispatch
+    );
+  };
+  const handleFilter1 = (event) => {
+    setAge(event.target.name);
+    facility1 = event.target.name
+    setFacility(facility1);
+    console.log("facility1:", facility1);
+    filterHotelRooms(
+      currentCity,
+      page.current,
+      facility,
+      facility1,
+      facility2,
+      dispatch
+    );
+  };
+  const handleFilter2 = (event) => {
+    setAge(event.target.name);
+    facility2 = event.target.name
+    setFacility(facility2);
+    console.log("facility2:", facility2);
+    filterHotelRooms(
+      currentCity,
+      page.current,
+      facility,
+      facility1,
+      facility2,
+      dispatch
+    );
   };
 
   useEffect(() => {
@@ -634,7 +673,6 @@ function DisplayHotel() {
                     width: "18px",
                     cursor: "pointer",
                   }}
-                
                   onChange={handleFilter}
                   type="checkbox"
                   name="Free Wi-Fi"
@@ -650,7 +688,7 @@ function DisplayHotel() {
                     width: "18px",
                     cursor: "pointer",
                   }}
-                  onChange={handleFilter}
+                  onChange={handleFilter1}
                   type="checkbox"
                   name="Reception"
                   label="Oyo"
@@ -665,7 +703,7 @@ function DisplayHotel() {
                     width: "18px",
                     cursor: "pointer",
                   }}
-                  onChange={handleFilter}
+                  onChange={handleFilter2}
                   type="checkbox"
                   name="Parking facility"
                   label="Oyo"
@@ -696,7 +734,7 @@ function DisplayHotel() {
                     width: "18px",
                     cursor: "pointer",
                   }}
-                  onChange={handleFilter}
+                  onChange={handleFilter1}
                   type="checkbox"
                   name="Power backup"
                   label="Oyo"
@@ -712,7 +750,7 @@ function DisplayHotel() {
                     width: "18px",
                     cursor: "pointer",
                   }}
-                  onChange={handleFilter}
+                  onChange={handleFilter2}
                   type="checkbox"
                   name="Elevator"
                   label="Oyo"
@@ -744,7 +782,7 @@ function DisplayHotel() {
                     width: "18px",
                     cursor: "pointer",
                   }}
-                  onChange={handleFilter}
+                  onChange={handleFilter1}
                   type="checkbox"
                   name="Geyser"
                   label="Oyo"
@@ -760,7 +798,7 @@ function DisplayHotel() {
                     width: "18px",
                     cursor: "pointer",
                   }}
-                  onChange={handleFilter}
+                  onChange={handleFilter2}
                   type="checkbox"
                   name="TV"
                   label="Oyo"
@@ -782,6 +820,22 @@ function DisplayHotel() {
                   label="Oyo"
                 />
                 Security
+              </div>
+              <div>
+                {" "}
+                <input
+                  style={{
+                    marginRight: "10px",
+                    height: "15px",
+                    width: "18px",
+                    cursor: "pointer",
+                  }}
+                  onChange={handleFilter1}
+                  type="checkbox"
+                  name="Caretaker"
+                  label="Oyo"
+                />
+                Caretaker
               </div>
             </div>
             {/* <div>
@@ -935,7 +989,7 @@ function DisplayHotel() {
               <Button
                 variant="outlined"
                 onClick={nextPage}
-                disabled={page.current == 2 ? true : false}
+                disabled={page.current == 4 ? true : false}
                 style={{
                   background: "red",
                   color: "white",
