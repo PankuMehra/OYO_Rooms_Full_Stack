@@ -29,7 +29,7 @@ export const LogIn = () => {
 
   const getData = async () => {
     try {
-      const res = await axios.get(`${URL.users}`);
+      const res = await axios.get(`${URL.users}/login`);
       setState(res.data);
     } catch (error) {
       console.log("Something Error");
