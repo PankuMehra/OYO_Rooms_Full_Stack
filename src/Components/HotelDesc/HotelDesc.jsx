@@ -10,7 +10,7 @@ import WifiIcon from "@mui/icons-material/Wifi";
 import CameraswitchIcon from "@mui/icons-material/Cameraswitch";
 import ElevatorIcon from "@mui/icons-material/Elevator";
 import { Link } from "react-router-dom";
-// import Footer from "../Components/footer/Footer";
+import Footer from "../HomePage/Footer/Footer";
 import { BsChevronLeft } from "react-icons/bs";
 import { BsChevronRight } from "react-icons/bs";
 import { Skeleton, Box } from "@mui/material";
@@ -31,7 +31,9 @@ import { AiFillCar } from "react-icons/ai";
 import { WiSnowflakeCold } from "react-icons/wi";
 import { RiTempColdLine } from "react-icons/ri";
 import { SlScreenDesktop } from "react-icons/sl";
-import { FaRegMoneyBillAlt } from "react-icons/fa";
+import { FaRegMoneyBillAlt, FaMoneyCheckAlt } from "react-icons/fa";
+import { HiReceiptPercent } from "react-icons/hi2";
+import { SiVirustotal } from "react-icons/si";
 function HotelDesc() {
   const [data, setData] = useState([]);
   const [roomDetails, setRoomDetails] = useState();
@@ -39,6 +41,11 @@ function HotelDesc() {
   let [isLoading, setIsLoading] = useState(true);
   let [isError, setIsError] = useState(false);
   let x = React.useRef(0);
+  const roomCount = localStorage.getItem("roomCount") || 1;
+  const guestCount = localStorage.getItem("guestCount") || 1;
+
+  const bookingStartDate = localStorage.getItem("start") || new Date();
+  const bookingEndDate = localStorage.getItem("finish") || new Date();
 
   // const {city} = useSelector(state => state.Search);
 
@@ -205,38 +212,28 @@ function HotelDesc() {
                 width: "50%",
               }}
             >
-              <div style={{ display: "flex" }}>
-                <div>
+              <div style={{ display: "flex", justifyContent: "space-between" }}>
+                <div style={{ width: "500px" }}>
                   <h2>{roomDetails.hotelName}</h2>
                   <p style={{ color: "#c4c4c4" }}>{roomDetails.address}</p>
                 </div>
-                <div style={{ marginLeft: "25px", paddingTop: "5px" }}>
-                  {/* <h3
-                    style={{
-                      border: "1px solid red",
-                      padding: "5px",
-                      color: "red",
-                    }}
-                  >
-                    {roomDetails.rating}
-                    <span style={{ color: "rgb(243,146,66)" }}>★</span>
-                  </h3> */}
+                <div>
                   <button
                     style={{
                       background: "rgb(82,181,32)",
                       color: "white",
                       border: "none",
                       borderRadius: "3px",
-                      padding: "5px 12px",
-                      // marginRight: "20px",
+                      padding: "5px 18px",
                       display: "flex",
                       justifyContent: "center",
                       alignItems: "center",
                       fontSize: "18px",
                       fontWeight: "bolder",
+                      margin: "0px",
                     }}
                   >
-                    &nbsp; {roomDetails.rating} ★
+                    {roomDetails.rating} ★
                   </button>
                   <p
                     style={{
@@ -447,7 +444,6 @@ function HotelDesc() {
                           height="35px"
                           color="#222"
                           fontSize="15px"
-                          width="130px"
                         >
                           {facilityIcons.map((elem) => {
                             if (elem.facility == roomDetails.facility3) {
@@ -474,16 +470,13 @@ function HotelDesc() {
                     justifyContent="space-between"
                     alignItems="center"
                   >
-                    <Box
-                      display="flex"
-                      justifyContent="space-between"
-                    >
+                    <Box display="flex" justifyContent="space-between">
                       <h5>₹ {roomDetails.price}</h5>
                       <p
                         style={{
                           textDecoration: "line-through",
-                          color:"gray",
-                          marginLeft: "8px"
+                          color: "gray",
+                          marginLeft: "8px",
                         }}
                       >
                         ₹ {roomDetails.strikedPrice}
@@ -505,7 +498,7 @@ function HotelDesc() {
                           alignItems: "center",
                         }}
                       >
-                        <BsFillPatchCheckFill color="#2ed56b" /> SELECTED
+                        <BsFillPatchCheckFill color="#2ed56b" /> &nbsp; SELECTED
                       </button>
                     </Box>
                   </Box>
@@ -519,6 +512,9 @@ function HotelDesc() {
                   background: "rgb(241,85,63)",
                   padding: "10px",
                   color: "white",
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
                 }}
               >
                 <span>LOG IN NOW TO GET EXCLUSIVE DEALS</span>
@@ -547,27 +543,23 @@ function HotelDesc() {
                         color: "rgb(238,42,35)",
                       }}
                     >
-                      ₹{roomDetails.price}
+                      ₹ {roomDetails.price}
                     </span>
                     <span
                       style={{
                         textDecoration: "line-through",
-                        fontSize: "10px",
+                        fontSize: "13px",
                         lineHeight: "25px",
                         color: "rgb(180,186,188)",
                         marginLeft: "1rem",
                       }}
                     >
-                      ₹
-                      {(
-                        (roomDetails.price * 100) /
-                        (100 - roomDetails.discount)
-                      ).toFixed(2)}
+                      ₹ {roomDetails.strikedPrice}
                     </span>
                     <span
                       style={{ color: "rgb(246,178,75)", marginLeft: "1rem" }}
                     >
-                      {roomDetails.discount}% off
+                      {roomDetails.discount}
                     </span>
                   </p>
                 </div>
@@ -595,7 +587,8 @@ function HotelDesc() {
                       padding: "10px",
                     }}
                   >
-                    Sun, 16 Jan - Mon, 17 Jan
+                    {/* Sun, 16 Jan - Mon, 17 Jan */}
+                    {`${bookingStartDate}  -  ${bookingEndDate}`}
                   </div>
                   <div
                     style={{
@@ -603,7 +596,7 @@ function HotelDesc() {
                       padding: "10px",
                     }}
                   >
-                    1 Room, 2 Guests
+                    {`${roomCount} Room, ${guestCount} Guests`}
                   </div>
                 </div>
                 <div
@@ -614,55 +607,62 @@ function HotelDesc() {
                     padding: "10px",
                   }}
                 >
-                  Dluxe (3X)
+                  Classic (2X)
                 </div>
                 <div
                   style={{
                     display: "flex",
-                    gap: "16rem",
+                    justifyContent: "space-between",
                     margin: "20px",
                     color: "rgb(34,34,34)",
                   }}
                 >
-                  <div>OyoRoom Coupon applied</div>
+                  <div>
+                    <HiReceiptPercent color="#f8c267" fontSize="30px" />{" "}
+                    OYOFESTIVE50 coupon applied
+                  </div>
                   <div>₹{89}✅</div>
                 </div>
 
                 <div
                   style={{
-                    display: "flex",
-                    gap: "12rem",
-                    margin: "20px",
-                    color: "rgb(34,34,34)",
-                  }}
-                >
-                  <div>Savae 5% with Wizard membership</div>
-                  <div>-₹52</div>
-                </div>
-                <div
-                  style={{
-                    display: "flex",
-                    textAlign: "left",
                     marginLeft: "20px",
                     background: "rgb(247,247,247)",
-                    gap: "10rem",
                   }}
                 >
-                  <div style={{ padding: "10px" }}>
-                    <p>Wizard Blue at s special price</p>
-                    <p>Get additional benefits upto ₹1000</p>
-                  </div>
-                  <div style={{ display: "flex", padding: "10px" }}>
-                    <div
-                      style={{
-                        padding: "10px",
-                        width: "80px",
-                        paddingTop: "0px",
-                      }}
-                    >
-                      <p>₹99</p>
-                      <p style={{ textDecoration: "line-through" }}>₹199</p>
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      padding: "10px",
+                      color: "rgb(34,34,34)",
+                    }}
+                  >
+                    <div>
+                      <FaMoneyCheckAlt color="#2b30d1" fontSize="30px" /> Save
+                      5% with Wizard membership
                     </div>
+                    <div>- ₹52</div>
+                  </div>
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      padding: "10px",
+                    }}
+                  >
+                    <p>Get Wizard Membership at special price</p>
+                    <p>₹99</p>
+                  </div>
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      padding: "10px",
+                    }}
+                  >
+                    <p>Get additional benefits upto ₹1000</p>
+                    <p style={{ textDecoration: "line-through" }}>₹199</p>
                   </div>
                 </div>
 
@@ -674,7 +674,7 @@ function HotelDesc() {
                   }}
                 >
                   <div>
-                    <div style={{ margin: "20px" }}>Your savings</div>
+                    <div style={{ margin: "20px" }}><SiVirustotal color="lightgreen" /> Your savings</div>
                     <div style={{ margin: "20px" }}>Total price</div>
                     <div style={{ margin: "20px" }}>
                       <span>(Incl. of all taxes)</span>
@@ -682,36 +682,37 @@ function HotelDesc() {
                   </div>
                   <div>
                     <div style={{ margin: "20px" }}>
-                      ₹{roomDetails.strikedPrice - roomDetails.price}
+                      ₹{roomDetails.strikedPrice - roomDetails.price - 89}
                     </div>
                     <div style={{ marginLeft: "20px" }}>
                       ₹{roomDetails.price}
                     </div>
                   </div>
                 </div>
-                <div
+                {/* <div
                   style={{
                     margin: "20px",
                     background: "green",
                     padding: "20px",
                     borderRadius: "10px",
                   }}
-                >
+                > */}
                   <Link
                     to={`/checkout/${_id}`}
                     style={{
                       padding: "20px",
-                      background: "green",
+                      background: "#1ab64f",
                       textDecoration: "none",
                       color: "white",
                       cursor: "pointer",
                       fontSize: "18px",
                       fontWeight: "700",
+                      display:"block"
                     }}
                   >
                     Continue to Book
                   </Link>
-                </div>
+                {/* </div> */}
                 <div
                   style={{ margin: "20px", color: "red", textAlign: "left" }}
                 >
@@ -735,10 +736,8 @@ function HotelDesc() {
             </div>
           </div>
         </div>
-        {/* )) */}
-        {/* } */}
       </div>
-      {/* <Footer /> */}
+      <Footer />
     </>
   );
 }

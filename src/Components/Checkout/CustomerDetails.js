@@ -23,7 +23,7 @@ const CustomerDetails = ({ data }) => {
   console.log(data);
 
   return (
-    <Box mb="50px" textAlign="left" w="650px">
+    <Box mb="50px" textAlign="left" w="100%">
       <Box
         borderRadius="5px"
         textAlign="center"

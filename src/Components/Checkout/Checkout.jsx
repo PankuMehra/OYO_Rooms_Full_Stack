@@ -11,15 +11,15 @@ import React, { useEffect } from "react";
 import CustomerDetails from "./CustomerDetails";
 import HotelBookingDetails from "./HotelBookingDetails";
 import { ChevronLeftIcon } from "@chakra-ui/icons";
-import { URL } from '../../URL';
-import "./Checkout.css"
-import { useParams } from "react-router-dom";
+import { URL } from "../../URL";
+import "./Checkout.css";
+import { Link, useParams } from "react-router-dom";
 
 const Checkout = () => {
   const [data, setData] = React.useState({});
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState(false);
-  let {id} = useParams();
+  let { id } = useParams();
 
   useEffect(() => {
     setLoading(true);
@@ -74,27 +74,43 @@ const Checkout = () => {
 
   return (
     <Box m="0%">
-      <Box p={"14px"} boxShadow="base">
-        <Image
-          w="95px"
-          ml="12px"
-          src="https://qph.cf2.quoracdn.net/main-qimg-b8bf0fbc22cdb8223cbb298ea1c0ca67"
-        />
+      <Box
+        p={"14px"}
+        boxShadow="base"
+        bgColor="white"
+        position="sticky"
+        top="0px"
+      >
+        <Link to="/">
+          <Image
+            w="95px"
+            ml="12px"
+            src="https://qph.cf2.quoracdn.net/main-qimg-b8bf0fbc22cdb8223cbb298ea1c0ca67"
+          />
+        </Link>
       </Box>
 
       <Box ml="200px" mt="30px" textAlign="left" color="red.500" mb="80px">
-        <Text as="b">
-          {" "}
-          <ChevronLeftIcon /> Modify your booking{" "}
-        </Text>
+        <Link to={`/hotels/${id}`}>
+          <Text style={{ color: "red.500", fontWeight: "600" }}>
+            {" "}
+            <ChevronLeftIcon /> Modify your booking{" "}
+          </Text>
+        </Link>
       </Box>
 
-      <HStack display="flex" alignItems="flex-start" w="72%" m="auto" mt="30px">
-        <Box mr="20px" mt="-40px">
+      <HStack
+        display="flex"
+        justifyContent="space-between"
+        w="80%"
+        m="auto"
+        mt="30px"
+      >
+        <Box w="64%">
           <CustomerDetails data={data} />
         </Box>
 
-        <Box>
+        <Box w="34%">
           <HotelBookingDetails data={data} />
         </Box>
       </HStack>
