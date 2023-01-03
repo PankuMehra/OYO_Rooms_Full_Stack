@@ -17,8 +17,8 @@ export default function Navbar1() {
     return store.UserReducer.LoggedIn;
   });
   console.log(loggedInUser);
-  let currentUser = localStorage.getItem("email");
-  let isAuth = localStorage.getItem("LogInToken");
+  let currentUser = localStorage.getItem("currentUser");
+  let isAuth = localStorage.getItem("isAuth");
 
   useEffect(() => {
     fetchData();

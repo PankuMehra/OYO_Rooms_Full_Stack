@@ -77,9 +77,10 @@ export const LogIn = () => {
     })
     .then(res => res.json())
     .then(data =>{
-      console.log(data);
+      console.log(data.token);
        localStorage.setItem("LogInToken", data.token)
-       localStorage.setItem("email", register.email)
+       localStorage.setItem("currentUser", data.data.name);
+       localStorage.setItem("isAuth", true);
        navigate("/");
     })
     .catch((error)=>console.log(error))

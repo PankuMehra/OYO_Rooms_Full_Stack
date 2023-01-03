@@ -425,8 +425,10 @@ function DisplayHotel() {
   const [age, setAge] = React.useState("");
 
   const handleFilter = (event) => {
-    setAge(event.target.value);
-    let facility = event.target.value;
+    setAge(event.target.name);
+    let facility = event.target.name;
+    console.log("facility:", facility);
+    console.log("gtfdrftyui");
     filterHotelRooms(currentCity, page.current, facility, dispatch);
   };
 
@@ -632,8 +634,10 @@ function DisplayHotel() {
                     width: "18px",
                     cursor: "pointer",
                   }}
+                
+                  onChange={handleFilter}
                   type="checkbox"
-                  name="OYO Rooms"
+                  name="Free Wi-Fi"
                   label="Oyo"
                 />{" "}
                 Free Wi-Fi
@@ -646,8 +650,9 @@ function DisplayHotel() {
                     width: "18px",
                     cursor: "pointer",
                   }}
+                  onChange={handleFilter}
                   type="checkbox"
-                  name="OYO Rooms"
+                  name="Reception"
                   label="Oyo"
                 />{" "}
                 Reception
@@ -660,8 +665,9 @@ function DisplayHotel() {
                     width: "18px",
                     cursor: "pointer",
                   }}
+                  onChange={handleFilter}
                   type="checkbox"
-                  name="OYO Rooms"
+                  name="Parking facility"
                   label="Oyo"
                 />
                 Parking facility
@@ -674,8 +680,9 @@ function DisplayHotel() {
                     width: "18px",
                     cursor: "pointer",
                   }}
+                  onChange={handleFilter}
                   type="checkbox"
-                  name="OYO Rooms"
+                  name="CCTV cameras"
                   label="Oyo"
                 />
                 CCTV cameras
@@ -689,8 +696,9 @@ function DisplayHotel() {
                     width: "18px",
                     cursor: "pointer",
                   }}
+                  onChange={handleFilter}
                   type="checkbox"
-                  name="OYO Rooms"
+                  name="Power backup"
                   label="Oyo"
                 />
                 Power backup
@@ -704,8 +712,9 @@ function DisplayHotel() {
                     width: "18px",
                     cursor: "pointer",
                   }}
+                  onChange={handleFilter}
                   type="checkbox"
-                  name="OYO Rooms"
+                  name="Elevator"
                   label="Oyo"
                 />
                 Elevator
@@ -719,8 +728,9 @@ function DisplayHotel() {
                     width: "18px",
                     cursor: "pointer",
                   }}
+                  onChange={handleFilter}
                   type="checkbox"
-                  name="OYO Rooms"
+                  name="AC"
                   label="Oyo"
                 />
                 AC
@@ -734,8 +744,9 @@ function DisplayHotel() {
                     width: "18px",
                     cursor: "pointer",
                   }}
+                  onChange={handleFilter}
                   type="checkbox"
-                  name="OYO Rooms"
+                  name="Geyser"
                   label="Oyo"
                 />
                 Geyser
@@ -749,8 +760,9 @@ function DisplayHotel() {
                     width: "18px",
                     cursor: "pointer",
                   }}
+                  onChange={handleFilter}
                   type="checkbox"
-                  name="OYO Rooms"
+                  name="TV"
                   label="Oyo"
                 />
                 TV
@@ -764,8 +776,9 @@ function DisplayHotel() {
                     width: "18px",
                     cursor: "pointer",
                   }}
+                  onChange={handleFilter}
                   type="checkbox"
-                  name="OYO Rooms"
+                  name="Security"
                   label="Oyo"
                 />
                 Security
