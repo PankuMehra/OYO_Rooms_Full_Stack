@@ -16,6 +16,8 @@ import {
   MenuItem,
   FormControl,
 } from "@mui/material";
+
+import { SelectChangeEvent } from "@mui/material/Select";
 import { IoLocationSharp } from "react-icons/io5";
 import { BiWifi } from "react-icons/bi";
 import {
@@ -29,25 +31,18 @@ import { AiFillCar } from "react-icons/ai";
 import { WiSnowflakeCold } from "react-icons/wi";
 import { RiTempColdLine } from "react-icons/ri";
 import { SlScreenDesktop } from "react-icons/sl";
+import { GrStakeholder } from "react-icons/gr";
 import { FaRegMoneyBillAlt } from "react-icons/fa";
-// import Button from "@mui/material/Button";
-// import Box from "@mui/material/Box";
-// import Slider from "@mui/material/Slider";
-// import FormGroup from "@mui/material/FormGroup";
-// import FormControlLabel from "@mui/material/FormControlLabel";
-// import Checkbox from "@mui/material/Checkbox";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
-// import TextField from "@mui/material/TextField";
 import styles from "./style.css";
-// import Skeleton from "@mui/material/Skeleton";
 import { Link } from "react-router-dom";
 import WifiIcon from "@mui/icons-material/Wifi";
 import CameraswitchIcon from "@mui/icons-material/Cameraswitch";
 import ElevatorIcon from "@mui/icons-material/Elevator";
-// import Stack from "@mui/material/Stack";
 import Carousel from "react-material-ui-carousel";
 import Footer from "../HomePage/Footer/Footer";
 import { getHotelRooms } from "./api";
+import { filterHotelRooms } from "./filter";
 import Navbar1 from "../HomePage/Navbar1";
 import { margin } from "@mui/system";
 function HotelItem({
@@ -115,6 +110,10 @@ function HotelItem({
     {
       icon: <GiSecurityGate />,
       facility: "Security",
+    },
+    {
+      icon: <GrStakeholder />,
+      facility: "Caretaker",
     },
   ];
   return (
@@ -405,228 +404,6 @@ function HotelItem({
       </Box>
     </>
   );
-  // return (
-  //   <>
-  //     <div style={{ display: "flex", justifyContent: "left" }}>
-  //       <div style={{ display: "flex" }}>
-  //         <div style={{ marginBottom: "5%  " }}>
-  //           <img
-  //             src={mainImage}
-  //             alt="img"
-  //             height="300px"
-  //             width="100%"
-  //             // style={{ objectFit: "cover" }}
-  //           />
-  //         </div>
-  //         <div style={{ width: "10%", marginLeft: "-1%" }}>
-  //           <img
-  //             src={image1}
-  //             alt="img"
-  //             height="100px"
-  //             width="100px"
-  //             style={{ objectFit: "cover" }}
-  //           />
-  //           <img
-  //             src={image2}
-  //             alt="img"
-  //             height="100px"
-  //             width="100px"
-  //             style={{ objectFit: "cover" }}
-  //           />
-  //           <img
-  //             src={image3}
-  //             alt="img"
-  //             height="100px"
-  //             width="100px"
-  //             style={{ objectFit: "cover" }}
-  //           />
-  //           <img
-  //             src={image4}
-  //             alt="img"
-  //             height="100px"
-  //             width="100px"
-  //             style={{ objectFit: "cover" }}
-  //           />
-  //         </div>
-
-  //         <div style={{ marginLeft: "30px", textAlign: "left" }}>
-  //           <div>
-  //             <span
-  //               style={{
-  //                 fontSize: "24px",
-  //                 fontWeight: "700",
-  //                 paddingBottom: "20px",
-  //               }}
-  //             >
-  //               {hotelName}
-  //             </span>
-  //           </div>
-  //           <p>{address}</p>
-  //           <div style={{ display: "flex" }}>
-  //             <div style={{ marginBottom: "10px", marginTop: "10px" }}>
-  //               <button
-  //                 style={{
-  //                   background: "rgb(82,181,32)",
-  //                   color: "white",
-  //                   border: "none",
-  //                   borderRadius: "5px",
-  //                   padding: "0px 10px",
-  //                   marginRight: "20px",
-  //                 }}
-  //               >
-  //                 &nbsp; {rating}★
-  //               </button>
-  //               ({rating * 10} Ratings) .{rating > 4 ? "Very Good" : "Good"}
-  //             </div>
-  //           </div>
-  //           <div
-  //             style={{
-  //               display: "flex",
-  //               gap: "2rem",
-  //               marginBottom: "10px",
-  //               marginTop: "10px",
-  //             }}
-  //           >
-  //             <div>
-  //               <p>🛏 AC &nbsp;</p>
-  //             </div>
-  //             <div>
-  //               <p>🚘 Parking Facility &nbsp;</p>{" "}
-  //             </div>
-  //             <div>
-  //               {" "}
-  //               <p>🙏 Reception &nbsp;</p>{" "}
-  //             </div>
-  //           </div>
-  //           <div
-  //             style={{
-  //               display: "flex",
-  //               gap: "2rem",
-  //               marginBottom: "10px",
-  //               marginTop: "10px",
-  //             }}
-  //           >
-  //             <div>
-  //               <p>
-  //                 <WifiIcon /> Free Wifi &nbsp;
-  //               </p>
-  //             </div>
-  //             <div>
-  //               <p>📺 TV &nbsp;</p>
-  //             </div>
-  //             <div>
-  //               <p>
-  //                 <CameraswitchIcon /> CCTV Camera &nbsp;
-  //               </p>
-  //             </div>
-  //             <div>
-  //               <p>
-  //                 <ElevatorIcon /> Elevator &nbsp;
-  //               </p>
-  //             </div>
-  //           </div>
-  //           <div style={{ marginBottom: "20px", marginTop: "10px" }}>
-  //             <br />
-  //           </div>
-  //           <div style={{ display: "flex", gap: "2rem" }}>
-  //             <div>
-  //               <div>
-  //                 <p style={{ lineHeight: "5px" }}>
-  //                   <span
-  //                     style={{
-  //                       fontSize: "20px",
-  //                       fontWeight: "700",
-  //                       lineHeight: "24px",
-  //                       color: "rgb(238,42,35)",
-  //                     }}
-  //                   >
-  //                     ₹{price} &nbsp;
-  //                   </span>
-  //                   <span
-  //                     style={{
-  //                       textDecoration: "line-through",
-  //                       fontSize: "12px",
-  //                       lineHeight: "25px",
-  //                       color: "rgb(180,186,188)",
-  //                     }}
-  //                   >
-  //                     ₹{strikedPrice} &nbsp;
-  //                   </span>
-  //                   <span
-  //                     style={{
-  //                       color: "rgb(244,165,34)",
-  //                       paddingBottom: "10px",
-  //                       fontSize: "12px",
-  //                     }}
-  //                   >
-  //                     &nbsp;
-  //                     {discount}% off
-  //                   </span>
-  //                 </p>
-  //               </div>
-  //               <div>
-  //                 <p
-  //                   style={{
-  //                     color: "rgb(163,169,172)",
-  //                     fontSize: "12px",
-  //                     paddingBottom: "10px",
-  //                     paddingTop: "10px",
-  //                   }}
-  //                 >
-  //                   per room per night
-  //                 </p>
-  //               </div>
-  //             </div>
-  //             <div style={{ marginLeft: "20px" }}>
-  //               <Stack direction="row" spacing={2}>
-  //                 <Button
-  //                   variant="out"
-  //                   style={{
-  //                     color: "black",
-  //                     border: "2px solid black",
-  //                     width: "120px",
-  //                     height: "60px",
-  //                   }}
-  //                 >
-  //                   <Link
-  //                     to={`/hotels/${id}`}
-  //                     style={{ textDecoration: "none", color: "black" }}
-  //                   >
-  //                     View Details
-  //                   </Link>
-  //                 </Button>
-  //                 <Button
-  //                   variant="out"
-  //                   style={{
-  //                     border: "2px solid black",
-  //                     color: "white",
-  //                     backgroundColor: "green",
-  //                     width: "120px",
-  //                     height: "60px",
-  //                   }}
-  //                 >
-  //                   <Link
-  //                     to={`/hotels/${id}`}
-  //                     style={{
-  //                       textDecoration: "none",
-  //                       color: "white",
-  //                       fontWeight: "600",
-  //                     }}
-  //                   >
-  //                     Book Now
-  //                   </Link>
-  //                 </Button>
-  //               </Stack>
-  //             </div>
-  //           </div>
-  //         </div>
-  //       </div>
-  //       <hr
-  //         style={{ border: ".5px solid rgb(224,224,224)", marginTop: "15px" }}
-  //       />
-  //     </div>
-  //   </>
-  // );
 }
 
 function valuetext(value) {
@@ -637,15 +414,30 @@ function DisplayHotel() {
   let [start, setStart] = React.useState([0]);
   let [end, setEnd] = React.useState([10000]);
   let [filterArray, setFilterArray] = React.useState([]);
+  const [loading, setLoading] = React.useState(true);
   const [value, setValue] = React.useState([0, 1000]);
   const [sortBy, setSortBy] = React.useState("popularity");
-  const [filterBy, setFilterBy] = useState("");
-  const [mail, setMail] = useState("e.g. abc@gmail.com");
   let page = React.useRef(1);
   const hoteldata = useSelector((state) => {
     return state.Reducer.hotelDataArray;
   });
-  console.log("hoteldata:", hoteldata);
+
+  const [age, setAge] = React.useState("");
+
+  const handleFilter = (event) => {
+    setAge(event.target.value);
+    let facility = event.target.value;
+    filterHotelRooms(currentCity, page.current, facility, dispatch);
+  };
+
+  useEffect(() => {
+    setLoading(true);
+    if (filterArray.length == 0) {
+      getHotelRooms(currentCity, page.current, dispatch);
+    }
+    setFilterArray(hoteldata);
+    setLoading(false);
+  }, [hoteldata]);
 
   let currentCity = localStorage.getItem("currentCity") || "Mumbai";
 
@@ -666,27 +458,22 @@ function DisplayHotel() {
     end = newValue[1] * 100;
     setStart(start);
     setEnd(end);
-    console.log('start:', start)
-    console.log('end:', end)
-    
+    console.log("start:", start);
+    console.log("end:", end);
+
     let filterHotelData = hoteldata.filter((elem) => {
-      if(elem.price >= start && elem.price <= end){
+      if (elem.price >= start && elem.price <= end) {
         return elem;
       }
     });
     setFilterArray(filterHotelData);
-    console.log('filterHotelData:', filterHotelData)
+    console.log("filterHotelData:", filterHotelData);
   };
   //   let { hotelDataArray, isLoading, isError } = useSelector(
   //     (state) => state.app,
   //     shallowEqual
   //   );
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    getHotelRooms(currentCity, page.current, dispatch);
-    setFilterArray(hoteldata);
-  }, []);
 
   const handleSortBy = (e) => {
     setSortBy(e.target.value);
@@ -712,10 +499,6 @@ function DisplayHotel() {
     default:
       return filterArray;
   }
-
-  const handleFilterClick = (e) => {
-    setFilterBy(e.target.textContent);
-  };
 
   return (
     <div>
@@ -811,331 +594,33 @@ function DisplayHotel() {
           />
 
           <div>
-            {/* <h4>Collections</h4>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                gap: "2px",
-              }}
-            >
-              <div>
-                <FormGroup>
-                  <FormControlLabel
-                    control={<Checkbox size="small" />}
-                    label={
-                      <Box
-                        component="div"
-                        fontSize={15}
-                        fontWeight={500}
-                        marginTop={0.5}
-                      >
-                        Family OYOs
-                      </Box>
-                    }
-                  />
-                </FormGroup>
-              </div>
-              <div>
-                <FormGroup>
-                  <FormControlLabel
-                    control={<Checkbox size="small" />}
-                    label={
-                      <Box
-                        component="div"
-                        fontSize={15}
-                        fontWeight={500}
-                        marginTop={0.5}
-                      >
-                        For Group Travellers
-                      </Box>
-                    }
-                  />
-                </FormGroup>
-              </div>
-              <div>
-                <FormGroup>
-                  <FormControlLabel
-                    control={<Checkbox size="small" />}
-                    label={
-                      <Box
-                        component="div"
-                        fontSize={15}
-                        fontWeight={500}
-                        marginTop={0.5}
-                      >
-                        Local IDs accepted
-                      </Box>
-                    }
-                  />
-                </FormGroup>
-              </div>
-              <div>
-                <FormGroup>
-                  <FormControlLabel
-                    control={<Checkbox size="small" />}
-                    label={
-                      <Box
-                        component="div"
-                        fontSize={15}
-                        fontWeight={500}
-                        marginTop={0.5}
-                      >
-                        OYOs welcomes couples
-                      </Box>
-                    }
-                  />
-                </FormGroup>
-              </div>
-              <div>
-                <FormGroup>
-                  <FormControlLabel
-                    control={<Checkbox size="small" />}
-                    label={
-                      <Box
-                        component="div"
-                        fontSize={15}
-                        fontWeight={500}
-                        marginTop={0.5}
-                      >
-                        Near Metro Station
-                      </Box>
-                    }
-                  />
-                </FormGroup>
-              </div>
-              <div>
-                <Button
-                  variant="outlined"
-                  style={{
-                    background: "none",
-                    color: "rgb(239,42,36)",
-                    border: "none",
-                    fontSize: "15px",
-                    textTransform: "Capitalize",
-                    fontWeight: "600",
-                    marginLeft: "-10px",
-                    marginTop: "10px",
-                  }}
-                >
-                  + View More
-                </Button>
-              </div>
-            </div> */}
-            {/* <hr
-              style={{
-                border: ".2px solid rgb(224,224,224)",
-                marginTop: "10px",
-              }}
-            />
-            <h4>Categories</h4>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                gap: "1rem",
-
-                fontSize: "12",
-              }}
-            >
-              <div style={{ display: "flex" }}>
-                <div style={{ marginRight: "5px" }}>
-                  <input
-                    type="checkbox"
-                    name="OYO Rooms"
-                    label="Oyo"
-                    style={{
-                      height: "15px",
-                      width: "18px",
-                      cursor: "pointer",
-                    }}
-                  />{" "}
-                </div>
-                <div>
-                  <span style={{ fontWeight: "600" }}> OYO Rooms</span>
-                  <span style={{ lineHeight: "25px", fontSize: "15px" }}>
-                    - Super affordable stays with essential aminities
-                  </span>
-                </div>
-              </div>
-
-              <div style={{ display: "flex" }}>
-                <div style={{ marginRight: "5px" }}>
-                  <input
-                    type="checkbox"
-                    name="OYO Rooms"
-                    label="Oyo"
-                    style={{
-                      height: "15px",
-                      width: "18px",
-                      cursor: "pointer",
-                    }}
-                  />{" "}
-                </div>
-                <div>
-                  <span style={{ fontWeight: "600" }}> Townhouse </span>
-                  <span style={{ fontSize: "15px" }}>
-                    - Your friendly, premium neighbourhood hotel-Serviced by OYO
-                  </span>
-                </div>
-              </div>
-              <div style={{ display: "flex" }}>
-                <div style={{ marginRight: "5px" }}>
-                  <input
-                    type="checkbox"
-                    name="OYO Rooms"
-                    label="Oyo"
-                    style={{
-                      height: "15px",
-                      width: "18px",
-                      cursor: "pointer",
-                    }}
-                  />{" "}
-                </div>
-                <div>
-                  <span style={{ fontWeight: "600" }}> Flagship </span>
-                  <span style={{ lineHeight: "25px", fontSize: "15px" }}>
-                    - Affordable hotels at prime locations - Serviced by OYO
-                  </span>
-                </div>
-              </div>
-              <div style={{ display: "flex" }}>
-                <div style={{ marginRight: "5px" }}>
-                  <input
-                    type="checkbox"
-                    name="OYO Rooms"
-                    label="Oyo"
-                    style={{
-                      height: "15px",
-                      width: "18px",
-                      cursor: "pointer",
-                    }}
-                  />{" "}
-                </div>
-                <div>
-                  <span
-                    style={{
-                      fontWeight: "600",
-                    }}
-                  >
-                    {" "}
-                    Home{" "}
-                  </span>{" "}
-                  <span style={{ lineHeight: "25px", fontSize: "15px" }}>
-                    - Villas and Apartments with space and privacy
-                  </span>
-                </div>
-              </div>
-              <div style={{ display: "flex" }}>
-                <div style={{ marginRight: "5px" }}>
-                  <input
-                    type="checkbox"
-                    name="OYO Rooms"
-                    label="Oyo"
-                    style={{
-                      height: "15px",
-                      width: "20px",
-                      cursor: "pointer",
-                      fontWeight: "900",
-                    }}
-                  />{" "}
-                </div>
-                <div>
-                  <span
-                    style={{
-                      fontWeight: "600",
-                    }}
-                  >
-                    {" "}
-                    Capital O{" "}
-                  </span>{" "}
-                  <span style={{ lineHeight: "25px", fontSize: "15px" }}>
-                    - Beautiful designed private crafted for the traveller who
-                    craves comfort
-                  </span>
-                </div>
-              </div>
-            </div>
-            <div>
-              <Button
-                variant="outlined"
-                style={{
-                  background: "none",
-                  color: "rgb(239,42,36)",
-                  border: "none",
-                  fontSize: "15px",
-                  textTransform: "Capitalize",
-                  fontWeight: "600",
-                  marginLeft: "-10px",
-                  marginTop: "10px",
-                }}
-              >
-                + View More
-              </Button>
-            </div> */}
-            {/* <hr
-              style={{
-                border: ".2px solid rgb(224,224,224)",
-                marginTop: "10px",
-              }}
-            />
-            <h4>Accomodation Type</h4>
-            <div
-              style={{ display: "flex", flexDirection: "column", gap: "10px" }}
-            >
-              <div>
-                <input
-                  style={{
-                    marginRight: "10px",
-                    height: "15px",
-                    width: "18px",
-                    cursor: "pointer",
-                  }}
-                  type="checkbox"
-                  name="OYO Rooms"
-                  label="Oyo"
-                />
-                OYO Home
-              </div>
-              <div>
-                <input
-                  style={{
-                    marginRight: "10px",
-                    height: "15px",
-                    width: "18px",
-                    cursor: "pointer",
-                  }}
-                  type="checkbox"
-                  name="OYO Rooms"
-                  label="Oyo"
-                />
-                Hotel
-              </div>
-            </div>
-            <div>
-              <Button
-                variant="outlined"
-                style={{
-                  background: "none",
-                  color: "rgb(239,42,36)",
-                  border: "none",
-                  fontSize: "15px",
-                  textTransform: "Capitalize",
-                  fontWeight: "600",
-                  marginLeft: "-10px",
-                  marginTop: "10px",
-                }}
-              >
-                + View More
-              </Button>
-            </div>
-            <hr
-              style={{
-                border: ".2px solid rgb(224,224,224)",
-                marginTop: "10px",
-              }}
-            /> */}
             <h4>Hotel Facilities</h4>
+            {/* <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
+              <InputLabel id="demo-select-small">Filter Hotels</InputLabel>
+              <Select
+                labelId="demo-select-small"
+                id="demo-select-small"
+                value={age}
+                label="Filter Hotels"
+                onChange={handleFilter}
+              >
+                <MenuItem value="">
+                  <em>None</em>
+                </MenuItem>
+                <MenuItem value={"Free Wi-Fi"}>Free Wi-Fi</MenuItem>
+                <MenuItem value={"Reception"}>Reception</MenuItem>
+                <MenuItem value={"Geyser"}>Geyser</MenuItem>
+                <MenuItem value={"CCTV cameras"}>CCTV cameras</MenuItem>
+                <MenuItem value={"Parking facility"}>Parking facility</MenuItem>
+                <MenuItem value={"AC"}>AC</MenuItem>
+                <MenuItem value={"TV"}>TV</MenuItem>
+                <MenuItem value={"Security"}>Security</MenuItem>
+                <MenuItem value={"Elevator"}>Elevator</MenuItem>
+                <MenuItem value={"Power backup"}>Power backup</MenuItem>
+                <MenuItem value={"Security"}>Security</MenuItem>
+                <MenuItem value={"Caretaker"}>Caretaker</MenuItem>
+              </Select>
+            </FormControl> */}
             <div
               style={{ display: "flex", flexDirection: "column", gap: "10px" }}
             >
@@ -1408,52 +893,11 @@ function DisplayHotel() {
           />
 
           <div style={{ width: "100%", display: "grid", gap: "45px" }}>
-            {/* {isLoading && <Skeleton
-              animation="wave"
-              height="500px"
-              width="80%"
-              style={{ marginBottom: 6 }}
-            />} */}
-
-            {/* {  hotelDataArray.length ===0 && !isLoading && <div style={{textAlign: "center", margin:"20%"}}>
-              <div style={{ fontSize: "100px", color:"red", fontWeight: "bold" }}>
-                4oh!4
-              </div>
-              <div style={{color:"gray"}}>
-                <p>There is no property available for this search </p>
-                
-              </div>
-              <div style={{ color:"gray" }}>
-                <p>Book your next stay here</p>
-                
-              </div>
-              <div>
-                <Link to="/" style={{textDecoration:"none", padding: "10px", background:"green", color:"white"}}>
-                 Go To Homepage 
-                </Link>
-              </div>
-            </div> } */}
-
-            {/* .filter((elem) => {
-                if (elem.citys === filterBy && (elem.price >= start) && (elem.price <= end)) {
-                  return elem.citys;
-                } else if (filterBy === "") {
-                  return elem;
-                }
-               return;
-              }) */}
-            {/* {hoteldata
-              .filter((elem) => {
-                if (elem.price >= start && elem.price <= end) {
-                  return elem;
-                } else if (filterBy === "") {
-                  return elem;
-                }
-                return;
-              }) */}
-            {filterArray.map((item) => (
-              <HotelItem key={item.id} {...item} />
-            ))}
+            {filterArray.length == 0 ? (
+              <h2>Loading Hotels...</h2>
+            ) : (
+              filterArray.map((item) => <HotelItem key={item.id} {...item} />)
+            )}
           </div>
           {/* <hr style={{ border: ".2px solid rgb(224,224,224)" }} /> */}
 

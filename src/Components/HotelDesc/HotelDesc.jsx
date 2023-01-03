@@ -20,6 +20,7 @@ import Navbar1 from "../HomePage/Navbar1";
 import Carousel from "react-material-ui-carousel";
 import { IoLocationSharp } from "react-icons/io5";
 import { BiWifi } from "react-icons/bi";
+import { GrStakeholder } from "react-icons/gr";
 import {
   GiCarBattery,
   GiCctvCamera,
@@ -170,6 +171,10 @@ function HotelDesc() {
     {
       icon: <GiSecurityGate />,
       facility: "Security",
+    },
+    {
+      icon: <GrStakeholder />,
+      facility: "Caretaker",
     },
   ];
   return (
@@ -674,7 +679,9 @@ function HotelDesc() {
                   }}
                 >
                   <div>
-                    <div style={{ margin: "20px" }}><SiVirustotal color="lightgreen" /> Your savings</div>
+                    <div style={{ margin: "20px" }}>
+                      <SiVirustotal color="lightgreen" /> Your savings
+                    </div>
                     <div style={{ margin: "20px" }}>Total price</div>
                     <div style={{ margin: "20px" }}>
                       <span>(Incl. of all taxes)</span>
@@ -697,21 +704,21 @@ function HotelDesc() {
                     borderRadius: "10px",
                   }}
                 > */}
-                  <Link
-                    to={`/checkout/${_id}`}
-                    style={{
-                      padding: "20px",
-                      background: "#1ab64f",
-                      textDecoration: "none",
-                      color: "white",
-                      cursor: "pointer",
-                      fontSize: "18px",
-                      fontWeight: "700",
-                      display:"block"
-                    }}
-                  >
-                    Continue to Book
-                  </Link>
+                <Link
+                  to={`/checkout/${_id}`}
+                  style={{
+                    padding: "20px",
+                    background: "#1ab64f",
+                    textDecoration: "none",
+                    color: "white",
+                    cursor: "pointer",
+                    fontSize: "18px",
+                    fontWeight: "700",
+                    display: "block",
+                  }}
+                >
+                  Continue to Book
+                </Link>
                 {/* </div> */}
                 <div
                   style={{ margin: "20px", color: "red", textAlign: "left" }}

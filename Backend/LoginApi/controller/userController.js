@@ -25,14 +25,12 @@ export const Login = async (req, res) => {
       return res
         .status(404)
         .send({ message: "Please enter valid email and password" });
-
     const match = user.checkPassword(req.body.password);
 
     if (!match)
       return res
         .status(404)
         .send({ message: "Please enter valid email and password" });
-
     const token = jsontoken(user);
 
     return res.status(200).send({ token: token });

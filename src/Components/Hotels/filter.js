@@ -1,9 +1,9 @@
 import { URL } from "../../URL"
 
-export const getHotelRooms = (city, page,dispatch) => {
+export const filterHotelRooms = (city, page, facility, dispatch) => {
   console.log(city)
   console.log(page)
-  let url = `${URL.hotel}?city=${city}&page=${page}`;
+  let url = `${URL.hotel}?city=${city}&page=${page}&facility=${facility}`;
   fetch(url)
     .then((res) => res.json())
     .then((res) => {
