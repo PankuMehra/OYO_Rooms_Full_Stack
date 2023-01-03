@@ -32,7 +32,9 @@ export default function Navbar1() {
 
   const changeAuth = () => {
     localStorage.removeItem("LogInToken");
-    localStorage.removeItem("email");
+    localStorage.removeItem("currentUser");
+    localStorage.removeItem("isAuth");
+    // localStorage.setItem("isAuth", false);
     setDropdown(false);
   };
 
