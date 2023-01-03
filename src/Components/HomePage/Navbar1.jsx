@@ -17,8 +17,8 @@ export default function Navbar1() {
     return store.UserReducer.LoggedIn;
   });
   console.log(loggedInUser);
-  let currentUser = JSON.parse(localStorage.getItem("currentUser"));
-  let isAuth = JSON.parse(localStorage.getItem("isAuth"));
+  let currentUser = localStorage.getItem("email");
+  let isAuth = localStorage.getItem("LogInToken");
 
   useEffect(() => {
     fetchData();
@@ -31,8 +31,8 @@ export default function Navbar1() {
   };
 
   const changeAuth = () => {
-    localStorage.removeItem("isAuth");
-    localStorage.removeItem("currentUser");
+    localStorage.removeItem("LogInToken");
+    localStorage.removeItem("email");
     setDropdown(false);
   };
 
@@ -68,7 +68,7 @@ export default function Navbar1() {
             {isAuth ? (
               <Link to="/profile" className="login-signup" id="loginBox">
                 <img src="/Images/profile.png" alt="profile" />
-                <p>Welcome, {loggedInUser.name}</p>
+                <p>Welcome, {currentUser}</p>
               </Link>
             ) : (
               <Link to="/login" className="login-signup" id="loginBox">

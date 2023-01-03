@@ -1,10 +1,16 @@
 import mongoose from "mongoose";
+import dotenv from "dotenv";
 
+dotenv.config();
+const USERNAME = process.env.DB_USERNAME
+const PASSWORD = process.env.DB_PASSWORD
 const connection = async () => {
+  
+  
   try {
     mongoose.connect(
-      // "mongodb+srv://furkan123:furkan123@dominosauth.i1suxc3.mongodb.net/dominosAuth?retryWrites=true&w=majority",
-      "mongodb+srv://deepakvats123:deepakvats123@oyouserdata.rg945xs.mongodb.net/OyoUserData?retryWrites=true&w=majority",
+      
+      `mongodb+srv://${USERNAME}:${PASSWORD}@oyouserdata.rg945xs.mongodb.net/OyoUserData?retryWrites=true&w=majority`,
       {
         useNewUrlParser: true,
         useUnifiedTopology: true,

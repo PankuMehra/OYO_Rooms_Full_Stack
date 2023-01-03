@@ -8,10 +8,11 @@ import "react-toastify/dist/ReactToastify.css";
 import { useEffect, useState } from "react";
 import { LogInNav } from "../LOGIN_NAVBAR/logInNavbar";
 import "../SIGNUP/common.css";
-import { Link } from "react-router-dom";
+import { json, Link } from "react-router-dom";
 import { URL } from "../../URL";
 import "./Login.css";
 import { useNavigate } from "react-router-dom";
+import { jsx } from "@emotion/react";
 export const LogIn = () => {
   const [state, setState] = useState([]);
   const [showPassword, setShowPassword] = useState(false);
@@ -20,22 +21,29 @@ export const LogIn = () => {
     password: "",
   });
 
-  useEffect(() => {
-    getData();
-  }, []);
+  
+
+  
+ 
+ 
 
   // const handleClickShowPassword = () => setShowPassword(true);
   // const handleMouseDownPassword = () => setShowPassword(false);
 
-  const getData = async () => {
-    try {
-      const res = await axios.get(`${URL.users}`);
-      setState(res.data);
-    } catch (error) {
-      console.log("Something Error");
-    }
-  };
+  // const getData = async () => {
+  //   try {
+  //     const res = await axios.post(`https://oyo-room-backend-api.vercel.app/login`, );
+  //     setState(res.data);
+  //     console.log(state)
+  //   } catch (error) {
+  //     console.log("Something Error");
+  //   }
+  // };
+  // const getData = async() => {
+    
+  // }
   console.log(state);
+  
   // console.log(state[0].email);
   const getInputFieldData = async (e) => {
     setRegister({
@@ -47,31 +55,61 @@ export const LogIn = () => {
 
   var flag = false;
   const navigate = useNavigate();
+
+  
+  useEffect(() => {
+    
+    let token = localStorage.getItem("LogInToken");
+    console.log(token)
+    if(token){
+     return navigate("/")
+    }
+   
+  }, []);
+
   function logIn() {
-    for (let i = 0; i < state.length; i++) {
-      // console.log(state[0].email);
-      if (
-        state[i].email === register.email &&
-        state[i].password === register.password
-      ) {
-        flag = true;
-        localStorage.setItem("currentUser", state[i].id);
-        localStorage.setItem("isAuth", true);
-        navigate("/");
+     fetch("https://oyo-room-backend-api.vercel.app/login", {
+      method: "POST",
+      body: JSON.stringify(register),
+      headers: {
+        "Content-Type": "application/json"
       }
+    })
+    .then(res => res.json())
+    .then(data =>{
+      console.log(data);
+       localStorage.setItem("LogInToken", data.token)
+       localStorage.setItem("email", register.email)
+       navigate("/");
+    })
+    .catch((error)=>console.log(error))
+   
+   
+  
+  //   for (let i = 0; i < state.length; i++) {
+  //     // console.log(state[0].email);
+  //     if (
+  //       state[i].email === register.email &&
+  //       state[i].password === register.password
+  //     ) {
+  //       flag = true;
+  //       localStorage.setItem("currentUser", state[i].id);
+  //       localStorage.setItem("isAuth", true);
+  //       navigate("/");
+  //     }
+  //   }
+  //   if (flag === true) {
+  //     toast.success("Login Sucessfull....", {
+  //       position: "top-center",
+  //       theme: "colored",
+  //     });
+  //   } else {
+  //     toast.warning("Please Enter Correct Email & Password", {
+  //       position: "top-center",
+  //       theme: "colored",
+  //     });
     }
-    if (flag === true) {
-      toast.success("Login Sucessfull....", {
-        position: "top-center",
-        theme: "colored",
-      });
-    } else {
-      toast.warning("Please Enter Correct Email & Password", {
-        position: "top-center",
-        theme: "colored",
-      });
-    }
-  }
+  
 
   return (
     <div id="wrap-main-div">

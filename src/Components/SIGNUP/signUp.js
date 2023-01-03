@@ -110,7 +110,7 @@ export const SignUp = () => {
     });
     console.log(userData);
     // send data to backend for register new user
-    const result = await axios.post(`${URL.users}`, inputFieldData);
+    const result = await axios.post(`${URL.users}signup`, inputFieldData);
 
     setTimeout(() => {
       navigate("/login");
