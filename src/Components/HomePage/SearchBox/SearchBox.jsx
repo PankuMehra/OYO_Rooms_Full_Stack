@@ -12,6 +12,8 @@ import { useNavigate } from "react-router-dom";
 import styles from "../searchBanner/SearchBanner.module.css";
 // import { saveData } from "../../redux/authentication/localStorage";
 
+
+
 const AutocompleteForm = () => {
   const [address, setAddress] = useState("");
 
