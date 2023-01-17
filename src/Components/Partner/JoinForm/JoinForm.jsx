@@ -27,11 +27,6 @@ const initData = {
   city: "",
   address: "",
   mainImage: "",
-  image1: "",
-  image2: "",
-  image3: "",
-  image4: "",
-  image5: "",
   facility1: "",
   facility2: "",
   facility3: "",
@@ -68,6 +63,7 @@ export function JoinForm() {
     console.log(file);
     reader.addEventListener("load", () => {
       let { name } = event.target;
+      
       setData({ ...data, [name]: reader.result });
       // console.log(reader.result);
     });
@@ -203,7 +199,8 @@ export function JoinForm() {
     return store.UserReducer.hotelData;
   });
   const saveHotelDetails = async () => {
-    let res = await fetch(`${URL.hotel}`, {
+    console.log(data);
+    let res = await fetch(`${URL.hotelPost}`, {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
