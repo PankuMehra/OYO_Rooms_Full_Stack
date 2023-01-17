@@ -8,8 +8,33 @@ const HotelBookingDetails = ({ data }) => {
   const roomCount = localStorage.getItem("roomCount") || 1;
   const guestCount = localStorage.getItem("guestCount") || 1;
 
-  const bookingStartDate = localStorage.getItem("start") || new Date();
-  const bookingEndDate = localStorage.getItem("finish") || new Date();
+  const month = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+
+  const currDate = new Date();
+  let monthName = month[currDate.getMonth()];
+  let date = currDate.getDate();
+  let year = currDate.getFullYear();
+
+  let today = `${date}th ${monthName} ${year}`;
+  let tomorrow = `${date + 1}th ${monthName} ${year}`;
+
+  const bookingStartDate = localStorage.getItem("start") || today;
+  const bookingEndDate = localStorage.getItem("finish") || tomorrow;
+  localStorage.setItem("start", bookingStartDate);
+  localStorage.setItem("finish", bookingEndDate);
 
   return (
     <Box p="20px" w="100%" h="480px" border="1px solid gray">
@@ -48,7 +73,7 @@ const HotelBookingDetails = ({ data }) => {
           <Box p={"5px"}>
             <FaRegCalendarAlt />
           </Box>
-          <Box>{`${bookingStartDate}  -  ${bookingEndDate}`}</Box>
+          <Box p={"0px 5px"}>{`${bookingStartDate}  -  ${bookingEndDate}`}</Box>
         </Box>
         <Box p="10px" borderBottom="0.1px solid gray">
           {`${roomCount} Room, ${guestCount} Guests`}
@@ -79,7 +104,9 @@ const HotelBookingDetails = ({ data }) => {
           <Text as={"p"}>Payable Amount</Text>
           <Box display="flex" alignItems="center">
             <HiReceiptTax color="#1ab64f" fontSize="15px" />{" "}
-            <Text as={"p"} fontSize="xs">inclusive of all taxes</Text>
+            <Text as={"p"} fontSize="xs">
+              inclusive of all taxes
+            </Text>
           </Box>
         </Box>
         <Box>

@@ -45,9 +45,33 @@ function HotelDesc() {
   const roomCount = localStorage.getItem("roomCount") || 1;
   const guestCount = localStorage.getItem("guestCount") || 1;
 
-  const bookingStartDate = localStorage.getItem("start") || new Date();
-  const bookingEndDate = localStorage.getItem("finish") || new Date();
+  const month = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
 
+  const currDate = new Date();
+  let monthName = month[currDate.getMonth()];
+  let date = currDate.getDate();
+  let year = currDate.getFullYear();
+
+  let today = `${date}th ${monthName} ${year}`;
+  let tomorrow = `${date + 1}th ${monthName} ${year}`;
+
+  const bookingStartDate = localStorage.getItem("start") || today;
+  const bookingEndDate = localStorage.getItem("finish") || tomorrow;
+  localStorage.setItem("start", bookingStartDate);
+  localStorage.setItem("finish", bookingEndDate);
   // const {city} = useSelector(state => state.Search);
 
   console.log("_id:", _id);
