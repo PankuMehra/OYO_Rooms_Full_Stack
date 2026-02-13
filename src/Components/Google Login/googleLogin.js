@@ -2,13 +2,13 @@ import { GoogleLogin } from "react-google-login";
 
 export const LogedIn = () => {
   //   const [showLogin, setShowLogin] = useState(true);
-  console.log("furkan");
+
   const onLoginSucess = (res) => {
-    console.log(res);
+    // Handle successful login
   };
 
   const onLoginFailure = (res) => {
-    console.log(res);
+    // Handle login failure
   };
   const clientid =
     "291586213988-15e4vphul9cg4tep7fbkmchs8ekk74om.apps.googleusercontent.com";

@@ -19,8 +19,10 @@ import {
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { HotelAction } from "../../../Action/HotelAction";
-import {useNavigate} from 'react-router-dom'
-import {URL} from "../../../URL"
+import { useNavigate } from "react-router-dom";
+import { URL } from "../../../URL";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const initData = {
   hotelName: "",
@@ -54,22 +56,44 @@ export function JoinForm() {
 
   let navigate = useNavigate();
   const [data, setData] = React.useState(initData);
+  console.log("data:", data);
 
   const initialRef = React.useRef(null);
 
-  const fileUpload = (event) => {
-    const file = event.target.files[0];
-    const reader = new FileReader();
-    console.log(file);
-    reader.addEventListener("load", () => {
-      let { name } = event.target;
-      
-      setData({ ...data, [name]: reader.result });
-      // console.log(reader.result);
-    });
+  // const fileUpload = (event) => {
+  //   const file = event.target.files[0];
+  //   const reader = new FileReader();
 
-    reader.readAsDataURL(file);
+  //   reader.addEventListener("load", () => {
+  //     let { name } = event.target;
+
+  //     setData({ ...data, [name]: reader.result });
+  //     // console.log(reader.result);
+  //   });
+
+  //   reader.readAsDataURL(file);
+  // };
+
+  const fileUpload = async (event) => {
+    try {
+      const file = event.target.files[0];
+      const formData = new FormData();
+      formData.append("image", file);
+
+      const res = await fetch(`${URL?.oyo_url}/upload`, {
+        method: "POST",
+        body: formData,
+      });
+
+      const imageData = await res.json();
+      let imageUrl = imageData.url;
+      setData({ ...data, ["mainImage"]: imageUrl });
+    } catch (error) {
+      console.error("Image upload error", error);
+      toast.error("Image upload failed");
+    }
   };
+
   // const handleChange = (e) => {
   //   let { name, value, type, checked } = e.target;
   //   value = type == "checkbox" ? checked : value;
@@ -116,7 +140,6 @@ export function JoinForm() {
     setF15(false);
     fCount.current = 0;
   };
-  console.log(data);
 
   const selectBox1 = (e) => {
     setF1(true);
@@ -199,18 +222,28 @@ export function JoinForm() {
     return store.UserReducer.hotelData;
   });
   const saveHotelDetails = async () => {
-    console.log(data);
-    let res = await fetch(`${URL.hotelPost}`, {
-      method: "POST",
-      body: JSON.stringify(data),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    let updatedData = await res.json();
-    HotelAction(updatedData, dispatch);
-    console.log(hotelData);
-    navigate("../partner");
+    try {
+      let res = await fetch(`${URL.hotelPost}`, {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      if (!res.ok) {
+        throw new Error("Failed to save hotel details");
+      } else {
+        let updatedData = await res.json();
+        HotelAction(updatedData, dispatch);
+        toast.success("Hotel details uploaded successfully!");
+        setData(initData);
+        setExtraDetails(false);
+        onClose();
+      }
+    } catch (error) {
+      console.error("Error saving hotel details:", error);
+      toast.error("Failed to save hotel details");
+    }
   };
   return (
     <>
@@ -522,6 +555,7 @@ export function JoinForm() {
                   placeholder="Enter Hotel Name"
                   bgColor="white"
                   borderColor="gray"
+                  value={data?.hotelName}
                   onChange={addDetails}
                   name="hotelName"
                   required
@@ -541,6 +575,7 @@ export function JoinForm() {
                   placeholder="Enter City Name"
                   bgColor="white"
                   borderColor="gray"
+                  value={data?.city}
                   onChange={addDetails}
                   name="city"
                   required
@@ -559,6 +594,7 @@ export function JoinForm() {
                   placeholder="Enter Hotel Address"
                   bgColor="white"
                   borderColor="gray"
+                  value={data?.address}
                   onChange={addDetails}
                   name="address"
                   required
@@ -668,6 +704,7 @@ export function JoinForm() {
           )}
         </ModalContent>
       </Modal>
+      <ToastContainer />
     </>
   );
 }

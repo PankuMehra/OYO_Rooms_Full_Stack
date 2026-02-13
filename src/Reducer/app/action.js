@@ -4,8 +4,8 @@ export const getHotelRoomRequest = () => {
   return {
     type: appConstants.GET_HOTELDATA_REQUEST,
     payload: {
-      isLoading: true
-    }
+      isLoading: true,
+    },
   };
 };
 
@@ -13,8 +13,8 @@ export const getHotelRoomSuccess = (hotelDataArray) => {
   return {
     type: appConstants.GET_HOTELDATA_SUCCESS,
     payload: {
-      hotelDataArray: hotelDataArray
-    }
+      hotelDataArray: hotelDataArray,
+    },
   };
 };
 
@@ -22,8 +22,8 @@ export const getHotelRoomFailure = () => {
   return {
     type: appConstants.GET_HOTELDATA_FAILURE,
     payload: {
-      isError: true
-    }
+      isError: true,
+    },
   };
 };
 
@@ -32,13 +32,19 @@ export const getHotelRoom = () => (dispatch) => {
   const requestAction = getHotelRoomRequest();
   dispatch(requestAction);
   return fetch("https://oyo-data.onrender.com/hotel")
-    .then((res) => res.json())
+    .then((res) => {
+      if (!res.ok) {
+        throw new Error("Failed to fetch hotels");
+      }
+      return res.json();
+    })
     .then((res) => {
       //success
       const successAction = getHotelRoomSuccess(res);
       dispatch(successAction);
     })
-    .catch((res) => {
+    .catch((error) => {
+      console.error("Error fetching hotels:", error);
       // failure
       const failureAction = getHotelRoomFailure();
       dispatch(failureAction);

@@ -31,6 +31,7 @@ const UserDetails = () => {
       return storeData.UserReducer.userData;
     }) || [];
   const userDispatch = useDispatch();
+  console.log("userData:", userData);
 
   const handleClick = () => {
     setShow(!show);
@@ -44,47 +45,41 @@ const UserDetails = () => {
   };
 
   React.useEffect(() => {
-    {
-      userData ? getUserDetails() : "";
-    }
+    getUserDetails();
   }, []);
   const getUserDetails = async () => {
-    let currentUser = JSON.parse(localStorage.getItem("currentUser"));
-    let res = await fetch(`${URL.users}/${currentUser}`);
+    try {
+      // let currentUser = JSON.parse(localStorage.getItem("currentUser"));
+      // let res = await fetch(`${URL.users}/${currentUser}`);
+      let token = localStorage.getItem("loginToken") || null;
+      console.log("token:", token);
+      if (token) {
+        let res = await fetch(`${URL.users}`, {
+          method: "GET",
+          headers: { Authorization: token },
+        });
 
-    let data = await res.json();
-    UserAction(data, userDispatch);
+        if (!res.ok) {
+          throw new Error("Failed to fetch user details");
+        }
+        let data = await res.json();
+        UserAction(data?.data, userDispatch);
+      }
+    } catch (error) {
+      console.error("Error fetching user details:", error);
+      toast.error("Failed to load user details");
+    }
   };
 
   let nameRef = React.useRef(null);
   let emailRef = React.useRef(null);
   const updateUserDetails = async () => {
-    let updatedUser = {
-      name: nameRef.current.value,
-      email: emailRef.current.value + "@gmail.com",
-    };
-    let currentUser = JSON.parse(localStorage.getItem("currentUser"));
-    let res = await fetch(`${URL.users}/${currentUser}`, {
-      method: "PATCH",
-      body: JSON.stringify(updatedUser),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    let data = await res.json();
-    UserAction(data, userDispatch);
-    setUserShow(!userShow);
-  };
-
-  let passRef = React.useRef(null);
-  const updatePass = async () => {
-    let updatedUser = {
-      password: myPass.newPass2,
-    };
-    let currentUser = JSON.parse(localStorage.getItem("currentUser"));
-    let oldRes = await fetch(`${URL.users}/${currentUser}`);
-    let oldData = await oldRes.json();
-    if (oldData.password == passRef.current.value) {
+    try {
+      let updatedUser = {
+        name: nameRef.current.value,
+        email: emailRef.current.value,
+      };
+      let currentUser = JSON.parse(localStorage.getItem("currentUser"));
       let res = await fetch(`${URL.users}/${currentUser}`, {
         method: "PATCH",
         body: JSON.stringify(updatedUser),
@@ -92,21 +87,53 @@ const UserDetails = () => {
           "Content-Type": "application/json",
         },
       });
+      if (!res.ok) {
+        throw new Error("Failed to update user details");
+      }
       let data = await res.json();
-      // console.log('data:', data)
       UserAction(data, userDispatch);
-      setPassword(!password);
-      toast.success("Password Sucessfully updated", {
-        position: "top-center",
-        theme: "colored",
-      });
-    } else {
-      toast.info("Old Password is Wrong", {
-        position: "top-center",
-        theme: "dark",
-      });
+      setUserShow(!userShow);
+      toast.success("User details updated successfully");
+    } catch (error) {
+      console.error("Error updating user details:", error);
+      toast.error("Failed to update user details");
     }
-    // }
+  };
+
+  let passRef = React.useRef(null);
+  const updatePass = async () => {
+    try {
+      let updatedUser = {
+        password: myPass.newPass2,
+      };
+      let currentUser = JSON.parse(localStorage.getItem("currentUser"));
+      let oldRes = await fetch(`${URL.users}/${currentUser}`);
+      if (!oldRes.ok) {
+        throw new Error("Failed to fetch current user data");
+      }
+      let oldData = await oldRes.json();
+      if (oldData.password == passRef.current.value) {
+        let res = await fetch(`${URL.users}/${currentUser}`, {
+          method: "PATCH",
+          body: JSON.stringify(updatedUser),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        if (!res.ok) {
+          throw new Error("Failed to update password");
+        }
+        let data = await res.json();
+        UserAction(data, userDispatch);
+        setPassword(!password);
+        toast.success("Password successfully updated!");
+      } else {
+        toast.error("Old password is incorrect");
+      }
+    } catch (error) {
+      console.error("Error updating password:", error);
+      toast.error("Failed to update password");
+    }
   };
 
   const handleChange = (e) => {
@@ -143,6 +170,7 @@ const UserDetails = () => {
               width="auto"
               placeholder="Enter Name"
               ref={nameRef}
+              defaultValue={userData.name || ""}
             />
           ) : userData.name != null ? (
             userData.name
@@ -154,17 +182,18 @@ const UserDetails = () => {
           <strong>
             <span className="profile_Money_Details">Phone Number: &nbsp;</span>
           </strong>
-          {userData.number != null ? userData.number : ""}
+          {userData.number != null ? userData.number : "Not Provided"}
         </Box>
         <Box>
           <strong>
             <span className="profile_Money_Details">Email Address: &nbsp;</span>
           </strong>
           {userShow ? (
-            <InputGroup size="sm">
-              <Input placeholder="Enter Email" ref={emailRef} />
-              <InputRightAddon children="@gmail.com" />
-            </InputGroup>
+            <Input
+              placeholder="Enter full email address"
+              ref={emailRef}
+              defaultValue={userData.email || ""}
+            />
           ) : userData.email != null ? (
             userData.email
           ) : (

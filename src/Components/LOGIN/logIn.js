@@ -21,12 +21,6 @@ export const LogIn = () => {
     password: "",
   });
 
-  
-
-  
- 
- 
-
   // const handleClickShowPassword = () => setShowPassword(true);
   // const handleMouseDownPassword = () => setShowPassword(false);
 
@@ -40,77 +34,50 @@ export const LogIn = () => {
   //   }
   // };
   // const getData = async() => {
-    
+
   // }
-  console.log(state);
-  
+
   // console.log(state[0].email);
   const getInputFieldData = async (e) => {
     setRegister({
       ...register,
       [e.target.name]: e.target.value,
     });
-    console.log(register);
   };
 
   var flag = false;
   const navigate = useNavigate();
 
-  
   useEffect(() => {
-    
-    let token = localStorage.getItem("LogInToken");
-    console.log(token)
-    if(token){
-     return navigate("/")
+    let token = localStorage.getItem("loginToken");
+    if (token) {
+      navigate("/");
     }
-   
   }, []);
 
-  function logIn() {
-     fetch("https://oyo-room-backend-api.vercel.app/login", {
-      method: "POST",
-      body: JSON.stringify(register),
-      headers: {
-        "Content-Type": "application/json"
+  async function logIn() {
+    try {
+      const res = await fetch(`${URL.login}`, {
+        method: "POST",
+        body: JSON.stringify(register),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      if (!res.ok) {
+        throw new Error("Login failed");
       }
-    })
-    .then(res => res.json())
-    .then(data =>{
-      console.log(data.token);
-       localStorage.setItem("LogInToken", data.token)
-       localStorage.setItem("currentUser", data.data.name);
-       localStorage.setItem("isAuth", true);
-       navigate("/");
-    })
-    .catch((error)=>console.log(error))
-   
-   
-  
-  //   for (let i = 0; i < state.length; i++) {
-  //     // console.log(state[0].email);
-  //     if (
-  //       state[i].email === register.email &&
-  //       state[i].password === register.password
-  //     ) {
-  //       flag = true;
-  //       localStorage.setItem("currentUser", state[i].id);
-  //       localStorage.setItem("isAuth", true);
-  //       navigate("/");
-  //     }
-  //   }
-  //   if (flag === true) {
-  //     toast.success("Login Sucessfull....", {
-  //       position: "top-center",
-  //       theme: "colored",
-  //     });
-  //   } else {
-  //     toast.warning("Please Enter Correct Email & Password", {
-  //       position: "top-center",
-  //       theme: "colored",
-  //     });
+      const data = await res.json();
+      localStorage.setItem("loginToken", data.token);
+      localStorage.setItem("currentUser", data.data.name);
+      localStorage.setItem("isAuth", true);
+      toast.success("Login successful!");
+      navigate("/");
+    } catch (error) {
+      console.error("Error during login:", error);
+      toast.error("Login failed. Please check your credentials.");
     }
-  
+  }
 
   return (
     <div id="wrap-main-div">
@@ -118,15 +85,7 @@ export const LogIn = () => {
 
       <div className="sl-main-div">
         <div className="sl-left-div">
-          <h2
-            style={{
-              fontSize: "45px",
-              marginTop: "50px",
-              marginBottom: "10px",
-            }}
-          >
-            There’s a smarter way to OYO around
-          </h2>
+          <h2 className="sl-body-head">There’s a smarter way to OYO around</h2>
           <span>
             Sign up with your phone number and get exclusive access to discounts
             and savings on OYO stays and with our many travel partners.
