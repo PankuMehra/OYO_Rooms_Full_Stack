@@ -14,8 +14,13 @@
 .sl-nav-elem {
   display: flex;
   align-items: center;
-  padding-left: 100px;
+  padding: 10px 60px;
   background-color: transparent;
+}
+.sl-body-head {
+  font-size: "45px";
+  margin-top: "50px";
+  margin-bottom: "10px";
 }
 .sl-nav-elem > p {
   font-size: 20px;
@@ -24,7 +29,7 @@
 /* Sign_Up LogIn navbar css End */
 
 /* Below navbar parts css Start */
-#LoginSignup{
+#LoginSignup {
   font-weight: 600;
   /* font-family: "Roboto", sans-serif; */
 }
@@ -32,7 +37,7 @@
   background: rgb(0, 0, 0, 0.5)
     url("https://assets.oyoroomscdn.com/cmsMedia/b3c9905c-31d1-4349-8594-c07deae6b36d.jpg");
   background-size: cover;
-  height: 100vh;
+  min-height: 100vh;
   color: white;
   background-blend-mode: darken;
 }
@@ -70,9 +75,63 @@
   /* border-radius: 4px; */
 }
 /* Below navbar parts css End */
-#SignupButton:hover{
+#SignupButton:hover {
   background-color: #1ab64f;
   color: white;
   border-radius: unset;
   font-weight: 600;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  #wrap-main-div {
+    /* height: auto; */
+    padding: 20px;
+  }
+  .sl-nav-elem {
+    padding: 0px;
+  }
+  .sl-body-head {
+    font-size: "22px";
+    margin-top: "20px";
+    margin-bottom: "4px";
+  }
+  .sl-main-div {
+    flex-direction: column;
+    align-items: center;
+  }
+  .sl-left-div {
+    width: 100%;
+    padding: 20px;
+    text-align: center;
+  }
+  .sl-left-div h2 {
+    font-size: 30px;
+    margin-top: 20px;
+  }
+  .sl-left-div span {
+    display: block;
+    margin-top: 10px;
+  }
+  #sl-right-div {
+    width: 100%;
+    margin-top: 20px;
+  }
+  #sl-form-div {
+    width: 100%;
+    padding: 20px;
+  }
+  #SignupButton {
+    width: 100%;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .sl-left-div {
+    width: 400px;
+    padding: 40px;
+  }
+  #sl-form-div {
+    width: 350px;
+  }
 }

@@ -411,71 +411,67 @@ function valuetext(value) {
 }
 
 function DisplayHotel() {
-  let [start, setStart] = React.useState([0]);
-  let [end, setEnd] = React.useState([10000]);
+  let [start, setStart] = React.useState(0);
+  let [end, setEnd] = React.useState(10000);
   let [facility, setFacility] = React.useState("");
   let [facility1, setFacility1] = React.useState("");
   let [facility2, setFacility2] = React.useState("");
   let [filterArray, setFilterArray] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
-  const [value, setValue] = React.useState([0, 1000]);
+  const [value, setValue] = React.useState([0, 10000]);
   const [sortBy, setSortBy] = React.useState("popularity");
   let page = React.useRef(1);
   const hoteldata = useSelector((state) => {
     return state.Reducer.hotelDataArray;
   });
-
-  const [age, setAge] = React.useState("");
+  const totalPage = useSelector((state) => {
+    return state.Reducer.totalPage;
+  });
+  console.log('totalPage:', totalPage)
 
   const handleFilter = (event) => {
-    setAge(event.target.name);
-    facility = event.target.name
-    setFacility(facility);
-
-    console.log("facility:", facility);
+    const selectedFacility = event.target.name;
+    setFacility(selectedFacility);
     filterHotelRooms(
       currentCity,
       page.current,
-      facility,
+      selectedFacility,
       facility1,
       facility2,
       dispatch
     );
   };
   const handleFilter1 = (event) => {
-    setAge(event.target.name);
-    facility1 = event.target.name
-    setFacility(facility1);
-    console.log("facility1:", facility1);
+    const selectedFacility1 = event.target.name;
+    setFacility1(selectedFacility1);
     filterHotelRooms(
       currentCity,
       page.current,
       facility,
-      facility1,
+      selectedFacility1,
       facility2,
       dispatch
     );
   };
   const handleFilter2 = (event) => {
-    setAge(event.target.name);
-    facility2 = event.target.name
-    setFacility(facility2);
-    console.log("facility2:", facility2);
+    const selectedFacility2 = event.target.name;
+    setFacility2(selectedFacility2);
     filterHotelRooms(
       currentCity,
       page.current,
       facility,
       facility1,
-      facility2,
+      selectedFacility2,
       dispatch
     );
   };
 
   useEffect(() => {
     setLoading(true);
-    if (filterArray.length == 0) {
-      getHotelRooms(currentCity, page.current, dispatch);
-    }
+    getHotelRooms(currentCity, page.current, dispatch);
+  }, []);
+
+  useEffect(() => {
     setFilterArray(hoteldata);
     setLoading(false);
   }, [hoteldata]);
@@ -989,7 +985,7 @@ function DisplayHotel() {
               <Button
                 variant="outlined"
                 onClick={nextPage}
-                disabled={page.current == 4 ? true : false}
+                disabled={totalPage < page.current + 1 ? true : false}
                 style={{
                   background: "red",
                   color: "white",

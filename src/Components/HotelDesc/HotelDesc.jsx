@@ -74,7 +74,7 @@ function HotelDesc() {
   localStorage.setItem("finish", bookingEndDate);
   // const {city} = useSelector(state => state.Search);
 
-  console.log("_id:", _id);
+
   const getDetails = () => {
     return fetch(`${URL.hotel}/${_id}`)
       .then((res) => res.json())

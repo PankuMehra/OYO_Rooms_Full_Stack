@@ -54,13 +54,11 @@ export const SignUp = () => {
   const getUserData = async () => {
     const result = await axios.get(`${URL.users}`);
     setUserData(result.data);
-    console.log(result.data);
   };
-  console.log(inputFieldData.name);
   //for showpassord icon
 
-  const handleClickShowPassword = () => setShowPassword(true);
-  const handleMouseDownPassword = () => setShowPassword(false);
+  const handleClickShowPassword = () => setShowPassword(!showPassword);
+  const handleMouseDownPassword = (event) => event.preventDefault();
 
   const handleChangeInputField = async (e) => {
     setInputFieldData({
@@ -76,11 +74,6 @@ export const SignUp = () => {
   };
   const sendDataToBackend = async (e) => {
     e.preventDefault();
-    setInputFieldData({
-      email: "",
-      name: "",
-      password: "",
-    });
     if (
       inputFieldData.name === "" ||
       inputFieldData.email === "" ||
@@ -93,28 +86,49 @@ export const SignUp = () => {
       return;
     }
 
+    // if (!regrex.test(inputFieldData.email)) {
+    //   toast.info("Please enter a valid email address", {
+    //     position: "top-center",
+    //     theme: "dark",
+    //   });
+    //   return;
+    // }
+
     // check email unique or not
-    for (let i = 0; i < userData.length; i++) {
-      if (userData[i].email === inputFieldData.email) {
-        toast.info("Email Id Already Exist", {
-          position: "top-center",
-          theme: "colored",
-        });
-        return;
-      }
+    // for (let i = 0; i < userData.length; i++) {
+    //   if (userData[i].email === inputFieldData.email) {
+    //     toast.info("Email Id Already Exist", {
+    //       position: "top-center",
+    //       theme: "colored",
+    //     });
+    //     return;
+    //   }
+    // }
+    console.log("inputFieldData:", inputFieldData);
+
+    try {
+      console.log("inputFieldData:", inputFieldData);
+      // send data to backend for register new user
+      const result = await axios.post(`${URL.signup}`, inputFieldData);
+      toast.success("Registration successful", {
+        position: "top-center",
+        theme: "colored",
+      });
+      setInputFieldData({
+        email: "",
+        name: "",
+        password: "",
+      });
+      setTimeout(() => {
+        navigate("/login");
+      }, 2000);
+    } catch (error) {
+      console.error("Registration failed:", error);
+      toast.error("Registration failed. Please try again.", {
+        position: "top-center",
+        theme: "colored",
+      });
     }
-
-    toast.success("Register Sucessfull", {
-      position: "top-center",
-      theme: "colored",
-    });
-    console.log(userData);
-    // send data to backend for register new user
-    const result = await axios.post(`${URL.users}signup`, inputFieldData);
-
-    setTimeout(() => {
-      navigate("/login");
-    }, 2000);
   };
   const { name, email, password } = inputFieldData;
   return (
@@ -124,15 +138,7 @@ export const SignUp = () => {
       {/* <GoogleButton onClick={LogedIn} /> */}
       <div className="sl-main-div">
         <div className="sl-left-div">
-          <h2
-            style={{
-              fontSize: "45px",
-              marginTop: "50px",
-              marginBottom: "10px",
-            }}
-          >
-            There’s a smarter way to OYO around
-          </h2>
+          <h2 className="sl-body-head">There’s a smarter way to OYO around</h2>
           <span>
             Sign up with your phone number and get exclusive access to discounts
             and savings on OYO stays and with our many travel partners.
@@ -144,9 +150,7 @@ export const SignUp = () => {
           </div>
           <form>
             <div id="sl-form-div">
-              <h2 id="LoginSignup">
-                Login / Signup
-              </h2>
+              <h2 id="LoginSignup">Login / Signup</h2>
               <TextField
                 onChange={(e) => handleChangeInputField(e)}
                 size="small"
