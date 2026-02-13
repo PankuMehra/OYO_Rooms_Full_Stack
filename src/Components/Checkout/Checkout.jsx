@@ -67,9 +67,11 @@ const Checkout = () => {
   }
 
   if (error) {
-    <Box mt="50px">
-      <Heading color={"red"}>Something went wrong please refresh</Heading>
-    </Box>;
+    return (
+      <Box mt="50px">
+        <Heading color={"red"}>Something went wrong please refresh</Heading>
+      </Box>
+    );
   }
 
   return (

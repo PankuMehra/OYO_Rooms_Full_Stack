@@ -9,7 +9,6 @@ import {
 } from "@chakra-ui/react";
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
-// import breakfast from "../Images/breakfastcards.png";
 import { URL } from "../../URL";
 
 const Payment = () => {
@@ -26,7 +25,7 @@ const Payment = () => {
       .catch((error) => setError(true))
       .finally(() => setLoading(false));
   }, []);
-  console.log(data);
+
 
   if (loading) {
     return (
@@ -64,9 +63,11 @@ const Payment = () => {
   }
 
   if (error) {
-    <Box mt="50px">
-      <Heading color={"red"}>Something went wrong please refresh</Heading>
-    </Box>;
+    return (
+      <Box mt="50px">
+        <Heading color={"red"}>Something went wrong please refresh</Heading>
+      </Box>
+    );
   }
 
   return (
@@ -116,27 +117,27 @@ const Payment = () => {
 
           <Box display="flex">
             <Box w="1000px">
-              <Heading fontSize="lg">Hotel Grand Shiva</Heading>
-              <Text>Gurugram</Text>
+          <Heading fontSize="lg">{data.hotelName || "Hotel Grand Shiva"}</Heading>
+          <Text>{data.city || "Gurugram"}</Text>
 
-              <Heading mt="10px" fontSize="md">{`Hotel Direction`}</Heading>
-              <Text>Huda city center</Text>
+          <Heading mt="10px" fontSize="md">{`Hotel Direction`}</Heading>
+          <Text>{data.address || "Huda city center"}</Text>
 
-              <Heading mt="10px" fontSize="md">{`Primery Guest`}</Heading>
-              <Text>{`1`}</Text>
+          <Heading mt="10px" fontSize="md">{`Primary Guest`}</Heading>
+          <Text>{`1`}</Text>
 
-              <Heading mt="5px" fontSize="md">{`Email address`}</Heading>
-              <Text>{`debuvats@gmail.com`}</Text>
+          <Heading mt="5px" fontSize="md">{`Email address`}</Heading>
+          <Text>{`debuvats@gmail.com`}</Text>
 
-              <Heading mt="5px" fontSize="md">{`Phone Number`}</Heading>
-              <Text>{`8979562342`}</Text>
+          <Heading mt="5px" fontSize="md">{`Phone Number`}</Heading>
+          <Text>{`8979562342`}</Text>
             </Box>
 
             <Box>
               <Image
                 w="300px"
                 h="180px"
-                src={data.Image}
+                src={data.mainImage}
               />
             </Box>
           </Box>
@@ -151,7 +152,7 @@ const Payment = () => {
           />
 
           <box>
-            <Image src="./Images/breakfastcards.png" />
+            <Image src="/Images/breakfastcards.png" />
           </box>
 
           <hr

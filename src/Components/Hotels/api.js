@@ -1,16 +1,25 @@
-import { URL } from "../../URL"
+import { URL } from "../../URL";
 
-export const getHotelRooms = (city, page,dispatch) => {
-  // console.log(city)
-  // console.log(page)
+export const getHotelRooms = (city, page, dispatch) => {
   let url = `${URL.hotel}?city=${city}&page=${page}`;
   fetch(url)
-    .then((res) => res.json())
     .then((res) => {
-      // console.log("OK", res[0].hotels);
+      if (!res.ok) {
+        throw new Error("Failed to fetch hotel data");
+      }
+      return res.json();
+    })
+    .then((res) => {
       dispatch({
         type: "GET_HOTELDATA_SUCCESS",
-        payload: res[0].hotels,
+        payload: res[0],
+      });
+    })
+    .catch((error) => {
+      console.error("Error fetching hotel data:", error);
+      dispatch({
+        type: "GET_HOTELDATA_FAILURE",
+        payload: error.message,
       });
     });
 };
