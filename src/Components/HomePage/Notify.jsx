@@ -31,7 +31,7 @@ const Notify = ()=>{
             <div style={{ display: "flex", alignItem: "center",justifyContent:"space-around" }}>
                 <div  style={{ display: "flex"}}>
               <div>
-                <img src="./images/fireLogo.png" alt="img" height="60px" />
+                <img src="/images/fireLogo.png" alt="img" height="60px" />
               </div>
               <div>
                 <div>

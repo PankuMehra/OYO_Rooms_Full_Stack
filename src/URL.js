@@ -1,8 +1,8 @@
 export const URL = {
-    hotelPost : "https://oyo-room-backend-api.vercel.app/addhotel",
-    hotel : "https://oyo-room-backend-api.vercel.app/gethotels",
-    users : "https://oyo-room-backend-api.vercel.app/",
-    // hotel : "https://jasper-rich-felidae.glitch.me/hotel",
-    // hotel : "http://localhost:3001/hotel",
-    // users : "http://localhost:3001/users"
-}
+  oyo_url: "https://oyo-rooms-backend.onrender.com",
+  login: "https://oyo-rooms-backend.onrender.com/login",
+  signup: "https://oyo-rooms-backend.onrender.com/signup",
+  hotelPost: "https://oyo-rooms-backend.onrender.com/addhotel",
+  hotel: "https://oyo-rooms-backend.onrender.com/gethotels",
+  users: "https://oyo-rooms-backend.onrender.com/getuserdata",
+};
