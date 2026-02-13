@@ -25,13 +25,26 @@ export default function Navbar1() {
   }, []);
 
   const fetchData = async () => {
-    let res = await fetch(`${URL.users}/${currentUser}`);
-    let data = await res.json();
-    LoggedInAction(data, dispatch);
+    try {
+      let token = localStorage.getItem("loginToken") || null;
+      if (token) {
+        let res = await fetch(`${URL.users}`, {
+          method: "GET",
+          headers: { Authorization: token },
+        });
+        if (!res.ok) {
+          throw new Error("Failed to fetch user data");
+        }
+        let data = await res.json();
+        LoggedInAction(data, dispatch);
+      }
+    } catch (error) {
+      console.error("Error fetching user data:", error);
+    }
   };
 
   const changeAuth = () => {
-    localStorage.removeItem("LogInToken");
+    localStorage.removeItem("loginToken");
     localStorage.removeItem("currentUser");
     localStorage.removeItem("isAuth");
     // localStorage.setItem("isAuth", false);
@@ -39,24 +52,31 @@ export default function Navbar1() {
   };
 
   return (
-    <div style={{position: "sticky", top: "0px", zIndex: "100000", backgroundColor: "white"}}>
+    <div
+      style={{
+        position: "sticky",
+        top: "0px",
+        zIndex: "100000",
+        backgroundColor: "white",
+      }}
+    >
       <div className="mainNav">
         <Link to="/" className="abk-leftnav">
           <img src="/Images/oyologo.png" alt="oyored" />
         </Link>
 
         <div className="abk-rightnav">
-          <div>
+          <div className="nav-becomeMember">
             <Link>
               <img src="/Images/becomeMember.png" alt="becomeamember" />
             </Link>
           </div>
-          <div>
+          <div className="nav-listProperty">
             <Link to="/partner">
               <img src="/Images/listProperty.png" alt="listproperty" />
             </Link>
           </div>
-          <div>
+          <div className="nav-language">
             <Link>
               <img src="/Images/language.png" alt="language" />
             </Link>
