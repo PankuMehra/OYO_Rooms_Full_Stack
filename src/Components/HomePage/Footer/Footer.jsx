@@ -2,7 +2,6 @@ import React from "react";
 import "./Footer.css";
 
 export default function Footer() {
-
   return (
     <div>
       <div className="abk-footer">
@@ -11,7 +10,7 @@ export default function Footer() {
             <img src="/Images/oyowhitelogo.png" alt="oyowhitelogo" />
             <p>World's leading chain of hotels and homes</p>
           </div>
-          <div>
+          <div style={{ display: "flex", gap: "10px" }}>
             <p>Join our network and grow your business!</p>
             <button>
               <img src="/Images/property.png" alt="property" />
@@ -42,9 +41,6 @@ export default function Footer() {
             <p>Guest Policies</p>
             <p>Privacy Policy</p>
             <p>Trust And Safety</p>
-          </div>
-
-          <div>
             <p>Cyber Security</p>
             <p>Cyber Security Awarness</p>
             <p>Responsible Disclosure</p>
