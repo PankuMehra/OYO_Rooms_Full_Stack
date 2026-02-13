@@ -9,6 +9,7 @@
   align-items: center;
   justify-content: space-between;
   border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  padding: 10px 0px;
   /* border:5px solid red; */
 }
 .navbar-logo {
@@ -29,11 +30,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-
   /* border: 2px solid red; */
 }
 #loginBox {
-  width: 250px;
+  width: 200px;
   height: 60px;
 }
 .abk-rightnav div:nth-of-type(4) p {
@@ -87,11 +87,19 @@
   margin-left: 8px;
   margin-right: 5px;
 } */
+
+.locationsNav {
+  width: 100%;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  overflow: auto;
+}
+
 .locations {
   display: flex;
   align-items: center;
   /* background: #f2f2f2; */
   padding: 0px 30px;
+  width: 100%;
   background-color: aliceblue;
   color: rgb(-8 0 0 / 0.7);
 }
@@ -113,7 +121,9 @@
   position: absolute;
   /* top: 88px; */
   padding: 10px 0;
-  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.08), 0 6px 20px 0 rgba(0, 0, 0, 0.08);
+  box-shadow:
+    0 3px 6px 0 rgba(0, 0, 0, 0.08),
+    0 6px 20px 0 rgba(0, 0, 0, 0.08);
   z-index: 60;
   background-color: #ffffff;
 }
@@ -124,9 +134,9 @@ p {
   margin: 15px;
   cursor: pointer;
 }
-#dropdown p:nth-of-type(1) {
+/* #dropdown p:nth-of-type(1) {
   font-weight: bold;
-}
+} */
 #dropdown p:hover {
   color: red;
   transition: all 0.15s;
@@ -160,4 +170,137 @@ p {
   font-weight: 500;
   border-radius: 4px;
   color: rgb(29, 29, 29);
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 1060px) {
+  .nav-becomeMember {
+    display: none;
+  }
+}
+@media (max-width: 550px) {
+  .nav-listProperty {
+    display: none;
+  }
+}
+@media (max-width: 768px) {
+  .mainNav {
+    /* flex-direction: column; */
+    /* align-items: flex-start; */
+    padding: 5px 20px;
+  }
+
+  .navbar-logo {
+    padding: 10px;
+  }
+
+  .abk-leftnav {
+    padding: 0;
+  }
+
+  .abk-rightnav {
+    /* flex-direction: row; */
+    align-items: center;
+    width: 100%;
+    justify-content: end;
+  }
+
+  .nav-becomeMember {
+    display: none;
+  }
+  .nav-language {
+    display: none;
+  }
+
+  .abk-rightnav > * {
+    border-right: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 5px 10px;
+  }
+
+  .abk-rightnav > *:last-child {
+    border-right: none;
+  }
+
+  .abk-rightnav div:nth-of-type(4) {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  #loginBox {
+    width: auto;
+    height: 40px;
+    padding: 5px 10px;
+  }
+
+  .abk-rightnav div:nth-of-type(4) p {
+    margin-left: 5px;
+    font-size: 12px;
+  }
+
+  .locations div {
+    margin: 5px;
+  }
+
+  .more-cities-container {
+    position: relative;
+  }
+
+  .more-cities-btn {
+    cursor: pointer;
+  }
+
+  .more-cities-btn .rotated {
+    transform: rotate(180deg);
+    transition: transform 0.3s ease;
+  }
+
+  .more-cities-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+    min-width: 200px;
+    padding: 10px;
+  }
+
+  .dropdown-city {
+    margin-bottom: 10px;
+  }
+
+  .dropdown-city:last-child {
+    margin-bottom: 0;
+  }
+
+  .belowNav {
+    padding: 10px;
+  }
+
+  .belowNav img {
+    width: 100%;
+    height: auto;
+  }
+
+  #profileDropdown {
+    width: 200px;
+    position: absolute;
+    top: 45px;
+    right: 0;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    border: 1px solid rgb(243, 243, 243);
+  }
+
+  #profileDropdown > a {
+    width: 100%;
+    padding: 12px;
+    border-top: 1px solid rgb(233, 233, 233);
+    border-bottom: 1px solid rgb(233, 233, 233);
+    color: rgb(20, 20, 20);
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+  }
 }

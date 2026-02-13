@@ -12,8 +12,6 @@ import { useNavigate } from "react-router-dom";
 import styles from "../searchBanner/SearchBanner.module.css";
 // import { saveData } from "../../redux/authentication/localStorage";
 
-
-
 const AutocompleteForm = () => {
   const [address, setAddress] = useState("");
 
@@ -40,16 +38,14 @@ const AutocompleteForm = () => {
 
     // }
     for (let index = 0; index < data.length; index++) {
-      if(data.charAt(index) === " " || data.charAt(index) === ','){
+      if (data.charAt(index) === " " || data.charAt(index) === ",") {
         break;
       }
       ref += data.charAt(index);
-      console.log(ref);
     }
     localStorage.setItem(key, ref);
-    navigate("/hotels")
+    navigate("/hotels");
   };
-  //   return <div>sdlfiwjeds</div>
   return (
     <>
       <PlacesAutocomplete
@@ -58,64 +54,18 @@ const AutocompleteForm = () => {
         onSelect={handleSelect}
       >
         {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-          <div style={{ width: "285px" }}>
+          <div>
             <input
-              style={{ height: "67px" }}
-              aria-expanded="false"
               id={styles.autoComplete}
+              style={{
+                height: "64px",
+                whiteSpace: "nowrap",
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+              }}
               {...getInputProps({})}
               placeholder="Please enter city name..."
             />
-            <div
-              className="autocomplete-dropdown-container"
-              style={{
-                position: "absolute",
-                zIndex: "100",
-                marginTop: "10px",
-                padding: "8px!important",
-              }}
-            >
-              {loading && <div>Loading...</div>}
-              {suggestions.map((suggestion) => {
-                const className = suggestion.active
-                  ? "suggestion-item--active"
-                  : "suggestion-item";
-                const style = suggestion.active
-                  ? {
-                      backgroundColor: "#fafbfc",
-                      cursor: "pointer",
-                      borderRadius: "4px",
-                      padding: "14px 8px",
-                      fontSize: "16px; ",
-                      overflow: "hidden",
-                      textOverflow: "ellipsis",
-                    }
-                  : {
-                      backgroundColor: "#ffffff",
-                      cursor: "pointer",
-                      borderRadius: "4px",
-                      padding: "14px 8px",
-                      fontSize: "16px; ",
-                      overflow: "hidden",
-                      textOverflow: "ellipsis",
-                    };
-                return (
-                  <div
-                    {...getSuggestionItemProps(suggestion, {
-                      className,
-                      style,
-                    })}
-                  >
-                    <span>
-                      <span className="pr-2">
-                        {/* <FontAwesomeIcon icon={faMapMarker} color="rgba(0, 0, 0, 0.5)" /> */}
-                      </span>
-                      <span className="p-2">{suggestion.description}</span>
-                    </span>
-                  </div>
-                );
-              })}
-            </div>
           </div>
         )}
       </PlacesAutocomplete>

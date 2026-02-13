@@ -8,6 +8,7 @@
   position: relative;
   z-index: 10;
   box-sizing: border-box;
+  width: 100%;
 }
 
 #background {
@@ -27,12 +28,21 @@
   margin: 16px 0;
   text-align: center;
 }
+
+#searchForm {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  width: 88%;
+}
+
 #autoComplete {
   width: 100%;
   height: 100%;
   line-height: 1;
   outline: none;
-  padding: 19px 50px 19px 16px;
+  padding: 0px 10px;
   font-size: 16px;
   color: rgba(0, 0, 0, 0.87);
   border: none;
@@ -45,14 +55,17 @@
 }
 #homeCalender,
 #homeRoom {
-  height: 100%;
+  height: 64px;
   border: 1px solid #999;
   border-right: none;
   border-left: none;
-  padding: 19px 50px 19px 16px;
+  padding: 0px 10px;
+  display: flex;
+  align-items: center;
   background-color: #fff;
   border-left: 1px solid rgba(0, 0, 0, 0.87);
   cursor: pointer;
+  overflow: hidden;
 }
 ::-webkit-input-placeholder {
   font-size: 16px;
@@ -82,12 +95,29 @@
   align-items: center;
   cursor: pointer;
 }
+
+#items {
+  display: flex;
+  width: 75%;
+  align-items: center;
+  justify-content: center;
+  margin-top: 15px;
+  gap: 10px;
+}
+
+#searchedPlaceContainer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  /* justify-content: center; */
+  gap: 10px;
+}
+
 #searched {
   color: #fff;
   font-size: 16px;
   font-weight: 600;
   min-width: 170px;
-  margin: 0 20px 0 0;
   text-shadow: 2px 4px 8px rgba(0, 0, 0, 0.2);
   cursor: pointer;
 }
@@ -99,11 +129,18 @@
   font-size: 12px;
   background-color: transparent;
   padding: 8px;
-  margin-right: 16px;
   cursor: pointer;
   line-height: 20px;
   margin-top: 5px;
+  overflow: hidden;
 }
+
+.searchedPlaceText {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 #searchedPlace:hover {
   background-color: rgba(0, 0, 0, 0.4);
 }
@@ -155,7 +192,7 @@
   height: 100%;
   line-height: 1;
   outline: none;
-  padding: 19px 50px 19px 16px;
+  /* padding: 19px 50px 19px 16px; */
   font-size: 16px;
   color: rgba(0, 0, 0, 0.87);
   border: none;
@@ -170,5 +207,109 @@
   display: flex !important;
   flex-direction: row !important;
   justify-content: space-around !important;
-  border: 2px solid red !important; 
+  border: 2px solid red !important;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  #container {
+    padding: 20px 0 40px;
+  }
+
+  #title {
+    font-size: 24px;
+    line-height: 1.3;
+    margin: 12px 0;
+    padding: 0 10px;
+  }
+
+  #headingForm {
+    padding: 0 10px;
+  }
+
+  .d-flex {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  #homeCalender,
+  #homeRoom {
+    border-bottom: 1px solid #999;
+    border-top: none;
+    margin-top: -1px;
+  }
+
+  #homebutton {
+    border-top-left-radius: 0;
+    border-top-right-radius: 4px;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    margin-top: -1px;
+    justify-content: center;
+  }
+
+  #autoComplete,
+  #homeCalender,
+  #homeRoom {
+    padding: 0px 10px;
+    font-size: 14px;
+  }
+
+  #items {
+    display: flex;
+    width: 90%;
+  }
+
+  #homebutton {
+    padding: 0px 16px;
+    font-size: 16px;
+  }
+
+  #homeCalender span,
+  #homeRoom span {
+    font-size: 14px;
+  }
+
+  #searched {
+    min-width: auto;
+  }
+
+  #searchedPlace {
+    margin-right: 0;
+    font-size: 11px;
+  }
+
+  #dropDownContainer {
+    width: 280px;
+  }
+
+  #dropDownHead {
+    padding: 15px 0 12px;
+    font-size: 14px;
+  }
+
+  #operator {
+    font-size: 18px;
+    padding: 1px 6px 3px;
+  }
+}
+
+@media (max-width: 450px) {
+  #searchForm {
+    display: grid;
+    justify-content: unset;
+    border-radius: 5px;
+  }
+  #autoComplete,
+  #homeCalender,
+  #homeRoom {
+    border-left: 1px solid rgba(0, 0, 0, 0.87);
+    border-right: 1px solid rgba(0, 0, 0, 0.87);
+  }
+
+  #items {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 20px;
+  }
 }
