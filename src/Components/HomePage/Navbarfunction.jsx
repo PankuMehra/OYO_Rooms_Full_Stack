@@ -10,9 +10,9 @@ export default function Navbarfunction(props) {
     setdiv(true);
   };
   const searchHotels = (name) => {
-    localStorage.setItem("currentCity", name)
-    navigate("/hotels")
-  }
+    localStorage.setItem("currentCity", name);
+    navigate("/hotels");
+  };
   return (
     <div>
       <div
@@ -39,7 +39,9 @@ export default function Navbarfunction(props) {
           }}
         >
           {props.more.map((e, index) => (
-            <p key={index}>{e}</p>
+            <p onClick={() => searchHotels(props.name)} key={index}>
+              {e}
+            </p>
           ))}
         </div>
       ) : null}
